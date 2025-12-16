@@ -1,0 +1,31 @@
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             version="3.0"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+             https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+
+    <persistence-unit name="MoodBytePersistence" transaction-type="RESOURCE_LOCAL">
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>Modelo.Entrada</class>
+        <class>Modelo.Diario</class>
+        <class>Modelo.Registro</class>
+        <class>Modelo.Usuario</class>
+        <properties>
+            <!-- Configuración de la conexión a base de datos -->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pruebas_jpa"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value="mysql"/>
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <!-- Configuración de dialecto de Hibernate para BD-->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+            <!-- Configuración pde comportamiento DDL (create, update, none)-->
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <!-- Opcional: Configuración para ver las consultas SQL generadas-->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+
+        </properties>
+    </persistence-unit>
+</persistence>

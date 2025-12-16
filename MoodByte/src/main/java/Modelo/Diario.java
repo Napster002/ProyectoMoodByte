@@ -17,9 +17,7 @@ public class Diario {
     @OneToMany(mappedBy = "diario")
     private List<Entrada> entradas=new ArrayList<>();
 
-    public Diario() {
-    }
-
+    public Diario() {}
     public long getIdUsuario() {
         return idUsuario;
     }

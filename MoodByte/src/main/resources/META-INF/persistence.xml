@@ -7,11 +7,15 @@
     <persistence-unit name="MoodBytePersistence" transaction-type="RESOURCE_LOCAL">
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-
         <class>Modelo.Entrada</class>
         <class>Modelo.Diario</class>
         <class>Modelo.Registro</class>
         <class>Modelo.Usuario</class>
+        <class>Modelo.Musica</class>
+        <class>Modelo.Estado</class>
+        <class>Modelo.Ejercicio</class>
+        <class>Modelo.Articulo</class>
+        <class>Modelo.Rutina</class>
         <properties>
             <!-- Configuración de la conexión a base de datos -->
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pruebas_jpa"/>

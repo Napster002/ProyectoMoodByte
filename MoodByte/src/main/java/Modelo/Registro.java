@@ -18,9 +18,7 @@ public class Registro {
     @JoinColumn(name="id_usuario")
     private Usuario usuario;
 
-    public Registro() {
-        this.fechaRegistro=LocalDate.now();
-    }
+    public Registro() {}
 
     public long getId() {
         return id;

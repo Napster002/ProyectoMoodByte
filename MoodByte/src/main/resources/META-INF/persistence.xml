@@ -18,7 +18,7 @@
         <class>Modelo.Rutina</class>
         <properties>
             <!-- Configuración de la conexión a base de datos -->
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pruebas_jpa"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pruebas_ac"/>
             <property name="jakarta.persistence.jdbc.user" value="root"/>
             <property name="jakarta.persistence.jdbc.password" value="mysql"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

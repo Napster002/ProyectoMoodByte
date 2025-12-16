@@ -34,9 +34,7 @@ public class Usuario {
     @OneToOne(mappedBy = "usuario",cascade = CascadeType.ALL)
     private Diario diario;
 
-    public Usuario() {
-        this.fechaRegistro=LocalDate.now();
-    }
+    public Usuario() {}
 
     public long getId() {
         return id;

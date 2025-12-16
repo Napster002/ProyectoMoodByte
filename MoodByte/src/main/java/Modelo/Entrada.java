@@ -22,9 +22,7 @@ public class Entrada {
     @JoinColumn(name="idDiario")
     private Diario diario;
 
-    public Entrada() {
-        this.fechaEntrada=LocalDate.now();
-    }
+    public Entrada() {}
 
     public long getId() {
         return id;

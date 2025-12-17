@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ruben\\source\\repos\\MoodByte_Interfaz\\MoodByte\\MoodByte.csproj",
+      "projectUniqueName": "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\MoodByte.csproj",
       "projectName": "MoodByte",
-      "projectPath": "C:\\Users\\ruben\\source\\repos\\MoodByte_Interfaz\\MoodByte\\MoodByte.csproj",
+      "projectPath": "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\MoodByte.csproj",
       "packagesPath": "C:\\Users\\ruben\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ruben\\source\\repos\\MoodByte_Interfaz\\MoodByte\\obj\\",
+      "outputPath": "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

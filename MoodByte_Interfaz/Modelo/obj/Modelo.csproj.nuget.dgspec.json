@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ruben\\source\\repos\\MoodByte_Interfaz\\Modelo\\Modelo.csproj": {}
+    "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\Modelo\\Modelo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ruben\\source\\repos\\MoodByte_Interfaz\\Modelo\\Modelo.csproj": {
+    "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\Modelo\\Modelo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ruben\\source\\repos\\MoodByte_Interfaz\\Modelo\\Modelo.csproj",
+        "projectUniqueName": "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\Modelo\\Modelo.csproj",
         "projectName": "Modelo",
-        "projectPath": "C:\\Users\\ruben\\source\\repos\\MoodByte_Interfaz\\Modelo\\Modelo.csproj",
+        "projectPath": "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\Modelo\\Modelo.csproj",
         "packagesPath": "C:\\Users\\ruben\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ruben\\source\\repos\\MoodByte_Interfaz\\Modelo\\obj\\",
+        "outputPath": "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\Modelo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

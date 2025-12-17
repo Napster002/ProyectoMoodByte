@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MoodByte")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b6bdb4735827e0d62e7a75996cd86a9726d2e609")]
 [assembly: System.Reflection.AssemblyProductAttribute("MoodByte")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MoodByte")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

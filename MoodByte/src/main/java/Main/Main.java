@@ -1,6 +1,10 @@
 package Main;
 
+<<<<<<< Updated upstream
 import Logica.RegistroDAO;
+=======
+import Conexion.ConexionMysqlEMF;
+>>>>>>> Stashed changes
 import Logica.UsuarioDAO;
 import Modelo.Genero;
 import Modelo.Registro;
@@ -15,7 +19,9 @@ import java.util.List;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        UsuarioDAO dao=new UsuarioDAO();
+       ConexionMysqlEMF.getEmf();
+
+       UsuarioDAO dao=new UsuarioDAO();
         Usuario usuario=new Usuario();
         usuario.setEdad(31);
         usuario.setGenero(Genero.Hombre);

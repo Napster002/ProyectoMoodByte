@@ -57,10 +57,10 @@ Personas que:
 
 ## 🛠️ Tecnologías utilizadas
 - Desarrollo multiplataforma
-- Lenguaje / framework: *(indicar el que uséis: Kotlin, Java, Flutter, etc.)*
-- IDE: Android Studio
+- Lenguaje / framework: Java, Kotlin, C#
+- IDE: IntelliJ, Android Studio, VisualStudio code
 - Control de versiones: Git y GitHub
-- Base de datos: *(SQLite / Firebase / la que corresponda)*
+- Base de datos: MySql
 - Diseño UI/UX enfocado en simplicidad y calma visual
 
 ---
@@ -75,15 +75,15 @@ El control de versiones se gestiona mediante GitHub, utilizando ramas para el de
 
 ## 👨‍💻 Equipo de desarrollo
 - Rubén Cobo González  
-- Miembro del equipo 2  
-- Miembro del equipo 3  
+- Saúl García Girón  
+- Fabián Saiz Landeras 
 
-*(Proyecto desarrollado en el ciclo formativo de Desarrollo de Aplicaciones Multiplataforma)*
+*(Proyecto desarrollado en el ciclo formativo de Desarrollo de Aplicaciones Multiplataforma del IES Miguel Herrero Pereda)*
 
 ---
 
 ## 🚀 Estado del proyecto
-Proyecto finalizado – Versión 1.0
+Proyecto en desarrollo – Versión 0.1
 
 ---
 

@@ -1,7 +1,11 @@
 package Main;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import Logica.RegistroDAO;
+=======
+import Conexion.ConexionMysqlEMF;
+>>>>>>> Stashed changes
 =======
 import Conexion.ConexionMysqlEMF;
 >>>>>>> Stashed changes

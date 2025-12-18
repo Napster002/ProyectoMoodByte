@@ -3,9 +3,10 @@ package org.example.servicio;
 import org.example.Logica.FraseRepository;
 import org.example.Modelo.Frase;
 import org.example.Modelo.Musica;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class FraseService implements IFraseService<Frase,Long> {
     private FraseRepository repository;
 

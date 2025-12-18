@@ -8,7 +8,6 @@ import java.util.List;
 
 @Service
 public class UsuarioService implements IUsuarioService<Usuario,Long> {
-
     private final UsuarioRepository repository;
 
     public UsuarioService(UsuarioRepository repository) {

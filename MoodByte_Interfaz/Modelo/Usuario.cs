@@ -17,7 +17,7 @@ namespace Modelo
         public string Password { get; set; }
         public DateTime FechaRegistro { get; set; }
         public DateTime FechaNacimiento { get; set; }
-        public enumGenero Genero { get; set; }
-        public enumTipoUsuario TipoUsuario { get; set; }
+        public Genero Genero { get; set; }
+        public TipoUsuario TipoUsuario { get; set; }
     }
 }

@@ -17,8 +17,8 @@ namespace MoodByte
         public CrearUsuario()
         {
             InitializeComponent();
-            cbTipoUsuario.DataSource = Enum.GetValues(typeof(enumTipoUsuario));
-            cbGenero.DataSource=Enum.GetValues(typeof (enumGenero));
+            cbTipoUsuario.DataSource = Enum.GetValues(typeof(TipoUsuario));
+            cbGenero.DataSource=Enum.GetValues(typeof (Genero));
             dtpFechaRegistro.Enabled = false;
         }
         private void buttonGuardar_Click(object sender, EventArgs e)
@@ -101,8 +101,8 @@ namespace MoodByte
                 Password=tbContraseña.Text,
                 FechaRegistro=dtpFechaRegistro.Value,
                 FechaNacimiento=dtpFechanacimiento.Value,
-                Genero= (enumGenero)cbGenero.SelectedItem,
-                TipoUsuario=(enumTipoUsuario)cbTipoUsuario.SelectedItem
+                Genero= (Genero)cbGenero.SelectedItem,
+                TipoUsuario=(TipoUsuario)cbTipoUsuario.SelectedItem
             };
             MessageBox.Show("Se agrego correctamnete", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

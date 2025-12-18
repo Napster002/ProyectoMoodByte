@@ -3,9 +3,10 @@ package org.example.servicio;
 import org.example.Logica.EjercicioRepository;
 import org.example.Modelo.Ejercicio;
 import org.example.Modelo.Entrada;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class EjercicioService implements IEjercicioService<Ejercicio,Long>{
     private EjercicioRepository repository;
 

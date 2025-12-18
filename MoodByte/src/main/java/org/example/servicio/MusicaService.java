@@ -3,9 +3,10 @@ package org.example.servicio;
 import org.example.Logica.MusicaRepository;
 import org.example.Modelo.Musica;
 import org.example.Modelo.Registro;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class MusicaService implements IMusicaService<Musica,Long>{
     private MusicaRepository repository;
 

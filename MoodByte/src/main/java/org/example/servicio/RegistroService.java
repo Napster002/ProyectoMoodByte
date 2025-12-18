@@ -2,10 +2,11 @@ package org.example.servicio;
 
 import org.example.Logica.RegistroRepository;
 import org.example.Modelo.Registro;
+import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-
+@Service
 public class RegistroService implements IRegistroService<Registro, Long>{
     private final RegistroRepository repository;
 

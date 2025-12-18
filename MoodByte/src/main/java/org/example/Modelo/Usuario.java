@@ -1,5 +1,6 @@
 package org.example.Modelo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -22,8 +23,10 @@ public class Usuario {
     private int edad;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Genero genero;
     @Enumerated(EnumType.STRING)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private TipoUsuario tipoUsuario;
     private LocalDate fechaRegistro;
     private LocalDate fechaNacimiento;

@@ -92,7 +92,7 @@
             Controls.Add(dgvUsuarios);
             Name = "AdminUsuarios";
             Text = "AdminUsuarios";
-            Load += AdminUsuarios_Load;
+            Load += AdminUsuarios_LoadAsync;
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).EndInit();
             ResumeLayout(false);
             PerformLayout();

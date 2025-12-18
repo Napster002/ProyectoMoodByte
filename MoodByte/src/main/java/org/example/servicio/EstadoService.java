@@ -3,9 +3,10 @@ package org.example.servicio;
 import org.example.Logica.EstadoRepository;
 import org.example.Modelo.Estado;
 import org.example.Modelo.Frase;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class EstadoService implements IEstadoService<Estado,Long>{
     private EstadoRepository repository;
 

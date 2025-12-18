@@ -1,5 +1,6 @@
 package org.example.servicio;
 
+import org.example.Logica.RegistroRepository;
 import org.example.Modelo.Registro;
 
 
@@ -8,7 +9,7 @@ import java.util.List;
 public class RegistroService implements IRegistroService<Registro, Long>{
     private final RegistroRepository repository;
 
-    public RegistroServiceService(RegistroRepository repository) {
+    public RegistroService(RegistroRepository repository) {
         this.repository = repository;
     }
 

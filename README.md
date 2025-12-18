@@ -83,7 +83,7 @@ El control de versiones se gestiona mediante GitHub, utilizando ramas para el de
 ---
 
 ## 🚀 Estado del proyecto
-Proyecto en desarrollo – Versión 0.1
+Proyecto en desarrollo – Versión 0.2
 
 ---
 

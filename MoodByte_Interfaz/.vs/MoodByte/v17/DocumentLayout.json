@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|c:\\users\\ruben\\desktop\\repositorio\\proyectomoodbyte\\moodbyte_interfaz\\moodbyte\\creararticulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|solutionrelative:moodbyte\\creararticulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|c:\\users\\ruben\\desktop\\repositorio\\proyectomoodbyte\\moodbyte_interfaz\\moodbyte\\adminejercicios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|solutionrelative:moodbyte\\adminejercicios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
@@ -14,11 +18,27 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "CrearArticulo.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\CrearArticulo.cs",
+              "RelativeDocumentMoniker": "MoodByte\\CrearArticulo.cs",
+              "ToolTip": "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\CrearArticulo.cs [Dise\u00F1o]",
+              "RelativeToolTip": "MoodByte\\CrearArticulo.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-18T14:40:12.365Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "AdminEjercicios.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\AdminEjercicios.cs",
               "RelativeDocumentMoniker": "MoodByte\\AdminEjercicios.cs",

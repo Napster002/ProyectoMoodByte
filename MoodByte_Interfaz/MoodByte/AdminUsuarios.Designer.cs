@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView1 = new DataGridView();
+            dgvUsuarios = new DataGridView();
             lblUsuarios = new Label();
             btnCrearUsuario = new Button();
             btnEditarusuario = new Button();
             btnBorrarUsuario = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
             SuspendLayout();
             // 
-            // dataGridView1
+            // dgvUsuarios
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(171, 59);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(582, 294);
-            dataGridView1.TabIndex = 0;
+            dgvUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvUsuarios.Location = new Point(171, 59);
+            dgvUsuarios.Name = "dgvUsuarios";
+            dgvUsuarios.Size = new Size(582, 294);
+            dgvUsuarios.TabIndex = 0;
             // 
             // lblUsuarios
             // 
@@ -89,17 +89,18 @@
             Controls.Add(btnEditarusuario);
             Controls.Add(btnCrearUsuario);
             Controls.Add(lblUsuarios);
-            Controls.Add(dataGridView1);
+            Controls.Add(dgvUsuarios);
             Name = "AdminUsuarios";
             Text = "AdminUsuarios";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Load += AdminUsuarios_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvUsuarios).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private DataGridView dataGridView1;
+        private DataGridView dgvUsuarios;
         private Label lblUsuarios;
         private Button btnCrearUsuario;
         private Button btnEditarusuario;

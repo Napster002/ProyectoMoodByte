@@ -69,6 +69,7 @@
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(255, 23);
             txtPassword.TabIndex = 3;
+            txtPassword.UseSystemPasswordChar = true;
             // 
             // btnRegistrar
             // 
@@ -78,6 +79,7 @@
             btnRegistrar.TabIndex = 4;
             btnRegistrar.Text = "Crear nuevo";
             btnRegistrar.UseVisualStyleBackColor = true;
+            btnRegistrar.Click += btnRegistrar_Click;
             // 
             // btnEntrar
             // 

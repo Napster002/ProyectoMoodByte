@@ -8,16 +8,16 @@ namespace Modelo
 {
     public class Usuario
     {
-        public long id { get; set; }
-        public string nombreUsuario { get; set; }
-        public string nombreCompleto { get; set; }
-        public int edad { get; set; }
-        public int nivel { get; set; }
-        public double expAcumulada { get; set; }
-        public string password { get; set; }
-        public DateTime fechaRegistro { get; set; }
-        public DateTime fechaNacimiento { get; set; }
-        public enumGenero genero { get; set; }
-        public enumTipoUsuario tipoUsuario { get; set; }
+        public long Id { get; set; }
+        public string NombreUsuario { get; set; }
+        public string NombreCompleto { get; set; }
+        public int Edad { get; set; }
+        public int Nivel { get; set; }
+        public double ExpAcumulada { get; set; }
+        public string Password { get; set; }
+        public DateTime FechaRegistro { get; set; }
+        public DateTime FechaNacimiento { get; set; }
+        public enumGenero Genero { get; set; }
+        public enumTipoUsuario TipoUsuario { get; set; }
     }
 }

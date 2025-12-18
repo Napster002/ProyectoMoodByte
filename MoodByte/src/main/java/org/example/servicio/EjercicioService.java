@@ -1,5 +1,6 @@
 package org.example.servicio;
 
+import org.example.Logica.EjercicioRepository;
 import org.example.Modelo.Ejercicio;
 import org.example.Modelo.Entrada;
 

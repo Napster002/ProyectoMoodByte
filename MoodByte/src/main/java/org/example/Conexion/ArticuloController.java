@@ -2,6 +2,7 @@ package org.example.Conexion;
 
 import org.example.Modelo.Articulo;
 import org.example.Modelo.Usuario;
+import org.example.servicio.ArticuloService;
 import org.example.servicio.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,6 +1,7 @@
 package org.example.Conexion;
 
 import org.example.Modelo.Ejercicio;
+import org.example.servicio.EjercicioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

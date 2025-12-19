@@ -1,3 +1,4 @@
+using Conexiones;
 using Modelo;
 using System.Net.Http;
 using System.Text.Json;
@@ -13,12 +14,12 @@ namespace MoodByte
         {
             InitializeComponent();
         }
-        public async Task CargarGrid()
+        public async Task CargarUsuarios()
         {
             try
             {
                 // Obtener el JSON como string
-                var json = await _httpClient.GetStringAsync("http://10.0.2.15:5500/api/usuario");
+                var json = await _httpClient.GetStringAsync(ConexionTabla.TablaUsuario);
 
                 // Configurar el deserializador para enums como strings
                 var options = new JsonSerializerOptions
@@ -34,21 +35,20 @@ namespace MoodByte
                 MessageBox.Show("Error al cargar los usuarios: " + ex.Message);
             }
         }
+        // Que vaya a CrearUsuario
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            CrearUsuario CU=new CrearUsuario();
-            CU.Visible=true;
-            this.Visible=false;
+
         }
 
         private async void Login_Load(object sender, EventArgs e)
         {
-            await CargarGrid();
+            await CargarUsuarios();
         }
-
+        // Falta solo cambiar si va a otra pantalla
         private async void btnEntrar_Click(object sender, EventArgs e)
         {
-            await CargarGrid();
+            await CargarUsuarios();
             foreach (var usuario in listaUsuarios)
             {
                 if (listaUsuarios != null && txtUsuario.Equals(usuario.NombreUsuario) && txtPassword.Equals(usuario.Password))

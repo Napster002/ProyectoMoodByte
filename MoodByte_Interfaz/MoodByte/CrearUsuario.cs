@@ -1,4 +1,5 @@
-﻿using Modelo;
+﻿using Conexiones;
+using Modelo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,15 +18,16 @@ namespace MoodByte
 {
     public partial class CrearUsuario : Form
     {
-
+        private readonly HttpClient _httpClient = new HttpClient();
         public CrearUsuario()
         {
             InitializeComponent();
             cbTipoUsuario.DataSource = Enum.GetValues(typeof(TipoUsuario));
-            cbGenero.DataSource=Enum.GetValues(typeof (Genero));
+            cbGenero.DataSource = Enum.GetValues(typeof(Genero));
             dtpFechaRegistro.Enabled = false;
         }
-        private void buttonGuardar_Click(object sender, EventArgs e)
+        // Falta la opcion de salir al guardar correctamnete
+        private async void buttonGuardar_Click(object sender, EventArgs e)
         {
             var errores = new List<string>();
             if (!Validaciones.validaNombre(tbNombre.Text, out var err))
@@ -99,7 +101,7 @@ namespace MoodByte
             int edad = DateTime.Today.Year - dtpFechanacimiento.Value.Year;
             var usuario = new Usuario
             {
-                NombreCompleto = tbNombre.Text + tbApellidos.Text,
+                NombreCompleto = tbNombre.Text +" "+ tbApellidos.Text,
                 NombreUsuario = tbNombreUsuario.Text,
                 Edad = edad,
                 Nivel = 0,
@@ -110,49 +112,46 @@ namespace MoodByte
                 Genero = (Genero)cbGenero.SelectedItem,
                 TipoUsuario = (TipoUsuario)cbTipoUsuario.SelectedItem
             };
-            InsertarUsuario(usuario);
+            await InsertarUsuario(usuario);
             MessageBox.Show("Se agrego correctamnete", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         //Metodo para guardar en la base de datos el usuario
         // No inserta el usuario cambiar
-        public async void InsertarUsuario(Usuario usuario)
+        public async Task InsertarUsuario(Usuario usuario)
         {
-            using (var httpClient = new HttpClient())
+            // Configurar la serialización para enums como strings
+            var options = new JsonSerializerOptions
             {
-                // Configurar la serialización para enums como strings
-                var options = new JsonSerializerOptions
-                {
-                    Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) },
-                    PropertyNameCaseInsensitive = true
-                };
-                var json = JsonSerializer.Serialize(usuario, options);
-                MessageBox.Show(json, "JSON a enviar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) },
+                PropertyNameCaseInsensitive = true
+            };
+            var json = JsonSerializer.Serialize(usuario, options);
+            // Muestra el usuario creado sin enviar a la db
+            MessageBox.Show(json, "JSON a enviar", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Pasar el contenido de usuario a Json
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-                // revienta aqui
-                var response = await httpClient.PostAsync("http://10.0.2.15:5500/api/usuario", content);
+            // Pasar el contenido de usuario a Json
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            // revienta aqui
+            var response = await _httpClient.PostAsync(ConexionTabla.TablaUsuario, content);
 
-                //Comprobacion de que se inserto correctamnete
-                // Si procesa correctamente la solicitud
-                if (response.IsSuccessStatusCode)
-                {
-                    var usuarioJson = await response.Content.ReadAsStringAsync();
-                    var usuarioCreado = JsonSerializer.Deserialize<Usuario>(usuarioJson);
-                    MessageBox.Show("Usuario creado: " + usuarioCreado.NombreUsuario);
-                }
-                else
-                {
-                    MessageBox.Show("Error al crear usuario: " + response.StatusCode);
-                }
+            //Comprobacion de que se inserto correctamnete
+            // Si procesa correctamente la solicitud
+            if (response.IsSuccessStatusCode)
+            {
+                var usuarioJson = await response.Content.ReadAsStringAsync();
+                var usuarioCreado = JsonSerializer.Deserialize<Usuario>(usuarioJson);
+                MessageBox.Show("Se agrego correctamnete e usuario", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Error al crear usuario: " + response.StatusCode);
             }
         }
             private void CrearUsuario_Load(object sender, EventArgs e)
            {
-          tbNombre.Focus();
-          cbGenero.SelectedIndex = 0;
-          cbTipoUsuario.SelectedIndex = 0;
-
+            tbNombre.Focus();
+            cbGenero.SelectedIndex = 0;
+            cbTipoUsuario.SelectedIndex = 0;
         }
 
         private void buttonLimpiar_Click(object sender, EventArgs e)

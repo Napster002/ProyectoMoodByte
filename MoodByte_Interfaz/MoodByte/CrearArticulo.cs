@@ -1,4 +1,5 @@
-﻿using Modelo;
+﻿using Conexiones;
+using Modelo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,8 +30,8 @@ namespace MoodByte
             txtEnlace.Clear();
             txtTitulo.Focus();
         }
-
-        private void btnGuardar_Click(object sender, EventArgs e)
+        // Si guarda que vuelva a AdminArticulo
+        private async void btnGuardar_Click(object sender, EventArgs e)
         {
             var errores = new List<string>();
             if (!Validaciones.validaTitulo(txtTitulo.Text, out var err))
@@ -60,19 +61,19 @@ namespace MoodByte
             {
                 epArticulo.SetError(txtImagen, "");
             }
-            if (txtEnlace.Text == null)
+            if (string.IsNullOrWhiteSpace(txtEnlace.Text))
             {
                 errores.Add("Mal introducido: Enlace");
-                epArticulo.SetError(txtImagen, err3);
+                epArticulo.SetError(txtEnlace, "Mal introducido: Enlace");
             }
             else
             {
-                epArticulo.SetError(txtImagen, err3);
+                epArticulo.SetError(txtEnlace, "");
             }
             if (errores.Count > 0)
             {
                 var sb = new StringBuilder();
-                sb.AppendLine("Se han encontrado errores en el usuario:");
+                sb.AppendLine("Se han encontrado errores en el articulo:");
                 foreach (var er in errores)
                     sb.AppendLine($"• {er}");
                 MessageBox.Show(sb.ToString(), "Errores de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -85,27 +86,32 @@ namespace MoodByte
                 imagen = txtImagen.Text,
                 enlace = txtEnlace.Text
             };
-            InsertarArticulo(articulo);
+           await InsertarArticulo(articulo);
 
         }
         // No funciona el insertar Articulo comprobar codigo
-        public async void InsertarArticulo(Articulo articulo)
+        public async Task InsertarArticulo(Articulo articulo)
         {
             var json = JsonSerializer.Serialize(articulo);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync("http://10.0.2.15:5500/api/articulo", content);
+            try
+            {
+                var response = await _httpClient.PostAsync(ConexionTabla.TablaArticulo, content);
 
-            //Comprobacion de que se inserto correctamnete
-            // Si procesa correctamente la solicitud
-            if (response.IsSuccessStatusCode)
-            {
-                var articuloJson = await response.Content.ReadAsStringAsync();
-                var articuloCreado = JsonSerializer.Deserialize<Articulo>(articuloJson);
-                MessageBox.Show("Articulo creado: " + articuloCreado.titulo);
+                if (response.IsSuccessStatusCode)
+                {
+                    var articuloJson = await response.Content.ReadAsStringAsync();
+                    var articuloCreado = JsonSerializer.Deserialize<Articulo>(articuloJson);
+                    MessageBox.Show("Articulo creado: " + articuloCreado.titulo);
+                }
+                else
+                {
+                    MessageBox.Show("Error al crear articulo: " + response.StatusCode);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al crear articulo: " + response.StatusCode);
+                MessageBox.Show("Error de conexión: " + ex.Message);
             }
         }
 

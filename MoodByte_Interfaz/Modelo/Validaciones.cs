@@ -19,9 +19,9 @@ namespace Modelo
             error = string.Empty;
             return true;
         }
-        public static bool validaApellido(string nombre, out string error)
+        public static bool validaApellido(string apellido, out string error)
         {
-            if (!Regex.IsMatch(nombre, "^[A-ZÑ][ A-Za-záéíóúÁÉÍÓÚÑñ ]{1,15}$"))
+            if (!Regex.IsMatch(apellido, "^[A-ZÑ][ A-Za-záéíóúÁÉÍÓÚÑñ ]{1,15}$"))
             {
                 error = "Mal introducido: Apellidos";
                 return false;
@@ -40,14 +40,45 @@ namespace Modelo
             error = string.Empty;
             return true;
         }
-        public static bool validaContraseña(string nombre, out string error)
+        public static bool validaContraseña(string contraseña, out string error)
         {
-            if (!Regex.IsMatch(nombre, "[ A-Za-záéíóúÁÉÍÓÚÑñ1234567890 ]{1,15}"))
+            if (!Regex.IsMatch(contraseña, "[ A-Za-záéíóúÁÉÍÓÚÑñ1234567890 ]{1,15}"))
             {
                 error = "Mal introducido: Contraseña: Introduce una contraseña valida";
                 return false;
             }
 
+            error = string.Empty;
+            return true;
+        }
+        public static bool validaTitulo(string titulo, out string error)
+        {
+            if (!Regex.IsMatch(titulo, "^[A-ZÑ][ A-Za-záéíóúÁÉÍÓÚÑñ ]{1,15}$"))
+            {
+                error = "Mal introducido: Titulo";
+                return false;
+            }
+
+            error = string.Empty;
+            return true;
+        }
+        public static bool validaSubtitulo(string subtitulo, out string error)
+        {
+            if (!Regex.IsMatch(subtitulo, "^[A-ZÑ][ A-Za-záéíóúÁÉÍÓÚÑñ ]{1,45}$"))
+            {
+                error = "Mal introducido: Subtitulo";
+                return false;
+            }
+            error = string.Empty;
+            return true;
+        }
+        public static bool validaImagen(string imagen, out string error)
+        {
+            if (!Regex.IsMatch(imagen, @"\.(png|jpg|jpeg)$",RegexOptions.IgnoreCase))
+            {
+                error = "Mal introducido: Formato de imagen no valido(png|jpg|jpeg)";
+                return false;
+            }
             error = string.Empty;
             return true;
         }

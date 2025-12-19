@@ -55,5 +55,12 @@ namespace MoodByte
         {
             await CargarGrid();
         }
+
+        private void btnCrearUsuario_Click(object sender, EventArgs e)
+        {
+            CrearUsuario CU = new CrearUsuario();
+            CU.Visible = true;
+            this.Visible = false;
+        }
     }
 }

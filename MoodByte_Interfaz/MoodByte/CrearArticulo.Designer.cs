@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             lblTitulo = new Label();
             lblSubtitulo = new Label();
             lblEnlace = new Label();
@@ -37,6 +38,9 @@
             txtEnlace = new TextBox();
             txtImagen = new TextBox();
             btnGuardar = new Button();
+            buttonLimpiar = new Button();
+            epArticulo = new ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)epArticulo).BeginInit();
             SuspendLayout();
             // 
             // lblTitulo
@@ -44,7 +48,7 @@
             lblTitulo.AutoSize = true;
             lblTitulo.Location = new Point(204, 68);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(41, 15);
+            lblTitulo.Size = new Size(40, 15);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Titulo:";
             // 
@@ -113,11 +117,26 @@
             btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += btnGuardar_Click;
             // 
+            // buttonLimpiar
+            // 
+            buttonLimpiar.Location = new Point(324, 369);
+            buttonLimpiar.Name = "buttonLimpiar";
+            buttonLimpiar.Size = new Size(75, 23);
+            buttonLimpiar.TabIndex = 9;
+            buttonLimpiar.Text = "Limpiar";
+            buttonLimpiar.UseVisualStyleBackColor = true;
+            buttonLimpiar.Click += buttonLimpiar_Click;
+            // 
+            // epArticulo
+            // 
+            epArticulo.ContainerControl = this;
+            // 
             // CrearArticulo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(buttonLimpiar);
             Controls.Add(btnGuardar);
             Controls.Add(txtImagen);
             Controls.Add(txtEnlace);
@@ -130,6 +149,7 @@
             Name = "CrearArticulo";
             Text = "CrearArticulo";
             Load += CrearArticulo_Load;
+            ((System.ComponentModel.ISupportInitialize)epArticulo).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -145,5 +165,7 @@
         private TextBox txtEnlace;
         private TextBox txtImagen;
         private Button btnGuardar;
+        private Button buttonLimpiar;
+        private ErrorProvider epArticulo;
     }
 }

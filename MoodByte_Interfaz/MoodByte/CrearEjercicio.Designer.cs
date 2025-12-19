@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             lblEstado = new Label();
             lblTitulo = new Label();
             lblDescripcion = new Label();
@@ -35,8 +36,11 @@
             cmbEstado = new ComboBox();
             txtTitulo = new TextBox();
             txtDescripcion = new TextBox();
-            txtDuracion = new TextBox();
             btnGuardar = new Button();
+            buttonLimpiar = new Button();
+            dtpDuracion = new DateTimePicker();
+            epEjercicio = new ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)epEjercicio).BeginInit();
             SuspendLayout();
             // 
             // lblEstado
@@ -53,7 +57,7 @@
             lblTitulo.AutoSize = true;
             lblTitulo.Location = new Point(230, 190);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(41, 15);
+            lblTitulo.Size = new Size(40, 15);
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Titulo:";
             // 
@@ -98,13 +102,6 @@
             txtDescripcion.Size = new Size(281, 106);
             txtDescripcion.TabIndex = 6;
             // 
-            // txtDuracion
-            // 
-            txtDuracion.Location = new Point(300, 116);
-            txtDuracion.Name = "txtDuracion";
-            txtDuracion.Size = new Size(121, 23);
-            txtDuracion.TabIndex = 7;
-            // 
             // btnGuardar
             // 
             btnGuardar.Location = new Point(506, 391);
@@ -113,14 +110,38 @@
             btnGuardar.TabIndex = 8;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
+            // 
+            // buttonLimpiar
+            // 
+            buttonLimpiar.Location = new Point(346, 391);
+            buttonLimpiar.Name = "buttonLimpiar";
+            buttonLimpiar.Size = new Size(75, 23);
+            buttonLimpiar.TabIndex = 9;
+            buttonLimpiar.Text = "Limpiar";
+            buttonLimpiar.UseVisualStyleBackColor = true;
+            buttonLimpiar.Click += buttonLimpiar_Click;
+            // 
+            // dtpDuracion
+            // 
+            dtpDuracion.Format = DateTimePickerFormat.Time;
+            dtpDuracion.Location = new Point(300, 110);
+            dtpDuracion.Name = "dtpDuracion";
+            dtpDuracion.Size = new Size(216, 23);
+            dtpDuracion.TabIndex = 10;
+            // 
+            // epEjercicio
+            // 
+            epEjercicio.ContainerControl = this;
             // 
             // CrearEjercicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(dtpDuracion);
+            Controls.Add(buttonLimpiar);
             Controls.Add(btnGuardar);
-            Controls.Add(txtDuracion);
             Controls.Add(txtDescripcion);
             Controls.Add(txtTitulo);
             Controls.Add(cmbEstado);
@@ -130,6 +151,8 @@
             Controls.Add(lblEstado);
             Name = "CrearEjercicio";
             Text = "CrearEjercicio";
+            Load += CrearEjercicio_Load;
+            ((System.ComponentModel.ISupportInitialize)epEjercicio).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -143,7 +166,9 @@
         private ComboBox cmbEstado;
         private TextBox txtTitulo;
         private TextBox txtDescripcion;
-        private TextBox txtDuracion;
         private Button btnGuardar;
+        private Button buttonLimpiar;
+        private DateTimePicker dtpDuracion;
+        private ErrorProvider epEjercicio;
     }
 }

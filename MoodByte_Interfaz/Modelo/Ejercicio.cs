@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Modelo
 {
-    internal class Ejercicio
+    public class Ejercicio
     {
         public long id { get; set; }
         public string titulo { get; set; }

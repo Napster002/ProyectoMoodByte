@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11205.157 d18.0
+VisualStudioVersion = 18.0.11205.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodByte", "MoodByte\MoodByte.csproj", "{5DD1706F-7716-436A-A54F-597E140A5AAA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelo", "Modelo\Modelo.csproj", "{020E9933-7A3F-4E5B-A728-03B905CF0D3A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Menu", "Menu\Menu.csproj", "{AE735EC9-74F0-43A7-B339-F81AF7D6C11E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controles", "Controles\Controles.csproj", "{AE0E0E4D-FF36-4E3C-BDD3-DD5B6D3A68CA}"
 EndProject
@@ -25,10 +23,6 @@ Global
 		{020E9933-7A3F-4E5B-A728-03B905CF0D3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{020E9933-7A3F-4E5B-A728-03B905CF0D3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{020E9933-7A3F-4E5B-A728-03B905CF0D3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AE735EC9-74F0-43A7-B339-F81AF7D6C11E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE735EC9-74F0-43A7-B339-F81AF7D6C11E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE735EC9-74F0-43A7-B339-F81AF7D6C11E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE735EC9-74F0-43A7-B339-F81AF7D6C11E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AE0E0E4D-FF36-4E3C-BDD3-DD5B6D3A68CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE0E0E4D-FF36-4E3C-BDD3-DD5B6D3A68CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE0E0E4D-FF36-4E3C-BDD3-DD5B6D3A68CA}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -1,12 +1,13 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11111.16 d18.0
+VisualStudioVersion = 18.0.11205.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodByte", "MoodByte\MoodByte.csproj", "{5DD1706F-7716-436A-A54F-597E140A5AAA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelo", "Modelo\Modelo.csproj", "{020E9933-7A3F-4E5B-A728-03B905CF0D3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conexiones", "Conexiones\Conexiones.csproj", "{D22DF339-4052-4761-AC03-07562B24FC1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controles", "Controles\Controles.csproj", "{AE0E0E4D-FF36-4E3C-BDD3-DD5B6D3A68CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +27,10 @@ Global
 		{D22DF339-4052-4761-AC03-07562B24FC1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D22DF339-4052-4761-AC03-07562B24FC1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D22DF339-4052-4761-AC03-07562B24FC1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE0E0E4D-FF36-4E3C-BDD3-DD5B6D3A68CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE0E0E4D-FF36-4E3C-BDD3-DD5B6D3A68CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE0E0E4D-FF36-4E3C-BDD3-DD5B6D3A68CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE0E0E4D-FF36-4E3C-BDD3-DD5B6D3A68CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -104,6 +104,7 @@
             Controls.Add(lblUsuario);
             Name = "Login";
             Text = "Login";
+            Load += Login_Load;
             ResumeLayout(false);
             PerformLayout();
         }

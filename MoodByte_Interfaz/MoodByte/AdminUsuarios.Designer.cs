@@ -61,6 +61,7 @@
             btnCrearUsuario.TabIndex = 2;
             btnCrearUsuario.Text = "Crear Nuevo";
             btnCrearUsuario.UseVisualStyleBackColor = true;
+            btnCrearUsuario.Click += btnCrearUsuario_Click;
             // 
             // btnEditarusuario
             // 

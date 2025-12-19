@@ -111,6 +111,7 @@
             btnGuardar.TabIndex = 8;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // CrearArticulo
             // 
@@ -128,6 +129,7 @@
             Controls.Add(lblTitulo);
             Name = "CrearArticulo";
             Text = "CrearArticulo";
+            Load += CrearArticulo_Load;
             ResumeLayout(false);
             PerformLayout();
         }

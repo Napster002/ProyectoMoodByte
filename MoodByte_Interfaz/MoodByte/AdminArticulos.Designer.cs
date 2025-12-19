@@ -49,6 +49,7 @@
             btnNuevoArticulo.TabIndex = 1;
             btnNuevoArticulo.Text = "Nuevo";
             btnNuevoArticulo.UseVisualStyleBackColor = true;
+            btnNuevoArticulo.Click += btnNuevoArticulo_Click;
             // 
             // btnEditarArticulo
             // 
@@ -67,6 +68,7 @@
             btnBorrarArticulo.TabIndex = 3;
             btnBorrarArticulo.Text = "Borrar";
             btnBorrarArticulo.UseVisualStyleBackColor = true;
+            btnBorrarArticulo.Click += btnBorrarArticulo_Click;
             // 
             // imageList1
             // 
@@ -76,11 +78,14 @@
             // 
             // listViewArticulos
             // 
+            listViewArticulos.FullRowSelect = true;
             listViewArticulos.Location = new Point(427, 42);
             listViewArticulos.Name = "listViewArticulos";
             listViewArticulos.Size = new Size(292, 376);
             listViewArticulos.TabIndex = 4;
             listViewArticulos.UseCompatibleStateImageBehavior = false;
+            listViewArticulos.View = View.List;
+            listViewArticulos.SelectedIndexChanged += listViewArticulos_SelectedIndexChanged;
             // 
             // pictureBoxArticulo
             // 
@@ -120,6 +125,7 @@
             Controls.Add(btnNuevoArticulo);
             Name = "AdminArticulos";
             Text = "AdminArticulos";
+            Load += AdminArticulos_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticulo).EndInit();
             panelTituloArticulo.ResumeLayout(false);
             panelTituloArticulo.PerformLayout();

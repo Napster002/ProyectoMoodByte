@@ -16,5 +16,14 @@ namespace MoodByte
         {
             InitializeComponent();
         }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CrearArticulo_Load(object sender, EventArgs e)
+        {
+        }
     }
 }

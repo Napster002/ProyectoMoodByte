@@ -26,7 +26,7 @@ namespace MoodByte
             try
             {
                 // Obtener el JSON como string
-                var json = await _httpClient.GetStringAsync("http://localhost:8080/api/usuario");
+                var json = await _httpClient.GetStringAsync("http://192.168.56.1:5500/api/usuario");
 
                 // Configurar el deserializador para enums como strings
                 var options = new JsonSerializerOptions

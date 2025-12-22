@@ -88,7 +88,7 @@ namespace MoodByte
 
         private void btnNuevoArticulo_Click(object sender, EventArgs e)
         {
-            CrearArticulo fomrCreacion= new CrearArticulo();
+            CrearArticulo fomrCreacion= new CrearArticulo(new Articulo());
             fomrCreacion.ShowDialog();
         }
     }

@@ -17,9 +17,11 @@ namespace MoodByte
     public partial class CrearArticulo : Form
     {
         private readonly HttpClient _httpClient = new HttpClient();
-        public CrearArticulo()
+        private Articulo articulo;
+        public CrearArticulo(Articulo _articulo)
         {
             InitializeComponent();
+            this.articulo = _articulo;
         }
 
         private void buttonLimpiar_Click(object sender, EventArgs e)
@@ -117,7 +119,14 @@ namespace MoodByte
 
         private void CrearArticulo_Load(object sender, EventArgs e)
         {
-
+            if(articulo != null)
+            {
+                txtTitulo.Text = articulo.titulo;
+                txtSubtitulo.Text = articulo.subtitulo;
+                txtImagen.Text = articulo.imagen;
+                txtEnlace.Text = articulo.enlace;
+                btnGuardar.Text = "Actualizar";
+            }
         }
     }
 }

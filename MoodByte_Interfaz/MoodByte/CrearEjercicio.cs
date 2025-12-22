@@ -98,13 +98,13 @@ namespace MoodByte
         }
         public async Task InsertaEjercicio(Ejercicio ejercicio)
         {
-            var options = new JsonSerializerOptions
-            {
-                Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) },
-                PropertyNameCaseInsensitive = true,
-                ReferenceHandler = ReferenceHandler.IgnoreCycles
-            };
-
+            // Configurar la serialización para enums como strings
+           var options = new JsonSerializerOptions
+           {
+             Converters = { new JsonStringEnumConverter() },
+             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+             PropertyNameCaseInsensitive = true
+          };
             var json = JsonSerializer.Serialize(ejercicio, options);
             MessageBox.Show(json, "JSON a enviar", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

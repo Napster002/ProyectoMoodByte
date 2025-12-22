@@ -101,19 +101,18 @@ namespace MoodByte
             int edad = DateTime.Today.Year - dtpFechanacimiento.Value.Year;
             var usuario = new Usuario
             {
-                NombreCompleto = tbNombre.Text +" "+ tbApellidos.Text,
+                NombreCompleto = tbNombre.Text + " " + tbApellidos.Text,
                 NombreUsuario = tbNombreUsuario.Text,
                 Edad = edad,
                 Nivel = 0,
                 ExpAcumulada = 0,
                 Password = tbContraseña.Text,
-                FechaRegistro = dtpFechaRegistro.Value,
-                FechaNacimiento = dtpFechanacimiento.Value,
+                FechaRegistro = DateOnly.FromDateTime(dtpFechaRegistro.Value),
+                FechaNacimiento = DateOnly.FromDateTime(dtpFechanacimiento.Value),
                 Genero = (Genero)cbGenero.SelectedItem,
                 TipoUsuario = (TipoUsuario)cbTipoUsuario.SelectedItem
             };
             await InsertarUsuario(usuario);
-            MessageBox.Show("Se agrego correctamnete", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         //Metodo para guardar en la base de datos el usuario
         // No inserta el usuario cambiar
@@ -122,7 +121,8 @@ namespace MoodByte
             // Configurar la serialización para enums como strings
             var options = new JsonSerializerOptions
             {
-                Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) },
+                Converters = { new JsonStringEnumConverter() },
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 PropertyNameCaseInsensitive = true
             };
             var json = JsonSerializer.Serialize(usuario, options);
@@ -144,7 +144,7 @@ namespace MoodByte
             }
             else
             {
-                MessageBox.Show("Error al crear usuario: " + response.StatusCode);
+                MessageBox.Show("Error al crear usuario: " + response.StatusCode+response.ToString());
             }
         }
             private void CrearUsuario_Load(object sender, EventArgs e)

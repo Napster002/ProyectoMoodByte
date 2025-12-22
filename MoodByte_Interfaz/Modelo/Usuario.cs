@@ -15,8 +15,8 @@ namespace Modelo
         public int Nivel { get; set; }
         public double ExpAcumulada { get; set; }
         public string Password { get; set; }
-        public DateTime FechaRegistro { get; set; }
-        public DateTime FechaNacimiento { get; set; }
+        public DateOnly FechaRegistro { get; set; }
+        public DateOnly FechaNacimiento { get; set; }
         public Genero Genero { get; set; }
         public TipoUsuario TipoUsuario { get; set; }
     }

@@ -57,7 +57,7 @@
             // 
             lblNombre.AutoSize = true;
             lblNombre.ForeColor = SystemColors.ButtonHighlight;
-            lblNombre.Location = new Point(12, 9);
+            lblNombre.Location = new Point(16, 9);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(54, 15);
             lblNombre.TabIndex = 0;
@@ -67,7 +67,7 @@
             // 
             lblNombreUsuario.AutoSize = true;
             lblNombreUsuario.ForeColor = SystemColors.ButtonHighlight;
-            lblNombreUsuario.Location = new Point(403, 9);
+            lblNombreUsuario.Location = new Point(407, 9);
             lblNombreUsuario.Name = "lblNombreUsuario";
             lblNombreUsuario.Size = new Size(94, 15);
             lblNombreUsuario.TabIndex = 1;
@@ -77,7 +77,7 @@
             // 
             lblContraseña.AutoSize = true;
             lblContraseña.ForeColor = SystemColors.ButtonHighlight;
-            lblContraseña.Location = new Point(412, 119);
+            lblContraseña.Location = new Point(416, 119);
             lblContraseña.Name = "lblContraseña";
             lblContraseña.Size = new Size(67, 15);
             lblContraseña.TabIndex = 2;
@@ -87,7 +87,7 @@
             // 
             lblGenero.AutoSize = true;
             lblGenero.ForeColor = SystemColors.ButtonHighlight;
-            lblGenero.Location = new Point(12, 171);
+            lblGenero.Location = new Point(16, 171);
             lblGenero.Name = "lblGenero";
             lblGenero.Size = new Size(45, 15);
             lblGenero.TabIndex = 4;
@@ -97,7 +97,7 @@
             // 
             lblTipoUsuario.AutoSize = true;
             lblTipoUsuario.ForeColor = SystemColors.ButtonHighlight;
-            lblTipoUsuario.Location = new Point(12, 230);
+            lblTipoUsuario.Location = new Point(16, 230);
             lblTipoUsuario.Name = "lblTipoUsuario";
             lblTipoUsuario.Size = new Size(73, 15);
             lblTipoUsuario.TabIndex = 5;
@@ -107,7 +107,7 @@
             // 
             lblFechanacimiento.AutoSize = true;
             lblFechanacimiento.ForeColor = SystemColors.ButtonHighlight;
-            lblFechanacimiento.Location = new Point(12, 119);
+            lblFechanacimiento.Location = new Point(16, 119);
             lblFechanacimiento.Name = "lblFechanacimiento";
             lblFechanacimiento.Size = new Size(117, 15);
             lblFechanacimiento.TabIndex = 6;
@@ -115,7 +115,7 @@
             // 
             // tbNombre
             // 
-            tbNombre.Location = new Point(12, 27);
+            tbNombre.Location = new Point(16, 27);
             tbNombre.Name = "tbNombre";
             tbNombre.Size = new Size(157, 23);
             tbNombre.TabIndex = 7;
@@ -124,7 +124,7 @@
             // 
             lblApellidos.AutoSize = true;
             lblApellidos.ForeColor = SystemColors.ButtonHighlight;
-            lblApellidos.Location = new Point(12, 64);
+            lblApellidos.Location = new Point(16, 64);
             lblApellidos.Name = "lblApellidos";
             lblApellidos.Size = new Size(56, 15);
             lblApellidos.TabIndex = 8;
@@ -132,14 +132,14 @@
             // 
             // tbApellidos
             // 
-            tbApellidos.Location = new Point(12, 82);
+            tbApellidos.Location = new Point(16, 82);
             tbApellidos.Name = "tbApellidos";
             tbApellidos.Size = new Size(157, 23);
             tbApellidos.TabIndex = 9;
             // 
             // dtpFechanacimiento
             // 
-            dtpFechanacimiento.Location = new Point(12, 137);
+            dtpFechanacimiento.Location = new Point(16, 137);
             dtpFechanacimiento.Name = "dtpFechanacimiento";
             dtpFechanacimiento.Size = new Size(235, 23);
             dtpFechanacimiento.TabIndex = 10;
@@ -148,7 +148,7 @@
             // 
             lblFechaRegistro.AutoSize = true;
             lblFechaRegistro.ForeColor = SystemColors.ButtonHighlight;
-            lblFechaRegistro.Location = new Point(403, 64);
+            lblFechaRegistro.Location = new Point(407, 64);
             lblFechaRegistro.Name = "lblFechaRegistro";
             lblFechaRegistro.Size = new Size(100, 15);
             lblFechaRegistro.TabIndex = 11;
@@ -156,7 +156,7 @@
             // 
             // dtpFechaRegistro
             // 
-            dtpFechaRegistro.Location = new Point(342, 82);
+            dtpFechaRegistro.Location = new Point(346, 82);
             dtpFechaRegistro.Name = "dtpFechaRegistro";
             dtpFechaRegistro.Size = new Size(218, 23);
             dtpFechaRegistro.TabIndex = 12;
@@ -164,7 +164,7 @@
             // cbGenero
             // 
             cbGenero.FormattingEnabled = true;
-            cbGenero.Location = new Point(12, 192);
+            cbGenero.Location = new Point(16, 192);
             cbGenero.Name = "cbGenero";
             cbGenero.Size = new Size(157, 23);
             cbGenero.TabIndex = 13;
@@ -172,21 +172,21 @@
             // cbTipoUsuario
             // 
             cbTipoUsuario.FormattingEnabled = true;
-            cbTipoUsuario.Location = new Point(12, 248);
+            cbTipoUsuario.Location = new Point(16, 248);
             cbTipoUsuario.Name = "cbTipoUsuario";
             cbTipoUsuario.Size = new Size(157, 23);
             cbTipoUsuario.TabIndex = 14;
             // 
             // tbNombreUsuario
             // 
-            tbNombreUsuario.Location = new Point(403, 27);
+            tbNombreUsuario.Location = new Point(407, 27);
             tbNombreUsuario.Name = "tbNombreUsuario";
             tbNombreUsuario.Size = new Size(157, 23);
             tbNombreUsuario.TabIndex = 15;
             // 
             // buttonGuardar
             // 
-            buttonGuardar.Location = new Point(412, 287);
+            buttonGuardar.Location = new Point(416, 287);
             buttonGuardar.Name = "buttonGuardar";
             buttonGuardar.Size = new Size(75, 23);
             buttonGuardar.TabIndex = 16;
@@ -196,7 +196,7 @@
             // 
             // tbContraseña
             // 
-            tbContraseña.Location = new Point(403, 140);
+            tbContraseña.Location = new Point(407, 140);
             tbContraseña.Name = "tbContraseña";
             tbContraseña.Size = new Size(157, 23);
             tbContraseña.TabIndex = 17;
@@ -208,7 +208,7 @@
             // 
             // buttonLimpiar
             // 
-            buttonLimpiar.Location = new Point(295, 287);
+            buttonLimpiar.Location = new Point(299, 287);
             buttonLimpiar.Name = "buttonLimpiar";
             buttonLimpiar.Size = new Size(75, 23);
             buttonLimpiar.TabIndex = 18;
@@ -220,7 +220,7 @@
             // 
             lblrepiteContraseña.AutoSize = true;
             lblrepiteContraseña.ForeColor = SystemColors.ButtonHighlight;
-            lblrepiteContraseña.Location = new Point(403, 171);
+            lblrepiteContraseña.Location = new Point(407, 171);
             lblrepiteContraseña.Name = "lblrepiteContraseña";
             lblrepiteContraseña.Size = new Size(113, 15);
             lblrepiteContraseña.TabIndex = 19;
@@ -228,7 +228,7 @@
             // 
             // tbRepitecontraseña
             // 
-            tbRepitecontraseña.Location = new Point(403, 192);
+            tbRepitecontraseña.Location = new Point(407, 192);
             tbRepitecontraseña.Name = "tbRepitecontraseña";
             tbRepitecontraseña.Size = new Size(157, 23);
             tbRepitecontraseña.TabIndex = 20;
@@ -239,7 +239,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MediumPurple;
-            ClientSize = new Size(572, 357);
+            ClientSize = new Size(579, 357);
             Controls.Add(tbRepitecontraseña);
             Controls.Add(lblrepiteContraseña);
             Controls.Add(buttonLimpiar);

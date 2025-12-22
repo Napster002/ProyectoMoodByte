@@ -35,6 +35,7 @@
             btnInsertarFrase = new Button();
             btnEditar = new Button();
             btnBorrar = new Button();
+            navMenu = new Controles.Menu();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -59,7 +60,7 @@
             lblTipo.AutoSize = true;
             lblTipo.Location = new Point(294, 59);
             lblTipo.Name = "lblTipo";
-            lblTipo.Size = new Size(34, 15);
+            lblTipo.Size = new Size(33, 15);
             lblTipo.TabIndex = 2;
             lblTipo.Text = "Tipo:";
             // 
@@ -98,11 +99,21 @@
             btnBorrar.Text = "Borrar";
             btnBorrar.UseVisualStyleBackColor = true;
             // 
+            // navMenu
+            // 
+            navMenu.BackColor = Color.Transparent;
+            navMenu.ForeColor = SystemColors.ControlText;
+            navMenu.Location = new Point(12, 3);
+            navMenu.Name = "navMenu";
+            navMenu.Size = new Size(215, 29);
+            navMenu.TabIndex = 7;
+            // 
             // AdminEjercicios
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(navMenu);
             Controls.Add(btnBorrar);
             Controls.Add(btnEditar);
             Controls.Add(btnInsertarFrase);
@@ -125,5 +136,6 @@
         private Button btnInsertarFrase;
         private Button btnEditar;
         private Button btnBorrar;
+        private Controles.Menu navMenu;
     }
 }

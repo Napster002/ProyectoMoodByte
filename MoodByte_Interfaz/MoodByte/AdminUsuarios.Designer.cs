@@ -33,6 +33,7 @@
             btnCrearUsuario = new Button();
             btnEditarusuario = new Button();
             btnBorrarUsuario = new Button();
+            navMenu = new Controles.Menu();
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
             SuspendLayout();
             // 
@@ -81,11 +82,21 @@
             btnBorrarUsuario.Text = "Borrar Usuario";
             btnBorrarUsuario.UseVisualStyleBackColor = true;
             // 
+            // navMenu
+            // 
+            navMenu.BackColor = Color.Transparent;
+            navMenu.ForeColor = SystemColors.ControlText;
+            navMenu.Location = new Point(12, 3);
+            navMenu.Name = "navMenu";
+            navMenu.Size = new Size(215, 27);
+            navMenu.TabIndex = 5;
+            // 
             // AdminUsuarios
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(navMenu);
             Controls.Add(btnBorrarUsuario);
             Controls.Add(btnEditarusuario);
             Controls.Add(btnCrearUsuario);
@@ -106,5 +117,6 @@
         private Button btnCrearUsuario;
         private Button btnEditarusuario;
         private Button btnBorrarUsuario;
+        private Controles.Menu navMenu;
     }
 }

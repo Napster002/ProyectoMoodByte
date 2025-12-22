@@ -37,6 +37,7 @@
             pictureBoxArticulo = new PictureBox();
             panelTituloArticulo = new Panel();
             lblTitulo = new Label();
+            navMenu = new Controles.Menu();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticulo).BeginInit();
             panelTituloArticulo.SuspendLayout();
             SuspendLayout();
@@ -108,15 +109,25 @@
             lblTitulo.AutoSize = true;
             lblTitulo.Location = new Point(14, 24);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(34, 15);
+            lblTitulo.Size = new Size(32, 15);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "TEXT";
+            // 
+            // navMenu
+            // 
+            navMenu.BackColor = Color.Transparent;
+            navMenu.ForeColor = SystemColors.ControlText;
+            navMenu.Location = new Point(7, 3);
+            navMenu.Name = "navMenu";
+            navMenu.Size = new Size(215, 24);
+            navMenu.TabIndex = 7;
             // 
             // AdminArticulos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(navMenu);
             Controls.Add(panelTituloArticulo);
             Controls.Add(pictureBoxArticulo);
             Controls.Add(listViewArticulos);
@@ -141,5 +152,6 @@
         private PictureBox pictureBoxArticulo;
         private Panel panelTituloArticulo;
         private Label lblTitulo;
+        private Controles.Menu navMenu;
     }
 }

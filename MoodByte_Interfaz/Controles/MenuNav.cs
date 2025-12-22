@@ -31,7 +31,7 @@
         }
         private void musica_Click(object sender, EventArgs e)
         {
-            AbrirMusica.Invoke(this, new EventArgs());
+            //AbrirMusica.Invoke(this, new EventArgs());
         }
         private void cerrarSesion_Click(object sender, EventArgs e) { 
 

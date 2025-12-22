@@ -36,6 +36,7 @@
             frasesToolStripMenuItem = new ToolStripMenuItem();
             ejerciciosToolStripMenuItem = new ToolStripMenuItem();
             musicaToolStripMenuItem = new ToolStripMenuItem();
+            cerrarSesionToolStripMenuItem = new ToolStripMenuItem();
             archivoToolStripMenuItem = new ToolStripMenuItem();
             nuevoToolStripMenuItem = new ToolStripMenuItem();
             abrirToolStripMenuItem = new ToolStripMenuItem();
@@ -65,7 +66,6 @@
             buscarToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator5 = new ToolStripSeparator();
             acercadeToolStripMenuItem = new ToolStripMenuItem();
-            cerrarSesionToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -126,6 +126,13 @@
             musicaToolStripMenuItem.Size = new Size(180, 22);
             musicaToolStripMenuItem.Text = "Musica";
             musicaToolStripMenuItem.Click += musica_Click;
+            // 
+            // cerrarSesionToolStripMenuItem
+            // 
+            cerrarSesionToolStripMenuItem.BackColor = Color.FromArgb(192, 192, 255);
+            cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
+            cerrarSesionToolStripMenuItem.Size = new Size(180, 22);
+            cerrarSesionToolStripMenuItem.Text = "Cerrar sesion";
             // 
             // archivoToolStripMenuItem
             // 
@@ -324,13 +331,6 @@
             acercadeToolStripMenuItem.Size = new Size(135, 22);
             acercadeToolStripMenuItem.Text = "&Acerca de...";
             // 
-            // cerrarSesionToolStripMenuItem
-            // 
-            cerrarSesionToolStripMenuItem.BackColor = Color.FromArgb(192, 192, 255);
-            cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
-            cerrarSesionToolStripMenuItem.Size = new Size(180, 22);
-            cerrarSesionToolStripMenuItem.Text = "Cerrar sesion";
-            // 
             // Menu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -339,7 +339,7 @@
             Controls.Add(menuStrip1);
             ForeColor = SystemColors.ControlText;
             Name = "Menu";
-            Size = new Size(215, 265);
+            Size = new Size(215, 25);
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);

@@ -19,8 +19,46 @@ namespace MoodByte
         public AdminArticulos()
         {
             InitializeComponent();
+            navMenu.AbrirUsuarios += menu_abrirUsuarios;
+            navMenu.AbrirArticulos += menu_abrirArticulos;
+            navMenu.AbrirEjercicios += menu_abrirEjercicios;
+            navMenu.AbrirFrases += menu_abrirFrases;
+        }
+        //Metodos menu de navegacion-------------------------
+        private void menu_abrirUsuarios(object sender, EventArgs e)
+        {
+
+            AdminUsuarios usuarios = new AdminUsuarios();
+            usuarios.Visible = true;
+            this.Close();
+
+        }
+        private void menu_abrirArticulos(object sender, EventArgs e)
+        {
+
+            AdminArticulos articulos = new AdminArticulos();
+            articulos.Visible = true;
+            this.Close();
+
+        }
+        private void menu_abrirEjercicios(object sender, EventArgs e)
+        {
+
+            AdminEjercicios ejercicios = new AdminEjercicios();
+            ejercicios.Visible = true;
+            this.Close();
+
+        }
+        private void menu_abrirFrases(object sender, EventArgs e)
+        {
+
+            AdminFrases frases = new AdminFrases();
+            frases.Visible = true;
+            this.Close();
+
         }
 
+        ///---------------------------------------
         public async Task CargarGrid()
         {
             List<Articulo> articulos = await _httpClient.GetFromJsonAsync<List<Articulo>>("http://192.168.56.1:5500/api/articulo");

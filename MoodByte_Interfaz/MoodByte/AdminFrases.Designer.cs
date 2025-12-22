@@ -34,6 +34,7 @@
             btnBorrar = new Button();
             btnEditar = new Button();
             btnInsertar = new Button();
+            navMenu = new Controles.Menu();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -89,11 +90,21 @@
             btnInsertar.Text = "Añadir";
             btnInsertar.UseVisualStyleBackColor = true;
             // 
+            // navMenu
+            // 
+            navMenu.BackColor = Color.Transparent;
+            navMenu.ForeColor = SystemColors.ControlText;
+            navMenu.Location = new Point(12, 2);
+            navMenu.Name = "navMenu";
+            navMenu.Size = new Size(215, 26);
+            navMenu.TabIndex = 6;
+            // 
             // AdminFrases
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(navMenu);
             Controls.Add(btnInsertar);
             Controls.Add(btnEditar);
             Controls.Add(btnBorrar);
@@ -115,5 +126,6 @@
         private Button btnBorrar;
         private Button btnEditar;
         private Button btnInsertar;
+        private Controles.Menu navMenu;
     }
 }

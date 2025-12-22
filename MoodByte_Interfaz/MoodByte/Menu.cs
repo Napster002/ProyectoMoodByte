@@ -24,28 +24,28 @@ namespace MoodByte
         
             AdminUsuarios usuarios = new AdminUsuarios();
             usuarios.Visible = true;
-            this.Close();
+            this.Hide();
 
         }
         private void menu_abrirArticulos(object sender, EventArgs e) { 
         
             AdminArticulos articulos = new AdminArticulos();
             articulos.Visible = true;
-            this.Close();
-           
+            this.Hide();
+
         }
         private void menu_abrirEjercicios(object sender, EventArgs e) { 
         
             AdminEjercicios ejercicios = new AdminEjercicios();
             ejercicios.Visible = true;
-            this.Close();
+            this.Hide();
 
         }
         private void menu_abrirFrases(object sender, EventArgs e) { 
         
             AdminFrases frases = new AdminFrases();
             frases.Visible = true;
-            this.Close();
+            this.Hide();
         
         }
     }

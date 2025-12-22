@@ -166,5 +166,6 @@ namespace MoodByte
             tbRepitecontraseña.Clear();
             tbNombre.Focus();
         }
+
     }
 }

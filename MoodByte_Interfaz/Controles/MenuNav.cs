@@ -1,4 +1,6 @@
-﻿namespace Controles
+﻿using Controles;
+
+namespace Controles
 {
     public partial class Menu : UserControl
     {

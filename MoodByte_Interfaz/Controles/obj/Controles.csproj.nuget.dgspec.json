@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\Controles\\Controles.csproj": {}
+    "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\Controles\\Controles.csproj": {}
   },
   "projects": {
-    "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\Controles\\Controles.csproj": {
+    "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\Controles\\Controles.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\Controles\\Controles.csproj",
+        "projectUniqueName": "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\Controles\\Controles.csproj",
         "projectName": "Controles",
-        "projectPath": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\Controles\\Controles.csproj",
-        "packagesPath": "C:\\Users\\usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\Controles\\obj\\",
+        "projectPath": "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\Controles\\Controles.csproj",
+        "packagesPath": "C:\\Users\\ruben\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ruben\\Desktop\\REPOSITORIO\\ProyectoMoodByte\\MoodByte_Interfaz\\Controles\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ruben\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -40,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -64,7 +69,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

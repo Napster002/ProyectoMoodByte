@@ -53,7 +53,9 @@ namespace MoodByte
             {
                 if (listaUsuarios != null && txtUsuario.Equals(usuario.NombreUsuario) && txtPassword.Equals(usuario.Password))
                 {
-
+                    Menu menu = new Menu();
+                    menu.Visible = true;
+                    this.Visible = false;
                     return;
                 }
             }

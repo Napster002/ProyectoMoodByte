@@ -19,34 +19,42 @@ namespace MoodByte
             navMenu.AbrirArticulos += menu_abrirArticulos;
             navMenu.AbrirEjercicios += menu_abrirEjercicios;
             navMenu.AbrirFrases += menu_abrirFrases;
+            navMenu.AbrirLogin += menu_cerrarSesion;
         }
         private void menu_abrirUsuarios(object sender, EventArgs e) { 
         
             AdminUsuarios usuarios = new AdminUsuarios();
             usuarios.Visible = true;
-            this.Hide();
+            this.Close();
 
         }
         private void menu_abrirArticulos(object sender, EventArgs e) { 
         
             AdminArticulos articulos = new AdminArticulos();
             articulos.Visible = true;
-            this.Hide();
+            this.Close();
 
         }
         private void menu_abrirEjercicios(object sender, EventArgs e) { 
         
             AdminEjercicios ejercicios = new AdminEjercicios();
             ejercicios.Visible = true;
-            this.Hide();
+            this.Close();
 
         }
         private void menu_abrirFrases(object sender, EventArgs e) { 
         
             AdminFrases frases = new AdminFrases();
             frases.Visible = true;
-            this.Hide();
+            this.Close();
         
+        }
+        private void menu_cerrarSesion(object sender, EventArgs e) { 
+        
+            Login login = new Login();
+            login.Visible = true;
+            this.Close();
+
         }
     }
 }

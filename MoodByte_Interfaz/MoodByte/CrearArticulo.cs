@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -92,7 +93,13 @@ namespace MoodByte
         // No funciona el insertar Articulo comprobar codigo
         public async Task InsertarArticulo(Articulo articulo)
         {
-            var json = JsonSerializer.Serialize(articulo);
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new JsonStringEnumConverter() },
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                PropertyNameCaseInsensitive = true
+            };
+            var json = JsonSerializer.Serialize(articulo,options);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             try
             {

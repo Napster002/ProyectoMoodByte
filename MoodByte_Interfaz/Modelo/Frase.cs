@@ -11,5 +11,6 @@ namespace Modelo
         public long id { get; set; }
         public string frase { get; set; }
         public int puntuacion { get; set; }
+
     }
 }

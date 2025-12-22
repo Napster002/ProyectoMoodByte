@@ -45,17 +45,36 @@ namespace MoodByte
             }
         }
         // Falta creacion al no saber el que necesita la clase Frase(falta Estado) y asignar que vuelva a AdminFrases
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnGuardar_Click(object sender, EventArgs e, int 0)
         {
-          // InsertarFrase(frase);
+            // InsertarFrase(frase);
+            if (Validaciones.validaFrase(txtFrase.Text,out var err))
+            {
+                epFrase.SetError(txtFrase, err);
+                MessageBox.Show("Mal Insertado: Frase", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                epFrase.SetError(txtFrase, "");
+                switch (cmbEstado.SelectedIndex)
+                {
+                    case 0: puntuacion = 1;
+
+                }
+                Frase frase= new Frase
+                {
+                    frase = txtFrase.Text,
+                    puntuacion = 
+                };
+            }
         }
         public async void InsertaFrase(Frase frase)
         {
             var options = new JsonSerializerOptions
             {
-                Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) },
-                PropertyNameCaseInsensitive = true,
-                ReferenceHandler = ReferenceHandler.IgnoreCycles
+                Converters = { new JsonStringEnumConverter() },
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                PropertyNameCaseInsensitive = true
             };
 
             var json = JsonSerializer.Serialize(frase, options);

@@ -94,7 +94,14 @@ namespace MoodByte
         // No funciona el insertar Articulo comprobar codigo
         public async Task InsertarArticulo(Articulo articulo)
         {
-            var json = JsonSerializer.Serialize(articulo);
+             var options = new JsonSerializerOptions
+               {
+             Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) },
+             PropertyNameCaseInsensitive = true,
+             ReferenceHandler = ReferenceHandler.IgnoreCycles
+             };
+
+            var json = JsonSerializer.Serialize(articulo, options);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             try
             {

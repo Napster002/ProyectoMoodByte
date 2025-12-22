@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE0E0E4D-FF36-4E3C-BDD3-DD5B6D3A68CA}|Controles\\Controles.csproj|c:\\users\\usuario\\documents\\github\\proyectomoodbyte\\moodbyte_interfaz\\controles\\usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{AE0E0E4D-FF36-4E3C-BDD3-DD5B6D3A68CA}|Controles\\Controles.csproj|solutionrelative:controles\\usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|c:\\users\\usuario\\documents\\github\\proyectomoodbyte\\moodbyte_interfaz\\moodbyte\\crearusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|solutionrelative:moodbyte\\crearusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE0E0E4D-FF36-4E3C-BDD3-DD5B6D3A68CA}|Controles\\Controles.csproj|c:\\users\\usuario\\documents\\github\\proyectomoodbyte\\moodbyte_interfaz\\controles\\usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE0E0E4D-FF36-4E3C-BDD3-DD5B6D3A68CA}|Controles\\Controles.csproj|solutionrelative:controles\\usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|c:\\users\\usuario\\documents\\github\\proyectomoodbyte\\moodbyte_interfaz\\moodbyte\\crearusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|solutionrelative:moodbyte\\crearusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|c:\\users\\usuario\\documents\\github\\proyectomoodbyte\\moodbyte_interfaz\\moodbyte\\adminarticulos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|solutionrelative:moodbyte\\adminarticulos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,27 +38,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UserControl1.cs",
-              "DocumentMoniker": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\Controles\\UserControl1.cs",
-              "RelativeDocumentMoniker": "Controles\\UserControl1.cs",
-              "ToolTip": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\Controles\\UserControl1.cs",
-              "RelativeToolTip": "Controles\\UserControl1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "CrearUsuario.cs",
+              "DocumentMoniker": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\CrearUsuario.cs",
+              "RelativeDocumentMoniker": "MoodByte\\CrearUsuario.cs",
+              "ToolTip": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\CrearUsuario.cs",
+              "RelativeToolTip": "MoodByte\\CrearUsuario.cs",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAowIMAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-19T14:48:21.425Z",
+              "WhenOpened": "2025-12-22T13:59:53.766Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UserControl1.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\Controles\\UserControl1.cs",
-              "RelativeDocumentMoniker": "Controles\\UserControl1.cs",
-              "ToolTip": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\Controles\\UserControl1.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Controles\\UserControl1.cs [Dise\u00F1o]",
+              "DocumentIndex": 1,
+              "Title": "CrearUsuario.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\CrearUsuario.cs",
+              "RelativeDocumentMoniker": "MoodByte\\CrearUsuario.cs",
+              "ToolTip": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\CrearUsuario.cs [Dise\u00F1o]",
+              "RelativeToolTip": "MoodByte\\CrearUsuario.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-19T14:43:24.223Z",
+              "WhenOpened": "2025-12-22T13:59:51.182Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AdminArticulos.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\AdminArticulos.cs",
+              "RelativeDocumentMoniker": "MoodByte\\AdminArticulos.cs",
+              "ToolTip": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\AdminArticulos.cs [Dise\u00F1o]",
+              "RelativeToolTip": "MoodByte\\AdminArticulos.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T13:59:46.155Z",
               "EditorCaption": " [Dise\u00F1o]"
             }
           ]

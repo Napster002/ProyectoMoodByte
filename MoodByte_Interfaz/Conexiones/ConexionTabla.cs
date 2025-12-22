@@ -14,7 +14,7 @@ namespace Conexiones
         public static string TablaEjercicio { get; } = ConexionGenerica.Conexion + "/api/ejercicio";
         public static string TablaFrase { get; } = ConexionGenerica.Conexion + "/api/frase";
         public static string TablaMusica { get; } = ConexionGenerica.Conexion + "/api/musica";
-
         public static string TablaEstado { get; } = ConexionGenerica.Conexion + "/api/estado";
+
     }
 }

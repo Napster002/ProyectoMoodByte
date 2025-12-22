@@ -80,7 +80,7 @@
             btnGuardar.TabIndex = 4;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
-            btnGuardar.Click += btnGuardar_Click;
+
             // 
             // buttonLimpiar
             // 

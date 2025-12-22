@@ -82,5 +82,15 @@ namespace Modelo
             error = string.Empty;
             return true;
         }
+        public static bool validaFrase(string frase, out string error)
+        {
+            if (!Regex.IsMatch(frase, "^[A-ZÑ][ A-Za-záéíóúÁÉÍÓÚÑñ ]{1,45}$"))
+            {
+                error = "Mal introducido: Frase";
+                return false;
+            }
+            error = string.Empty;
+            return true;
+        }
     }
 }

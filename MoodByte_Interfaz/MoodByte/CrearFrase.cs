@@ -44,30 +44,6 @@ namespace MoodByte
                 MessageBox.Show("Error al cargar los estados: " + ex.Message);
             }
         }
-        // Falta creacion al no saber el que necesita la clase Frase(falta Estado) y asignar que vuelva a AdminFrases
-        private void btnGuardar_Click(object sender, EventArgs e, int 0)
-        {
-            // InsertarFrase(frase);
-            if (Validaciones.validaFrase(txtFrase.Text,out var err))
-            {
-                epFrase.SetError(txtFrase, err);
-                MessageBox.Show("Mal Insertado: Frase", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                epFrase.SetError(txtFrase, "");
-                switch (cmbEstado.SelectedIndex)
-                {
-                    case 0: puntuacion = 1;
-
-                }
-                Frase frase= new Frase
-                {
-                    frase = txtFrase.Text,
-                    puntuacion = 
-                };
-            }
-        }
         public async void InsertaFrase(Frase frase)
         {
             var options = new JsonSerializerOptions
@@ -108,6 +84,34 @@ namespace MoodByte
                 cmbEstado.SelectedIndex = 0;
             txtFrase.Clear();
             txtFrase.Focus();
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (Validaciones.validaFrase(txtFrase.Text, out var err))
+            {
+                epFrase.SetError(txtFrase, err);
+                MessageBox.Show("Mal Insertado: Frase", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                epFrase.SetError(txtFrase, "");
+                var puntuaje = 0;
+                switch (cmbEstado.SelectedIndex)
+                {
+                    case 0: puntuaje = 1; break;
+                    case 1: puntuaje = 2; break;
+                    case 2: puntuaje = 3; break;
+                    case 3: puntuaje = 4; break;
+                    case 4: puntuaje = 5; break;
+                }
+                Frase frase = new Frase
+                {
+                    frase = txtFrase.Text,
+                    puntuacion = puntuaje
+                };
+                InsertaFrase(frase);
+            }
         }
     }
 }

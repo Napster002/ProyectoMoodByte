@@ -3,15 +3,23 @@
   "WorkspaceRootPath": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{619A81EC-C4BB-476B-9C68-648EFD0590B4}|Conexiones\\Conexiones.csproj|c:\\users\\usuario\\documents\\github\\proyectomoodbyte\\moodbyte_interfaz\\conexiones\\conexiontabla.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{619A81EC-C4BB-476B-9C68-648EFD0590B4}|Conexiones\\Conexiones.csproj|solutionrelative:conexiones\\conexiontabla.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{619A81EC-C4BB-476B-9C68-648EFD0590B4}|Conexiones\\Conexiones.csproj|c:\\users\\usuario\\documents\\github\\proyectomoodbyte\\moodbyte_interfaz\\conexiones\\conexiongenerica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{619A81EC-C4BB-476B-9C68-648EFD0590B4}|Conexiones\\Conexiones.csproj|solutionrelative:conexiones\\conexiongenerica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|c:\\users\\usuario\\documents\\github\\proyectomoodbyte\\moodbyte_interfaz\\moodbyte\\crearusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|solutionrelative:moodbyte\\crearusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|c:\\users\\usuario\\documents\\github\\proyectomoodbyte\\moodbyte_interfaz\\moodbyte\\crearusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\moodbyte\\crearusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|solutionrelative:moodbyte\\crearusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|c:\\users\\usuario\\documents\\github\\proyectomoodbyte\\moodbyte_interfaz\\moodbyte\\adminarticulos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\moodbyte\\adminarticulos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{5DD1706F-7716-436A-A54F-597E140A5AAA}|MoodByte\\MoodByte.csproj|solutionrelative:moodbyte\\adminarticulos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -39,39 +47,63 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ConexionTabla.cs",
+              "DocumentMoniker": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\Conexiones\\ConexionTabla.cs",
+              "RelativeDocumentMoniker": "Conexiones\\ConexionTabla.cs",
+              "ToolTip": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\Conexiones\\ConexionTabla.cs",
+              "RelativeToolTip": "Conexiones\\ConexionTabla.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T14:06:02.599Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ConexionGenerica.cs",
+              "DocumentMoniker": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\Conexiones\\ConexionGenerica.cs",
+              "RelativeDocumentMoniker": "Conexiones\\ConexionGenerica.cs",
+              "ToolTip": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\Conexiones\\ConexionGenerica.cs",
+              "RelativeToolTip": "Conexiones\\ConexionGenerica.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T14:04:44.192Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "CrearUsuario.cs",
               "DocumentMoniker": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\CrearUsuario.cs",
               "RelativeDocumentMoniker": "MoodByte\\CrearUsuario.cs",
               "ToolTip": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\CrearUsuario.cs",
               "RelativeToolTip": "MoodByte\\CrearUsuario.cs",
-              "ViewState": "AgIAAHIAAAAAAAAAAAAowIMAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAowH4AAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-22T13:59:53.766Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "CrearUsuario.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\CrearUsuario.cs",
               "RelativeDocumentMoniker": "MoodByte\\CrearUsuario.cs",
               "ToolTip": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\CrearUsuario.cs [Dise\u00F1o]",
               "RelativeToolTip": "MoodByte\\CrearUsuario.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-22T13:59:51.182Z",
-              "EditorCaption": " [Dise\u00F1o]"
+              "WhenOpened": "2025-12-22T13:59:51.182Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "AdminArticulos.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\AdminArticulos.cs",
               "RelativeDocumentMoniker": "MoodByte\\AdminArticulos.cs",
               "ToolTip": "C:\\Users\\usuario\\Documents\\GitHub\\ProyectoMoodByte\\MoodByte_Interfaz\\MoodByte\\AdminArticulos.cs [Dise\u00F1o]",
               "RelativeToolTip": "MoodByte\\AdminArticulos.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-22T13:59:46.155Z",
-              "EditorCaption": " [Dise\u00F1o]"
+              "WhenOpened": "2025-12-22T13:59:46.155Z"
             }
           ]
         }

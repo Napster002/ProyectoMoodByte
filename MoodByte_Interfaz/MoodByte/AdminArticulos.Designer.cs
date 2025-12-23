@@ -44,9 +44,10 @@
             // 
             // btnNuevoArticulo
             // 
-            btnNuevoArticulo.Location = new Point(66, 395);
+            btnNuevoArticulo.Location = new Point(75, 527);
+            btnNuevoArticulo.Margin = new Padding(3, 4, 3, 4);
             btnNuevoArticulo.Name = "btnNuevoArticulo";
-            btnNuevoArticulo.Size = new Size(75, 23);
+            btnNuevoArticulo.Size = new Size(86, 31);
             btnNuevoArticulo.TabIndex = 1;
             btnNuevoArticulo.Text = "Nuevo";
             btnNuevoArticulo.UseVisualStyleBackColor = true;
@@ -54,18 +55,21 @@
             // 
             // btnEditarArticulo
             // 
-            btnEditarArticulo.Location = new Point(147, 395);
+            btnEditarArticulo.Location = new Point(168, 527);
+            btnEditarArticulo.Margin = new Padding(3, 4, 3, 4);
             btnEditarArticulo.Name = "btnEditarArticulo";
-            btnEditarArticulo.Size = new Size(75, 23);
+            btnEditarArticulo.Size = new Size(86, 31);
             btnEditarArticulo.TabIndex = 2;
             btnEditarArticulo.Text = "Editar";
             btnEditarArticulo.UseVisualStyleBackColor = true;
+            btnEditarArticulo.Click += btnEditarArticulo_Click;
             // 
             // btnBorrarArticulo
             // 
-            btnBorrarArticulo.Location = new Point(240, 395);
+            btnBorrarArticulo.Location = new Point(274, 527);
+            btnBorrarArticulo.Margin = new Padding(3, 4, 3, 4);
             btnBorrarArticulo.Name = "btnBorrarArticulo";
-            btnBorrarArticulo.Size = new Size(75, 23);
+            btnBorrarArticulo.Size = new Size(86, 31);
             btnBorrarArticulo.TabIndex = 3;
             btnBorrarArticulo.Text = "Borrar";
             btnBorrarArticulo.UseVisualStyleBackColor = true;
@@ -80,9 +84,10 @@
             // listViewArticulos
             // 
             listViewArticulos.FullRowSelect = true;
-            listViewArticulos.Location = new Point(427, 42);
+            listViewArticulos.Location = new Point(488, 56);
+            listViewArticulos.Margin = new Padding(3, 4, 3, 4);
             listViewArticulos.Name = "listViewArticulos";
-            listViewArticulos.Size = new Size(292, 376);
+            listViewArticulos.Size = new Size(333, 500);
             listViewArticulos.TabIndex = 4;
             listViewArticulos.UseCompatibleStateImageBehavior = false;
             listViewArticulos.View = View.List;
@@ -90,26 +95,28 @@
             // 
             // pictureBoxArticulo
             // 
-            pictureBoxArticulo.Location = new Point(66, 42);
+            pictureBoxArticulo.Location = new Point(75, 56);
+            pictureBoxArticulo.Margin = new Padding(3, 4, 3, 4);
             pictureBoxArticulo.Name = "pictureBoxArticulo";
-            pictureBoxArticulo.Size = new Size(249, 185);
+            pictureBoxArticulo.Size = new Size(285, 247);
             pictureBoxArticulo.TabIndex = 5;
             pictureBoxArticulo.TabStop = false;
             // 
             // panelTituloArticulo
             // 
             panelTituloArticulo.Controls.Add(lblTitulo);
-            panelTituloArticulo.Location = new Point(66, 257);
+            panelTituloArticulo.Location = new Point(75, 343);
+            panelTituloArticulo.Margin = new Padding(3, 4, 3, 4);
             panelTituloArticulo.Name = "panelTituloArticulo";
-            panelTituloArticulo.Size = new Size(249, 59);
+            panelTituloArticulo.Size = new Size(285, 79);
             panelTituloArticulo.TabIndex = 6;
             // 
             // lblTitulo
             // 
             lblTitulo.AutoSize = true;
-            lblTitulo.Location = new Point(14, 24);
+            lblTitulo.Location = new Point(16, 32);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(32, 15);
+            lblTitulo.Size = new Size(42, 20);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "TEXT";
             // 
@@ -117,16 +124,17 @@
             // 
             navMenu.BackColor = Color.Transparent;
             navMenu.ForeColor = SystemColors.ControlText;
-            navMenu.Location = new Point(7, 3);
+            navMenu.Location = new Point(8, 4);
+            navMenu.Margin = new Padding(3, 5, 3, 5);
             navMenu.Name = "navMenu";
-            navMenu.Size = new Size(215, 24);
+            navMenu.Size = new Size(246, 32);
             navMenu.TabIndex = 7;
             // 
             // AdminArticulos
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(navMenu);
             Controls.Add(panelTituloArticulo);
             Controls.Add(pictureBoxArticulo);
@@ -134,6 +142,7 @@
             Controls.Add(btnBorrarArticulo);
             Controls.Add(btnEditarArticulo);
             Controls.Add(btnNuevoArticulo);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "AdminArticulos";
             Text = "AdminArticulos";
             Load += AdminArticulos_Load;

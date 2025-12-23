@@ -133,6 +133,7 @@
             cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
             cerrarSesionToolStripMenuItem.Size = new Size(180, 22);
             cerrarSesionToolStripMenuItem.Text = "Cerrar sesion";
+            cerrarSesionToolStripMenuItem.Click += cerrarSesion_Click;
             // 
             // archivoToolStripMenuItem
             // 

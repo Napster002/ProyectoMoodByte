@@ -1,4 +1,5 @@
-﻿using Modelo;
+﻿using Conexiones;
+using Modelo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -61,7 +62,7 @@ namespace MoodByte
         ///---------------------------------------
         public async Task CargarGrid()
         {
-            List<Articulo> articulos = await _httpClient.GetFromJsonAsync<List<Articulo>>("http://localhost:5500/api/articulo");
+            List<Articulo> articulos = await _httpClient.GetFromJsonAsync<List<Articulo>>(ConexionTabla.TablaArticulo);
             listViewArticulos.BeginUpdate();
             listViewArticulos.Items.Clear();
             foreach (var articulo in articulos)
@@ -121,7 +122,7 @@ namespace MoodByte
                                      MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.Yes)
                 {
-                    await _httpClient.DeleteAsync($"http://localhost:5500/api/articulo/{articuloSeleccionado.id}");
+                    await _httpClient.DeleteAsync($"{ ConexionTabla.TablaArticulo}/{ articuloSeleccionado.id}");
                     await CargarGrid();
                     Limpiar();
                 }
@@ -134,13 +135,13 @@ namespace MoodByte
 
         private async void btnNuevoArticulo_Click(object sender, EventArgs e)
         {
-            CrearArticulo fomrCreacion = new CrearArticulo(new Articulo());
-            var resultado=fomrCreacion.ShowDialog();
-            if (resultado == DialogResult.OK)
+            CrearArticulo formCreacion = new CrearArticulo(new Articulo());
+            formCreacion.ArticuloModificado += async (s, ev) =>
             {
                 await CargarGrid();
                 Limpiar();
-            }
+            };
+            formCreacion.ShowDialog();
         }
 
         private async void btnEditarArticulo_Click(object sender, EventArgs e)
@@ -149,12 +150,17 @@ namespace MoodByte
             {
                 var articuloSeleccionado=(Articulo)listViewArticulos.SelectedItems[0].Tag;
                 CrearArticulo formEdicion = new CrearArticulo(articuloSeleccionado);
-                var resultado=formEdicion.ShowDialog();
-                if (resultado == DialogResult.OK)
+                formEdicion.ArticuloModificado += async (s, ev) =>
                 {
                     await CargarGrid();
                     Limpiar();
-                }
+                };
+                formEdicion.ShowDialog();
+            }
+
+            else
+            {
+                MessageBox.Show("Por favor, selecciona un artículo para editar.","Atencion",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
             }
         }
         public void Limpiar()

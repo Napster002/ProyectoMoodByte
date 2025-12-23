@@ -17,6 +17,7 @@ namespace MoodByte
 {
     public partial class CrearArticulo : Form
     {
+        public event EventHandler ArticuloModificado;
         private readonly HttpClient _httpClient = new HttpClient();
         private Articulo articulo;
         public CrearArticulo(Articulo _articulo)
@@ -88,7 +89,6 @@ namespace MoodByte
             articulo.titulo = txtTitulo.Text;
 
             await InsertarArticulo(articulo);
-            articulo = null;
             this.Close();
         }
         // No funciona el insertar Articulo comprobar codigo
@@ -113,6 +113,7 @@ namespace MoodByte
                         var articuloJson = await response.Content.ReadAsStringAsync();
                         var articuloCreado = JsonSerializer.Deserialize<Articulo>(articuloJson);
                         MessageBox.Show("Articulo creado: " + articuloCreado.titulo);
+                        ArticuloModificado?.Invoke(this, EventArgs.Empty);
                     }
                     else
                     {
@@ -122,7 +123,7 @@ namespace MoodByte
                 else {
                     var json = JsonSerializer.Serialize(articulo, options);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
-                    
+                    MessageBox.Show($"{ ConexionTabla.TablaArticulo}/{ articulo.id}");
                     var response = await _httpClient.PutAsync($"{ ConexionTabla.TablaArticulo}/{ articulo.id}",
                     content);
                     if (response.IsSuccessStatusCode)
@@ -130,6 +131,7 @@ namespace MoodByte
                         var articuloJson = await response.Content.ReadAsStringAsync();
                         var articuloCreado = JsonSerializer.Deserialize<Articulo>(articuloJson);
                         MessageBox.Show("Articulo actualizado: " + articuloCreado.titulo);
+                        ArticuloModificado?.Invoke(this, EventArgs.Empty);
                     }
                     else
                     {

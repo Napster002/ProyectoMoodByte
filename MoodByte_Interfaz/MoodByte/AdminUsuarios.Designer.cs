@@ -72,6 +72,7 @@
             btnEditarusuario.TabIndex = 3;
             btnEditarusuario.Text = "Editar";
             btnEditarusuario.UseVisualStyleBackColor = true;
+            btnEditarusuario.Click += btnEditarusuario_Click;
             // 
             // btnBorrarUsuario
             // 

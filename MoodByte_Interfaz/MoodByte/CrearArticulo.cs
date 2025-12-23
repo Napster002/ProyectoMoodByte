@@ -113,6 +113,9 @@ namespace MoodByte
                         var articuloJson = await response.Content.ReadAsStringAsync();
                         var articuloCreado = JsonSerializer.Deserialize<Articulo>(articuloJson);
                         MessageBox.Show("Articulo creado: " + articuloCreado.titulo);
+                        AdminArticulos adminArticulos = new AdminArticulos();
+                        adminArticulos.Visible = true;
+                        this.Close();
                     }
                     else
                     {

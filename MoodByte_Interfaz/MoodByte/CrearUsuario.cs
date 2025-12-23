@@ -19,13 +19,26 @@ namespace MoodByte
     public partial class CrearUsuario : Form
     {
         private readonly HttpClient _httpClient = new HttpClient();
-        public CrearUsuario()
+        private Usuario usuarioaModificar=new Usuario();
+        public CrearUsuario(Usuario usuario)
         {
             InitializeComponent();
             cbTipoUsuario.DataSource = Enum.GetValues(typeof(TipoUsuario));
             cbGenero.DataSource = Enum.GetValues(typeof(Genero));
             dtpFechaRegistro.Enabled = false;
+            if (usuario.Id>0)
+            {
+            usuarioaModificar = usuario;
+            Modificar_CargarDatos();
+            }
+            else { 
+                dtpFechaRegistro.Value = DateTime.Today;
+                dtpFechanacimiento.Value = DateTime.Today;
+                cbGenero.SelectedIndex = 0;
+                cbTipoUsuario.SelectedIndex = 0;
+            }
         }
+
         // Falta la opcion de salir al guardar correctamnete
         private async void buttonGuardar_Click(object sender, EventArgs e)
         {
@@ -98,10 +111,31 @@ namespace MoodByte
                 MessageBox.Show(sb.ToString(), "Errores de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            if (usuarioaModificar.Id > 0)
+            {
+                long id=usuarioaModificar.Id;
+                int edad = DateTime.Today.Year - dtpFechanacimiento.Value.Year;
+                var usuario = new Usuario
+                {
+                    NombreCompleto = tbNombre.Text + "," + tbApellidos.Text,
+                    NombreUsuario = tbNombreUsuario.Text,
+                    Edad = edad,
+                    Nivel = 0,
+                    ExpAcumulada = 0,
+                    Password = tbContraseña.Text,
+                    FechaRegistro = DateOnly.FromDateTime(dtpFechaRegistro.Value),
+                    FechaNacimiento = DateOnly.FromDateTime(dtpFechanacimiento.Value),
+                    Genero = (Genero)cbGenero.SelectedItem,
+                    TipoUsuario = (TipoUsuario)cbTipoUsuario.SelectedItem
+                };
+                await ModificarUsuario(usuario);
+            }
+            else
+            {
             int edad = DateTime.Today.Year - dtpFechanacimiento.Value.Year;
             var usuario = new Usuario
             {
-                NombreCompleto = tbNombre.Text + " " + tbApellidos.Text,
+                NombreCompleto = tbNombre.Text + "," + tbApellidos.Text,
                 NombreUsuario = tbNombreUsuario.Text,
                 Edad = edad,
                 Nivel = 0,
@@ -113,6 +147,7 @@ namespace MoodByte
                 TipoUsuario = (TipoUsuario)cbTipoUsuario.SelectedItem
             };
             await InsertarUsuario(usuario);
+            }
         }
         //Metodo para guardar en la base de datos el usuario
         // No inserta el usuario cambiar
@@ -141,10 +176,47 @@ namespace MoodByte
                 var usuarioJson = await response.Content.ReadAsStringAsync();
                 var usuarioCreado = JsonSerializer.Deserialize<Usuario>(usuarioJson);
                 MessageBox.Show("Se agrego correctamnete e usuario", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                AdminUsuarios adminUsuarios = new AdminUsuarios();
+                adminUsuarios.Visible = true;
+                this.Close();
             }
             else
             {
                 MessageBox.Show("Error al crear usuario: " + response.StatusCode+response.ToString());
+            }
+        }
+        public async Task ModificarUsuario(Usuario usuario)
+        {
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new JsonStringEnumConverter() },
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                PropertyNameCaseInsensitive = true
+            };
+            var json = JsonSerializer.Serialize(usuario, options);
+            // Muestra el usuario creado sin enviar a la db
+            MessageBox.Show(json, "JSON a enviar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Pasar el contenido de usuario a Json
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            // revienta aqui
+            var modificar = ConexionTabla.TablaUsuario + "/"+usuarioaModificar.Id;
+            var response = await _httpClient.PutAsync(modificar, content);
+
+            //Comprobacion de que se inserto correctamnete
+            // Si procesa correctamente la solicitud
+            if (response.IsSuccessStatusCode)
+            {
+                var usuarioJson = await response.Content.ReadAsStringAsync();
+                var usuarioCreado = JsonSerializer.Deserialize<Usuario>(usuarioJson);
+                MessageBox.Show("Se modifico correctamnete e usuario", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                AdminUsuarios adminUsuarios = new AdminUsuarios();
+                adminUsuarios.Visible = true;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Error al modificar usuario: " + response.StatusCode + response.ToString());
             }
         }
             private void CrearUsuario_Load(object sender, EventArgs e)
@@ -153,7 +225,34 @@ namespace MoodByte
             cbGenero.SelectedIndex = 0;
             cbTipoUsuario.SelectedIndex = 0;
         }
-
+        private void Modificar_CargarDatos()
+        { 
+            int posicionEspacio = posicionDelEspacio(usuarioaModificar.NombreCompleto);
+            tbNombre.Text = usuarioaModificar.NombreCompleto.Substring(0, posicionEspacio);
+            tbApellidos.Text =usuarioaModificar.NombreCompleto.Substring(posicionEspacio+1);
+            tbNombreUsuario.Text = usuarioaModificar.NombreUsuario;
+            tbContraseña.Text = usuarioaModificar.Password;
+            tbRepitecontraseña.Text = usuarioaModificar.Password;
+            // Mete la hora a 00 "necesario para el DateTime" y no para DateOnly
+            dtpFechanacimiento.Value =usuarioaModificar.FechaNacimiento.ToDateTime(TimeOnly.MinValue);
+            dtpFechaRegistro.Value = usuarioaModificar.FechaRegistro.ToDateTime(TimeOnly.MinValue);
+            cbGenero.SelectedItem = usuarioaModificar.Genero;
+            cbTipoUsuario.SelectedItem = usuarioaModificar.TipoUsuario;
+            tbNombre.Focus();
+        }
+        //Metodo para encontrar donde esta el espacio de nombre completo y sacar el nombre y apellidos separados para la opcion de modificar que lo añada correctamnete
+        public static int posicionDelEspacio(string frase)
+        {
+            char[] caracteres = frase.ToCharArray();
+            for (int i = 0; i < frase.Length; i++)
+            {
+                if (caracteres[i] == ',')
+                {
+                    return i; 
+                }
+            }
+            return -1; 
+        }
         private void buttonLimpiar_Click(object sender, EventArgs e)
         {
             tbNombre.Clear();

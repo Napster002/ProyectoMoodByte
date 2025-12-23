@@ -61,7 +61,7 @@ namespace MoodByte
         }
         private void menu_abrirLogin(object sender, EventArgs e)
         {
-            
+
             Program.log.Visible = true;
             this.Close();
 
@@ -104,9 +104,40 @@ namespace MoodByte
 
         private void btnCrearUsuario_Click(object sender, EventArgs e)
         {
-            CrearUsuario CU = new CrearUsuario();
+            Usuario usuario = new Usuario();
+            CrearUsuario CU = new CrearUsuario(usuario);
             CU.Visible = true;
             this.Visible = false;
+        }
+
+        private void btnEditarusuario_Click(object sender, EventArgs e)
+        {
+            var seleccionado=dgvUsuarios.CurrentRow;
+            if (seleccionado==null)
+            {
+                MessageBox.Show("Debes seleccionar un usuario.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+             Usuario usuario = new Usuario
+                {
+                    Id =(long)dgvUsuarios.CurrentRow.Cells["Id"].Value,
+                    NombreUsuario = (string)dgvUsuarios.CurrentRow.Cells["NombreUsuario"].Value,
+                    NombreCompleto = (string)dgvUsuarios.CurrentRow.Cells["NombreCompleto"].Value,
+                    Edad = (int)dgvUsuarios.CurrentRow.Cells["Edad"].Value,
+                    Nivel = (int)dgvUsuarios.CurrentRow.Cells["Nivel"].Value,
+                    ExpAcumulada = (double)dgvUsuarios.CurrentRow.Cells["ExpAcumulada"].Value,
+                    Password = (string)dgvUsuarios.CurrentRow.Cells["Password"].Value,
+                    FechaRegistro = (DateOnly)dgvUsuarios.CurrentRow.Cells["FechaRegistro"].Value,
+                    FechaNacimiento = (DateOnly)dgvUsuarios.CurrentRow.Cells["FechaNacimiento"].Value,
+                    Genero = (Genero)dgvUsuarios.CurrentRow.Cells["Genero"].Value,
+                    TipoUsuario = (TipoUsuario)dgvUsuarios.CurrentRow.Cells["TipoUsuario"].Value
+             };
+                CrearUsuario crearUsuario = new CrearUsuario(usuario);
+                crearUsuario.Visible = true;
+                this.Close();
+            }    
         }
     }
 }

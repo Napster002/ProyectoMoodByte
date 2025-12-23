@@ -60,6 +60,7 @@
             // cmbEstado
             // 
             cmbEstado.FormattingEnabled = true;
+            cmbEstado.Items.AddRange(new object[] { "Muy mal", "Mal", "Normal", "Bien", "Muy bien" });
             cmbEstado.Location = new Point(302, 127);
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(160, 23);
@@ -80,7 +81,7 @@
             btnGuardar.TabIndex = 4;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
-
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // buttonLimpiar
             // 

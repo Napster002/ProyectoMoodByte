@@ -61,7 +61,8 @@ namespace MoodByte
         ///---------------------------------------
         public async Task CargarGrid()
         {
-            List<Articulo> articulos = await _httpClient.GetFromJsonAsync<List<Articulo>>("http://192.168.56.1:5500/api/articulo");
+            List<Articulo> articulos = await _httpClient.GetFromJsonAsync<List<Articulo>>("http://localhost:5500/api/articulo");
+            listViewArticulos.BeginUpdate();
             listViewArticulos.Items.Clear();
             foreach (var articulo in articulos)
             {
@@ -69,6 +70,7 @@ namespace MoodByte
                 item.Tag = articulo;
                 listViewArticulos.Items.Add(item);
             }
+            listViewArticulos.EndUpdate();
         }
 
         private async void AdminArticulos_Load(object sender, EventArgs e)
@@ -78,15 +80,17 @@ namespace MoodByte
 
         private async void listViewArticulos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listViewArticulos.SelectedItems.Count > 0)
+            if (listViewArticulos.SelectedItems.Count == 0)
             {
-                var ArticuloSeleccionado = (Articulo)listViewArticulos.SelectedItems[0].Tag;
-                await CargarImagen(ArticuloSeleccionado.imagen);
-                lblTitulo.Text = ArticuloSeleccionado.titulo;
+                pictureBoxArticulo.Image = null;
+                lblTitulo.Text = "";
             }
             else
             {
-                pictureBoxArticulo.Image = null;
+
+                var articulo = (Articulo)listViewArticulos.SelectedItems[0].Tag;
+                lblTitulo.Text = articulo.titulo;
+                await CargarImagen(articulo.imagen);
             }
         }
 
@@ -96,7 +100,9 @@ namespace MoodByte
             {
                 var bytes = await _httpClient.GetByteArrayAsync(urlImagen);
                 using var ms = new MemoryStream(bytes);
-                pictureBoxArticulo.Image = Image.FromStream(ms);
+                using var ImagenTemporal = Image.FromStream(ms);
+                pictureBoxArticulo.Image?.Dispose();
+                pictureBoxArticulo.Image = new Bitmap(ImagenTemporal);
                 pictureBoxArticulo.SizeMode = PictureBoxSizeMode.Zoom;
             }
             catch
@@ -115,7 +121,9 @@ namespace MoodByte
                                      MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.Yes)
                 {
-                    await _httpClient.DeleteAsync($"http://192.168.56.1:5500/api/articulo/{articuloSeleccionado.id}");
+                    await _httpClient.DeleteAsync($"http://localhost:5500/api/articulo/{articuloSeleccionado.id}");
+                    await CargarGrid();
+                    Limpiar();
                 }
             }
             else
@@ -124,10 +132,42 @@ namespace MoodByte
             }
         }
 
-        private void btnNuevoArticulo_Click(object sender, EventArgs e)
+        private async void btnNuevoArticulo_Click(object sender, EventArgs e)
         {
-            CrearArticulo fomrCreacion= new CrearArticulo(new Articulo());
-            fomrCreacion.ShowDialog();
+            CrearArticulo fomrCreacion = new CrearArticulo(new Articulo());
+            var resultado=fomrCreacion.ShowDialog();
+            if (resultado == DialogResult.OK)
+            {
+                await CargarGrid();
+                Limpiar();
+            }
+        }
+
+        private async void btnEditarArticulo_Click(object sender, EventArgs e)
+        {
+            if (listViewArticulos.SelectedItems.Count > 0)
+            {
+                var articuloSeleccionado=(Articulo)listViewArticulos.SelectedItems[0].Tag;
+                CrearArticulo formEdicion = new CrearArticulo(articuloSeleccionado);
+                var resultado=formEdicion.ShowDialog();
+                if (resultado == DialogResult.OK)
+                {
+                    await CargarGrid();
+                    Limpiar();
+                }
+            }
+        }
+        public void Limpiar()
+        {
+            listViewArticulos.SelectedItems.Clear();
+            listViewArticulos.FocusedItem = null;
+            listViewArticulos.HideSelection = true;
+            if (pictureBoxArticulo.Image != null)
+            {
+                pictureBoxArticulo.Image.Dispose();
+                pictureBoxArticulo.Image = null;
+            }
+            lblTitulo.Text = "";
         }
     }
 }

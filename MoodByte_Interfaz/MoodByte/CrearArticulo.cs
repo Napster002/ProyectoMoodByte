@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -81,15 +82,14 @@ namespace MoodByte
                 MessageBox.Show(sb.ToString(), "Errores de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            Articulo articulo = new Articulo
-            {
-                titulo = txtTitulo.Text,
-                subtitulo = txtSubtitulo.Text,
-                imagen = txtImagen.Text,
-                enlace = txtEnlace.Text
-            };
-           await InsertarArticulo(articulo);
+            articulo.enlace = txtEnlace.Text;
+            articulo.imagen = txtImagen.Text;
+            articulo.subtitulo = txtSubtitulo.Text;
+            articulo.titulo = txtTitulo.Text;
 
+            await InsertarArticulo(articulo);
+            articulo = null;
+            this.Close();
         }
         // No funciona el insertar Articulo comprobar codigo
         public async Task InsertarArticulo(Articulo articulo)
@@ -102,21 +102,39 @@ namespace MoodByte
              PropertyNameCaseInsensitive = true
             };
 
-            var json = JsonSerializer.Serialize(articulo, options);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            try
-            {
-                var response = await _httpClient.PostAsync(ConexionTabla.TablaArticulo, content);
+            try{
+                if (articulo.id==0) {
+                    var json = JsonSerializer.Serialize(articulo, options);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    var response = await _httpClient.PostAsync(ConexionTabla.TablaArticulo, content);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var articuloJson = await response.Content.ReadAsStringAsync();
-                    var articuloCreado = JsonSerializer.Deserialize<Articulo>(articuloJson);
-                    MessageBox.Show("Articulo creado: " + articuloCreado.titulo);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var articuloJson = await response.Content.ReadAsStringAsync();
+                        var articuloCreado = JsonSerializer.Deserialize<Articulo>(articuloJson);
+                        MessageBox.Show("Articulo creado: " + articuloCreado.titulo);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al crear articulo: " + response.StatusCode);
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Error al crear articulo: " + response.StatusCode);
+                else {
+                    var json = JsonSerializer.Serialize(articulo, options);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    
+                    var response = await _httpClient.PutAsync($"{ ConexionTabla.TablaArticulo}/{ articulo.id}",
+                    content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var articuloJson = await response.Content.ReadAsStringAsync();
+                        var articuloCreado = JsonSerializer.Deserialize<Articulo>(articuloJson);
+                        MessageBox.Show("Articulo actualizado: " + articuloCreado.titulo);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al actualizar articulo: " + response.StatusCode);
+                    }
                 }
             }
             catch (Exception ex)
@@ -127,13 +145,17 @@ namespace MoodByte
 
         private void CrearArticulo_Load(object sender, EventArgs e)
         {
-            if(articulo != null)
+            if(articulo.id != 0)
             {
                 txtTitulo.Text = articulo.titulo;
                 txtSubtitulo.Text = articulo.subtitulo;
                 txtImagen.Text = articulo.imagen;
                 txtEnlace.Text = articulo.enlace;
                 btnGuardar.Text = "Actualizar";
+            }
+            else
+            {
+                btnGuardar.Text = "Crear";
             }
         }
     }

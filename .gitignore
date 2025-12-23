@@ -4,6 +4,8 @@
 *.user
 *.db
 *.vsidx
+*.cache
+*.backup.json
 
 # Build
 bin/

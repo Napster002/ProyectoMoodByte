@@ -72,6 +72,7 @@
             btnEditarusuario.TabIndex = 3;
             btnEditarusuario.Text = "Editar";
             btnEditarusuario.UseVisualStyleBackColor = true;
+            btnEditarusuario.Click += btnEditarusuario_Click;
             // 
             // btnBorrarUsuario
             // 
@@ -81,6 +82,7 @@
             btnBorrarUsuario.TabIndex = 4;
             btnBorrarUsuario.Text = "Borrar Usuario";
             btnBorrarUsuario.UseVisualStyleBackColor = true;
+            btnBorrarUsuario.Click += btnBorrarUsuario_Click;
             // 
             // navMenu
             // 

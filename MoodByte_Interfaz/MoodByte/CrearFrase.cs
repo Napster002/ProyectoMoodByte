@@ -47,6 +47,7 @@ namespace MoodByte
         // Falta creacion al no saber el que necesita la clase Frase(falta Estado) y asignar que vuelva a AdminFrases
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            // InsertarFrase(frase);
             if (Validaciones.validaFrase(txtFrase.Text,out var err))
             {
                 epFrase.SetError(txtFrase, err);
@@ -95,9 +96,6 @@ namespace MoodByte
                     var fraseJson = await response.Content.ReadAsStringAsync();
                     var fraseCreada = JsonSerializer.Deserialize<Frase>(fraseJson);
                     MessageBox.Show("Se agregó correctamente la frase", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    AdminFrases adminFrases = new AdminFrases();
-                    adminFrases.Visible = true;
-                    this.Close();
                 }
                 else
                 {

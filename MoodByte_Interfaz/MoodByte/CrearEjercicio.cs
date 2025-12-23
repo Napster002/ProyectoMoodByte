@@ -118,9 +118,6 @@ namespace MoodByte
                     var ejercicioJson = await response.Content.ReadAsStringAsync();
                     var ejercicioCreado = JsonSerializer.Deserialize<Ejercicio>(ejercicioJson);
                     MessageBox.Show("Se agregó correctamente el ejercicio", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    AdminEjercicios adminEjercicios = new AdminEjercicios();
-                    adminEjercicios.Visible = true;
-                    this.Close();
                 }
                 else
                 {

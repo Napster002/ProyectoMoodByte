@@ -18,30 +18,16 @@ namespace MoodByte
     {
         private readonly HttpClient _httpClient = new HttpClient();
         public List<Estado> listaEstados;
-        public CrearFrase()
+        private Boolean _update = false;
+        private Frase _frase = new Frase();
+        public CrearFrase(Frase frase)
         {
             InitializeComponent();
-            CargarEstados();
-        }
-        public async void CargarEstados()
-        {
-            try
-            {
-                var json = await _httpClient.GetStringAsync(ConexionTabla.TablaEstado);
-                listaEstados = JsonSerializer.Deserialize<List<Estado>>(json);
-
-                cmbEstado.Items.Clear();
-                foreach (var estado in listaEstados)
-                {
-                    cmbEstado.Items.Add(estado.nombre);
-                }
-
-                if (cmbEstado.Items.Count > 0)
-                    cmbEstado.SelectedIndex = 0;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar los estados: " + ex.Message);
+            if (frase.id != 0) { 
+                cmbEstado.SelectedIndex = frase.puntuacion-1;
+                txtFrase.Text = frase.frase;
+                _update = true;
+                _frase = frase;
             }
         }
         // Falta creacion al no saber el que necesita la clase Frase(falta Estado) y asignar que vuelva a AdminFrases
@@ -65,16 +51,12 @@ namespace MoodByte
                      case 3: puntuaje = 4;break;
                      case 4: puntuaje = 5;break;
                 };
-                Frase frase= new Frase
-                {
-                    frase = txtFrase.Text,
-                    puntuacion = puntuaje
-
-                };
-                InsertaFrase(frase);
+                _frase.frase = txtFrase.Text;
+                _frase.puntuacion = puntuaje;
+                InsertaFrase(_frase,_update);
             }
         }
-        public async void InsertaFrase(Frase frase)
+        public async void InsertaFrase(Frase frase,Boolean update)
         {
             var options = new JsonSerializerOptions
             {
@@ -89,8 +71,15 @@ namespace MoodByte
             try
             {
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await _httpClient.PostAsync(ConexionTabla.TablaFrase, content);
-
+                HttpResponseMessage response;
+                if (update)
+                {
+                    response = await _httpClient.PutAsync($"{ConexionTabla.TablaFrase}/{frase.id}", content);
+                }
+                else
+                {
+                    response = await _httpClient.PostAsync(ConexionTabla.TablaFrase, content);
+                }
                 if (response.IsSuccessStatusCode)
                 {
                     var fraseJson = await response.Content.ReadAsStringAsync();

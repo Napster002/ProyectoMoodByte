@@ -53,7 +53,7 @@ namespace Modelo
         }
         public static bool validaTitulo(string titulo, out string error)
         {
-            if (!Regex.IsMatch(titulo, "^[A-ZÑ][ A-Za-záéíóúÁÉÍÓÚÑñ ]{1,15}$"))
+            if (!Regex.IsMatch(titulo, "^[A-ZÑ][ A-Za-záéíóúÁÉÍÓÚÑñ, ]{1,40}$"))
             {
                 error = "Mal introducido: Titulo";
                 return false;
@@ -64,7 +64,7 @@ namespace Modelo
         }
         public static bool validaSubtitulo(string subtitulo, out string error)
         {
-            if (!Regex.IsMatch(subtitulo, "^[A-ZÑ][ A-Za-záéíóúÁÉÍÓÚÑñ ]{1,45}$"))
+            if (!Regex.IsMatch(subtitulo, "^[A-ZÑ][ A-Za-záéíóúÁÉÍÓÚÑñ, ]{1,60}$"))
             {
                 error = "Mal introducido: Subtitulo";
                 return false;

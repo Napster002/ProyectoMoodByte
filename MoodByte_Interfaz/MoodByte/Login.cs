@@ -51,9 +51,11 @@ namespace MoodByte
             await CargarUsuarios();
             foreach (var usuario in listaUsuarios)
             {
-                if (listaUsuarios != null && txtUsuario.Equals(usuario.NombreUsuario) && txtPassword.Equals(usuario.Password))
+                if (txtUsuario.Text.Equals(usuario.NombreUsuario) && txtPassword.Text.Equals(usuario.Password))
                 {
-
+                    Menu menu = new Menu();
+                    menu.Visible = true;
+                    this.Visible = false;
                     return;
                 }
             }

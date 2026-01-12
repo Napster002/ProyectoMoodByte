@@ -25,8 +25,8 @@ public class ArticuloService implements IArticuloService<Articulo,Long>{
         if(articulo1!=null){
            articulo1.setEnlace(articulo.getEnlace());
            articulo1.setImagen(articulo.getImagen());
-           articulo1.setTitulo(articulo1.getTitulo());
-           articulo1.setSubtitulo(articulo1.getSubtitulo());
+           articulo1.setTitulo(articulo.getTitulo());
+           articulo1.setSubtitulo(articulo.getSubtitulo());
         }
         return repository.save(articulo1);
     }

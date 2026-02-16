@@ -35,4 +35,12 @@ public class Ejercicio {
     public Time getDuracion() {return duracion;}
 
     public void setDuracion(Time duracion) {this.duracion = duracion;}
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
 }

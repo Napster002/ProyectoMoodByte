@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Modelo
@@ -17,7 +18,9 @@ namespace Modelo
         public string Password { get; set; }
         public DateOnly FechaRegistro { get; set; }
         public DateOnly FechaNacimiento { get; set; }
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public Genero Genero { get; set; }
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public TipoUsuario TipoUsuario { get; set; }
     }
 }

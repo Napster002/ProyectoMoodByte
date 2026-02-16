@@ -42,51 +42,56 @@
             // lblEstado
             // 
             lblEstado.AutoSize = true;
-            lblEstado.Location = new Point(238, 127);
+            lblEstado.Location = new Point(272, 169);
             lblEstado.Name = "lblEstado";
-            lblEstado.Size = new Size(45, 15);
+            lblEstado.Size = new Size(57, 20);
             lblEstado.TabIndex = 0;
             lblEstado.Text = "Estado:";
             // 
             // lblFrase
             // 
             lblFrase.AutoSize = true;
-            lblFrase.Location = new Point(238, 221);
+            lblFrase.Location = new Point(272, 295);
             lblFrase.Name = "lblFrase";
-            lblFrase.Size = new Size(37, 15);
+            lblFrase.Size = new Size(46, 20);
             lblFrase.TabIndex = 1;
             lblFrase.Text = "Frase:";
             // 
             // cmbEstado
             // 
             cmbEstado.FormattingEnabled = true;
-            cmbEstado.Location = new Point(302, 127);
+            cmbEstado.Items.AddRange(new object[] { "Muy bien", "Bien", "Normal", "Un poco mal", "Triste" });
+            cmbEstado.Location = new Point(345, 169);
+            cmbEstado.Margin = new Padding(3, 4, 3, 4);
             cmbEstado.Name = "cmbEstado";
-            cmbEstado.Size = new Size(160, 23);
+            cmbEstado.Size = new Size(182, 28);
             cmbEstado.TabIndex = 2;
             // 
             // txtFrase
             // 
-            txtFrase.Location = new Point(302, 218);
+            txtFrase.Location = new Point(345, 291);
+            txtFrase.Margin = new Padding(3, 4, 3, 4);
             txtFrase.Name = "txtFrase";
-            txtFrase.Size = new Size(277, 23);
+            txtFrase.Size = new Size(316, 27);
             txtFrase.TabIndex = 3;
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(504, 309);
+            btnGuardar.Location = new Point(576, 412);
+            btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(75, 23);
+            btnGuardar.Size = new Size(86, 31);
             btnGuardar.TabIndex = 4;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
-
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // buttonLimpiar
             // 
-            buttonLimpiar.Location = new Point(346, 309);
+            buttonLimpiar.Location = new Point(395, 412);
+            buttonLimpiar.Margin = new Padding(3, 4, 3, 4);
             buttonLimpiar.Name = "buttonLimpiar";
-            buttonLimpiar.Size = new Size(75, 23);
+            buttonLimpiar.Size = new Size(86, 31);
             buttonLimpiar.TabIndex = 5;
             buttonLimpiar.Text = "Limpiar";
             buttonLimpiar.UseVisualStyleBackColor = true;
@@ -98,15 +103,16 @@
             // 
             // CrearFrase
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(buttonLimpiar);
             Controls.Add(btnGuardar);
             Controls.Add(txtFrase);
             Controls.Add(cmbEstado);
             Controls.Add(lblFrase);
             Controls.Add(lblEstado);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "CrearFrase";
             Text = "CrearFrase";
             ((System.ComponentModel.ISupportInitialize)epFrase).EndInit();

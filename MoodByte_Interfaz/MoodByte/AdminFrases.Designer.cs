@@ -28,100 +28,113 @@
         /// </summary>
         private void InitializeComponent()
         {
-            comboBox1 = new ComboBox();
-            dataGridView1 = new DataGridView();
+            cmbEstados = new ComboBox();
+            dgvFrases = new DataGridView();
             lblEstado = new Label();
             btnBorrar = new Button();
             btnEditar = new Button();
             btnInsertar = new Button();
             navMenu = new Controles.Menu();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvFrases).BeginInit();
             SuspendLayout();
             // 
-            // comboBox1
+            // cmbEstados
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(344, 51);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 0;
+            cmbEstados.FormattingEnabled = true;
+            cmbEstados.Location = new Point(393, 68);
+            cmbEstados.Margin = new Padding(3, 4, 3, 4);
+            cmbEstados.Name = "cmbEstados";
+            cmbEstados.Size = new Size(138, 28);
+            cmbEstados.TabIndex = 0;
+            cmbEstados.SelectedIndexChanged += cmbEstados_SelectedIndexChanged;
             // 
-            // dataGridView1
+            // dgvFrases
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(101, 102);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(591, 274);
-            dataGridView1.TabIndex = 1;
+            dgvFrases.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvFrases.Location = new Point(115, 136);
+            dgvFrases.Margin = new Padding(3, 4, 3, 4);
+            dgvFrases.Name = "dgvFrases";
+            dgvFrases.RowHeadersWidth = 51;
+            dgvFrases.Size = new Size(675, 365);
+            dgvFrases.TabIndex = 1;
             // 
             // lblEstado
             // 
             lblEstado.AutoSize = true;
-            lblEstado.Location = new Point(274, 54);
+            lblEstado.Location = new Point(313, 72);
             lblEstado.Name = "lblEstado";
-            lblEstado.Size = new Size(45, 15);
+            lblEstado.Size = new Size(57, 20);
             lblEstado.TabIndex = 2;
             lblEstado.Text = "Estado:";
             // 
             // btnBorrar
             // 
-            btnBorrar.Location = new Point(617, 397);
+            btnBorrar.Location = new Point(705, 529);
+            btnBorrar.Margin = new Padding(3, 4, 3, 4);
             btnBorrar.Name = "btnBorrar";
-            btnBorrar.Size = new Size(75, 23);
+            btnBorrar.Size = new Size(86, 31);
             btnBorrar.TabIndex = 3;
             btnBorrar.Text = "Borrar";
             btnBorrar.UseVisualStyleBackColor = true;
+            btnBorrar.Click += btnBorrar_Click;
             // 
             // btnEditar
             // 
-            btnEditar.Location = new Point(516, 397);
+            btnEditar.Location = new Point(590, 529);
+            btnEditar.Margin = new Padding(3, 4, 3, 4);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(75, 23);
+            btnEditar.Size = new Size(86, 31);
             btnEditar.TabIndex = 4;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnInsertar
             // 
-            btnInsertar.Location = new Point(101, 397);
+            btnInsertar.Location = new Point(115, 529);
+            btnInsertar.Margin = new Padding(3, 4, 3, 4);
             btnInsertar.Name = "btnInsertar";
-            btnInsertar.Size = new Size(75, 23);
+            btnInsertar.Size = new Size(86, 31);
             btnInsertar.TabIndex = 5;
             btnInsertar.Text = "Añadir";
             btnInsertar.UseVisualStyleBackColor = true;
+            btnInsertar.Click += btnInsertar_Click;
             // 
             // navMenu
             // 
             navMenu.BackColor = Color.Transparent;
             navMenu.ForeColor = SystemColors.ControlText;
-            navMenu.Location = new Point(12, 2);
+            navMenu.Location = new Point(14, 3);
+            navMenu.Margin = new Padding(3, 5, 3, 5);
             navMenu.Name = "navMenu";
-            navMenu.Size = new Size(215, 26);
+            navMenu.Size = new Size(246, 35);
             navMenu.TabIndex = 6;
             // 
             // AdminFrases
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(navMenu);
             Controls.Add(btnInsertar);
             Controls.Add(btnEditar);
             Controls.Add(btnBorrar);
             Controls.Add(lblEstado);
-            Controls.Add(dataGridView1);
-            Controls.Add(comboBox1);
+            Controls.Add(dgvFrases);
+            Controls.Add(cmbEstados);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "AdminFrases";
             Text = "AdminFrases";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Load += AdminFrases_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvFrases).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private ComboBox comboBox1;
-        private DataGridView dataGridView1;
+        private ComboBox cmbEstados;
+        private DataGridView dgvFrases;
         private Label lblEstado;
         private Button btnBorrar;
         private Button btnEditar;

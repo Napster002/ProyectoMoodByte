@@ -3,14 +3,9 @@ package org.example.moodbyte;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.persistence.autoconfigure.EntityScan;
-import org.springframework.boot.security.autoconfigure.SecurityAutoConfiguration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication(
-        scanBasePackages = "org.example"
-        // Quitar el sping security(si esta puesto== no funciona, si esta quitado= funciona
-        , exclude = { SecurityAutoConfiguration.class }
-)
+@SpringBootApplication(scanBasePackages = "org.example")
 @EntityScan("org.example.Modelo")
 @EnableJpaRepositories("org.example")
 public class MoodByteApplication {

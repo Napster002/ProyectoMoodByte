@@ -24,13 +24,11 @@ namespace MoodByte
         public CrearUsuario(Usuario usuario)
         {
             InitializeComponent();
-            usuarioActual = usuario;
             cbTipoUsuario.DataSource = Enum.GetValues(typeof(TipoUsuario));
             cbGenero.DataSource = Enum.GetValues(typeof(Genero));
             dtpFechaRegistro.Enabled = false;
             if (usuarioActual != null)
             {
-                cbTipoUsuario.Enabled = true;
                 var partes = usuarioActual.NombreCompleto.Split(',');
                 tbNombre.Text = partes[0];
                 tbApellidos.Text = partes.Length > 1 ? partes[1] : "";
@@ -40,11 +38,6 @@ namespace MoodByte
                 cbTipoUsuario.SelectedItem = usuarioActual.TipoUsuario;
                 tbContraseña.Text = usuarioActual.Password;
                 tbRepitecontraseña.Text = usuarioActual.Password;
-            }
-            else
-            {
-                cbTipoUsuario.SelectedItem = TipoUsuario.CLIENTE;
-                cbTipoUsuario.Enabled = false;
             }
         }
         // Falta la opcion de salir al guardar correctamnete
@@ -205,8 +198,7 @@ namespace MoodByte
             {
                 tbNombre.Focus();
                 cbGenero.SelectedIndex = 0;
-                cbTipoUsuario.SelectedItem = TipoUsuario.CLIENTE;
-                cbTipoUsuario.Enabled = false;
+                cbTipoUsuario.SelectedIndex = 0;
             }
             else
             {

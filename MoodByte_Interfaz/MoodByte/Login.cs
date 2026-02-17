@@ -38,7 +38,9 @@ namespace MoodByte
         // Que vaya a CrearUsuario
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-
+            CrearUsuario newUsu = new CrearUsuario();
+            newUsu.Visible = true;
+            this.Visible = false;
         }
 
         private async void Login_Load(object sender, EventArgs e)

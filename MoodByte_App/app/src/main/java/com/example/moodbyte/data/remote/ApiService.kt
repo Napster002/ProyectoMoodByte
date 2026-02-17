@@ -8,9 +8,9 @@ interface ApiService {
     /**
      * Metodos de usuario
      **/
-    @GET("usuarios")
+    @GET("usuario")
     suspend fun getUsuarios(): List<UsuarioDto>
 
-    @GET("usuarios/{id}")
+    @GET("usuario/{id}")
     suspend fun getUsuarioById(@Path("id") id: Long): UsuarioDto
 }

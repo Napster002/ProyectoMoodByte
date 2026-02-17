@@ -1,6 +1,7 @@
 package org.example.Conexion;
 
 import org.example.Modelo.Estado;
+import org.example.ModeloDTO.EstadoDTO;
 import org.example.servicio.EstadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +19,8 @@ public class EstadoController {
         return estadoService.crear(estado);
     }
     @GetMapping
-    public List<Estado> findAll() {
-        return estadoService.listar();
+    public List<EstadoDTO> findAll() {
+        return estadoService.listar().stream().map(EstadoDTO::new).toList();
     }
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {

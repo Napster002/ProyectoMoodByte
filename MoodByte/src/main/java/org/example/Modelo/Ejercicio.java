@@ -14,6 +14,8 @@ public class Ejercicio {
     private String titulo;
     @Column(columnDefinition = "TEXT")
     private String descripcion;
+    @Column(length = 255)
+    private String recursoUrl;
     private Time duracion;
     @ManyToOne
     private Estado estado;
@@ -35,4 +37,20 @@ public class Ejercicio {
     public Time getDuracion() {return duracion;}
 
     public void setDuracion(Time duracion) {this.duracion = duracion;}
+
+    public String getRecursoUrl() {
+        return recursoUrl;
+    }
+
+    public void setRecursoUrl(String recursoUrl) {
+        this.recursoUrl = recursoUrl;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
 }

@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Conexiones\Conexiones.csproj" />
     <ProjectReference Include="..\Controles\Controles.csproj" />
+    <ProjectReference Include="..\ModeloDTO\ModeloDTO.csproj" />
     <ProjectReference Include="..\Modelo\Modelo.csproj" />
   </ItemGroup>
 

@@ -8,7 +8,7 @@ namespace MoodByte
 {
     public partial class Login : Form
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly HttpClient _httpClient = ConexionGenerica.CLIENTE;
         private List<Usuario> listaUsuarios=new List<Usuario>();
         public Login()
         {
@@ -25,7 +25,7 @@ namespace MoodByte
                 var options = new JsonSerializerOptions
                 {
                     Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) },
-                    PropertyNameCaseInsensitive = true // útil si el JSON tiene mayúsculas distintas
+                    PropertyNameCaseInsensitive = true // ï¿½til si el JSON tiene mayï¿½sculas distintas
                 };
                 // Deserializar a lista de usuarios
                  listaUsuarios= JsonSerializer.Deserialize<List<Usuario>>(json, options);

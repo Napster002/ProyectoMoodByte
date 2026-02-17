@@ -1,11 +1,13 @@
 ﻿using Conexiones;
 using Modelo;
+using ModeloDTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -16,84 +18,81 @@ namespace MoodByte
 {
     public partial class CrearFrase : Form
     {
-        private readonly HttpClient _httpClient = new HttpClient();
-        public List<Estado> listaEstados;
-        private Boolean _update = false;
-        private Frase _frase = new Frase();
-        public CrearFrase(Frase frase)
+        private List<EstadoDTO> listaEstados;
+        private bool esNuevo;
+        private FraseDTO frase;
+
+        public CrearFrase()
         {
+            esNuevo = true;
             InitializeComponent();
-            if (frase.id != 0) { 
-                cmbEstado.SelectedIndex = frase.puntuacion-1;
-                txtFrase.Text = frase.frase;
-                _update = true;
-                _frase = frase;
-            }
+            this.Load += CrearFrase_Load;
+            btnGuardar.Text = "Guardar";
         }
-        // Falta creacion al no saber el que necesita la clase Frase(falta Estado) y asignar que vuelva a AdminFrases
-        private void btnGuardar_Click(object sender, EventArgs e)
+        public CrearFrase(FraseDTO frase)
         {
-            // InsertarFrase(frase);
-            if (Validaciones.validaFrase(txtFrase.Text,out var err))
-            {
-                epFrase.SetError(txtFrase, err);
-                MessageBox.Show("Mal Insertado: Frase", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                var puntuaje=0;
-                epFrase.SetError(txtFrase, "");
-                switch (cmbEstado.SelectedIndex)
-                {
-                     case 0: puntuaje = 1;break;
-                     case 1: puntuaje = 2;break;
-                     case 2: puntuaje = 3;break;
-                     case 3: puntuaje = 4;break;
-                     case 4: puntuaje = 5;break;
-                };
-                _frase.frase = txtFrase.Text;
-                _frase.puntuacion = puntuaje;
-                InsertaFrase(_frase,_update);
-            }
+            esNuevo = false;
+            InitializeComponent();
+            btnGuardar.Text = "Actualizar";
+            this.Load += CrearFrase_Load;
+            this.frase = frase;
         }
-        public async void InsertaFrase(Frase frase,Boolean update)
+
+        public async Task CargarEstados()
         {
-            var options = new JsonSerializerOptions
-            {
-                Converters = { new JsonStringEnumConverter() },
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                PropertyNameCaseInsensitive = true
-            };
-
-            var json = JsonSerializer.Serialize(frase, options);
-            MessageBox.Show(json, "JSON a enviar", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             try
             {
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response;
-                if (update)
+                var estados = await ConexionGenerica.CLIENTE
+                    .GetFromJsonAsync<List<EstadoDTO>>(ConexionTabla.TablaEstado);
+
+                if (estados == null)
                 {
-                    response = await _httpClient.PutAsync($"{ConexionTabla.TablaFrase}/{frase.id}", content);
+                    MessageBox.Show("No se recibieron estados.");
+                    return;
                 }
-                else
-                {
-                    response = await _httpClient.PostAsync(ConexionTabla.TablaFrase, content);
-                }
-                if (response.IsSuccessStatusCode)
-                {
-                    var fraseJson = await response.Content.ReadAsStringAsync();
-                    var fraseCreada = JsonSerializer.Deserialize<Frase>(fraseJson);
-                    MessageBox.Show("Se agregó correctamente la frase", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Error al crear frase: " + response.StatusCode);
-                }
+
+                listaEstados = estados;
+
+                cmbEstado.DataSource = null;
+                cmbEstado.DataSource = listaEstados;
+                cmbEstado.DisplayMember = "nombre";
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error de conexión: " + ex.Message);
+                MessageBox.Show("Error al cargar los estados: " + ex.Message);
+            }
+        }
+        public async Task InsertaFrase(Frase frase)
+        {
+            if (!esNuevo) { 
+           
+                Frase fraseActualizada= new Frase
+                {
+                    id = frase.id,
+                    frase = frase.frase,
+                    puntuacion = frase.puntuacion
+                };
+                var respuesta = await ConexionGenerica.CLIENTE.PutAsJsonAsync($"{ConexionTabla.TablaFrase}/{fraseActualizada.id}", fraseActualizada);
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Frase actualizada", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Fallo al actualizar frase" + respuesta.ReasonPhrase);
+                }
+            }
+            else
+            {
+                var respuesta = await ConexionGenerica.CLIENTE.PostAsJsonAsync(ConexionTabla.TablaFrase, frase);
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Frase agregada", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Fallo al agregar frase");
+                }
             }
         }
 
@@ -103,6 +102,63 @@ namespace MoodByte
                 cmbEstado.SelectedIndex = 0;
             txtFrase.Clear();
             txtFrase.Focus();
+        }
+
+        private async void CrearFrase_Load(object sender, EventArgs e)
+        {
+            await CargarEstados();
+            if (!esNuevo)
+            {
+                switch(frase.puntuacion)
+                {
+                    case 1: cmbEstado.SelectedItem = listaEstados.FirstOrDefault(e => e.nombre.ToLower() == "triste"); break;
+                    case 2: cmbEstado.SelectedItem = listaEstados.FirstOrDefault(e => e.nombre.ToLower() == "un poco mal"); break;
+                    case 3: cmbEstado.SelectedItem = listaEstados.FirstOrDefault(e => e.nombre.ToLower() == "regular"); break;
+                    case 4: cmbEstado.SelectedItem = listaEstados.FirstOrDefault(e => e.nombre.ToLower() == "bien"); break;
+                    case 5: cmbEstado.SelectedItem = listaEstados.FirstOrDefault(e => e.nombre.ToLower() == "muy bien"); break;
+                }
+                cmbEstado.Enabled = false;
+            }
+        }
+
+        private async void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (!Validaciones.validaFrase(txtFrase.Text, out var err))
+            {
+                epFrase.SetError(txtFrase, err);
+                MessageBox.Show("Mal Insertado: Frase", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var puntuaje = 0;
+                epFrase.SetError(txtFrase, "");
+                EstadoDTO estado = cmbEstado.SelectedItem as EstadoDTO;
+                switch (estado.nombre.ToLower())
+                {
+                    case "triste": puntuaje = 1; break;
+                    case "un poco mal": puntuaje = 2; break;
+                    case "regular": puntuaje = 3; break;
+                    case "bien": puntuaje = 4; break;
+                    case "muy bien": puntuaje = 5; break;
+                };
+                Frase fraseInsert = new Frase();
+                if (!esNuevo) {
+                    fraseInsert = new Frase
+                    {
+                        id = frase.id,
+                        frase = txtFrase.Text,
+                        puntuacion = puntuaje
+                    };
+                } else {
+                    fraseInsert = new Frase
+                    {
+                        frase = txtFrase.Text,
+                        puntuacion = puntuaje
+
+                    };
+                }
+                await InsertaFrase(fraseInsert);
+            }
         }
     }
 }

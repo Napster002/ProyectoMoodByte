@@ -30,7 +30,7 @@ class FraseController {
         fraseService.eliminar(id);
     }
     @PutMapping("/{id}")
-    public Frase update(@RequestBody Frase frase, @PathVariable Long id) {
+    public Frase update(@RequestBody Frase frase, @PathVariable("id") Long id) {
         return fraseService.modificar(frase, id);
     }
     @GetMapping("/{id}")

@@ -72,14 +72,14 @@ namespace MoodByte
                     frase = frase.frase,
                     puntuacion = frase.puntuacion
                 };
-                var respuesta = await ConexionGenerica.CLIENTE.PutAsJsonAsync($"{ConexionTabla.TablaFrase}/{frase.id}", fraseActualizada);
+                var respuesta = await ConexionGenerica.CLIENTE.PutAsJsonAsync($"{ConexionTabla.TablaFrase}/{fraseActualizada.id}", fraseActualizada);
                 if (respuesta.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Frase actualizada", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show("Fallo al actualizar frase");
+                    MessageBox.Show("Fallo al actualizar frase" + respuesta.ReasonPhrase);
                 }
             }
             else

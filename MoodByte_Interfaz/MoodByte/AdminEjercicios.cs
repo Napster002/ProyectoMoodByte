@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Conexiones;
+using ModeloDTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,6 +16,7 @@ namespace MoodByte
 {
     public partial class AdminEjercicios : Form
     {
+        private List<EjercicioDTO> listaEjercicios = new List<EjercicioDTO>();
         public AdminEjercicios()
         {
             InitializeComponent();
@@ -53,6 +58,98 @@ namespace MoodByte
             this.Close();
 
         }
-        ///-----------------------------------
+        private async Task CargarEstado()
+        {
+            var estados = await ConexionGenerica.CLIENTE.GetFromJsonAsync<List<EstadoDTO>>(ConexionTabla.TablaEstado);
+            if (estados == null)
+            {
+                MessageBox.Show("No se recibieron estados.");
+                return;
+            }
+            cmbEstado.DataSource = null;
+            cmbEstado.DataSource = estados;
+            cmbEstado.DisplayMember = "nombre";
+        }
+        private async Task CargarGrid()
+        {
+            var ejercicios = await ConexionGenerica.CLIENTE.GetFromJsonAsync<List<EjercicioDTO>>(ConexionTabla.TablaEjercicio);
+            if (ejercicios == null)
+            {
+                MessageBox.Show("No se recibieron ejercicios.");
+                return;
+            }
+            listaEjercicios = ejercicios;
+            dgvEjercicio.DataSource = listaEjercicios;
+            dgvEjercicio.AutoGenerateColumns = true;
+            dgvEjercicio.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvEjercicio.Columns["Id"].Visible = false;
+            dgvEjercicio.Columns["idEstado"].Visible = false;
+            MessageBox.Show(JsonSerializer.Serialize(listaEjercicios));
+        }
+
+        private async void AdminEjercicios_Load(object sender, EventArgs e)
+        {
+            await CargarEstado();
+            await CargarGrid();
+        }
+
+        private void btnInsertarEjercicio_Click(object sender, EventArgs e)
+        {
+            CrearEjercicio crear = new CrearEjercicio();
+            crear.Show();
+        }
+
+        private async void cmbEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EstadoDTO estadoSeleccionado = cmbEstado.SelectedItem as EstadoDTO;
+            if (estadoSeleccionado == null)
+                return;
+            var ejerciciosSeleccionados = listaEjercicios
+                .Where(e => e.idEstado == estadoSeleccionado.id)
+                .ToList();
+            dgvEjercicio.DataSource = null;
+            dgvEjercicio.DataSource = ejerciciosSeleccionados;
+            dgvEjercicio.AutoGenerateColumns = true;
+            dgvEjercicio.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            if (dgvEjercicio.SelectedRows.Count > 0)
+            {
+                EjercicioDTO ejercicioSeleccionado = dgvEjercicio.SelectedRows[0].DataBoundItem as EjercicioDTO;
+                if (ejercicioSeleccionado != null)
+                {
+                    CrearEjercicio editar = new CrearEjercicio(ejercicioSeleccionado);
+                    editar.Show();
+                }
+            }
+        }
+
+        private async void btnBorrar_Click(object sender, EventArgs e)
+        {
+            if (dgvEjercicio.SelectedRows.Count > 0)
+            {
+                EjercicioDTO ejercicioSeleccionado = dgvEjercicio.SelectedRows[0].DataBoundItem as EjercicioDTO;
+                if(ejercicioSeleccionado != null)
+                {
+                    var confirmResult = MessageBox.Show("¿Estás seguro de que deseas eliminar este ejercicio?", "Confirmar eliminación", MessageBoxButtons.YesNo);
+                    if (confirmResult == DialogResult.Yes)
+                    {
+                        var response=await ConexionGenerica.CLIENTE.DeleteAsync($"{ConexionTabla.TablaEjercicio}/{ejercicioSeleccionado.id}");
+                        if (response.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("Ejercicio eliminado");
+                            await CargarGrid();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error al eliminar el ejercicio");
+                        }
+                    }
+                }
+            }
+        }
     }
 }

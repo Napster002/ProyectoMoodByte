@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 18
-VisualStudioVersion = 18.0.11205.157
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36511.14 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodByte", "MoodByte\MoodByte.csproj", "{5DD1706F-7716-436A-A54F-597E140A5AAA}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controles", "Controles\Controles.csproj", "{AE0E0E4D-FF36-4E3C-BDD3-DD5B6D3A68CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conexiones", "Conexiones\Conexiones.csproj", "{619A81EC-C4BB-476B-9C68-648EFD0590B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModeloDTO", "ModeloDTO\ModeloDTO.csproj", "{5C2D8528-3B6D-34F2-BDB8-01C5122F5E91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{619A81EC-C4BB-476B-9C68-648EFD0590B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{619A81EC-C4BB-476B-9C68-648EFD0590B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{619A81EC-C4BB-476B-9C68-648EFD0590B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C2D8528-3B6D-34F2-BDB8-01C5122F5E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C2D8528-3B6D-34F2-BDB8-01C5122F5E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C2D8528-3B6D-34F2-BDB8-01C5122F5E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C2D8528-3B6D-34F2-BDB8-01C5122F5E91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

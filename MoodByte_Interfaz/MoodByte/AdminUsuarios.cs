@@ -1,5 +1,6 @@
 ﻿using Conexiones;
 using Modelo;
+using ModeloDTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,7 @@ namespace MoodByte
 {
     public partial class AdminUsuarios : Form
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly HttpClient Cliente= ConexionGenerica.CLIENTE;
         public AdminUsuarios()
         {
             InitializeComponent();
@@ -72,26 +73,18 @@ namespace MoodByte
         {
             try
             {
-                // Obtener el JSON como string
-
-                var json = await _httpClient.GetStringAsync(ConexionTabla.TablaUsuario);
-
-
-                // Configurar el deserializador para enums como strings
-                var options = new JsonSerializerOptions
+                var usuarios = await Cliente.GetFromJsonAsync<List<UsuarioDTO>>(ConexionTabla.TablaUsuario);
+                if(usuarios == null)
                 {
-                    Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) },
-                    PropertyNameCaseInsensitive = true // útil si el JSON tiene mayúsculas distintas
-                };
+                    MessageBox.Show("No se recibieron usuarios.");
+                    return;
+                }
 
-                // Deserializar a lista de usuarios
-                var usuarios = JsonSerializer.Deserialize<List<Usuario>>(json, options);
-
-                // Asignar al DataGridView
                 dgvUsuarios.DataSource = null;
                 dgvUsuarios.DataSource = usuarios;
                 dgvUsuarios.Columns["Password"].Visible = false;
                 dgvUsuarios.Columns["Id"].Visible = false;
+                dgvUsuarios.SelectionMode=DataGridViewSelectionMode.FullRowSelect;
             }
             catch (Exception ex)
             {
@@ -106,7 +99,7 @@ namespace MoodByte
 
         private void btnCrearUsuario_Click(object sender, EventArgs e)
         {
-            CrearUsuario CU = new CrearUsuario(new Usuario());
+            CrearUsuario CU = new CrearUsuario();
             CU.UsuarioCreado_Editado += async (s, ev) => await CargarGrid();
             CU.ShowDialog();
         }
@@ -115,7 +108,7 @@ namespace MoodByte
         {
             if (dgvUsuarios.SelectedRows.Count>0)
             {
-                var usuarioSeleccionado = dgvUsuarios.SelectedRows[0].DataBoundItem as Usuario;
+                var usuarioSeleccionado = dgvUsuarios.SelectedRows[0].DataBoundItem as UsuarioDTO;
                 CrearUsuario crearUsuario = new CrearUsuario(usuarioSeleccionado);
                 crearUsuario.UsuarioCreado_Editado += async (s, ev) => await CargarGrid();
                 crearUsuario.ShowDialog();
@@ -130,10 +123,10 @@ namespace MoodByte
         {
             if (dgvUsuarios.CurrentRow != null)
             {
-                var usuarioSeleccionado = dgvUsuarios.CurrentRow.DataBoundItem as Usuario;
+                var usuarioSeleccionado = dgvUsuarios.CurrentRow.DataBoundItem as UsuarioDTO;
                 if (usuarioSeleccionado != null)
                 {
-                    var resultado = MessageBox.Show($"¿Estás seguro de que deseas eliminar al usuario {usuarioSeleccionado.NombreUsuario}?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    var resultado = MessageBox.Show($"¿Estás seguro de que deseas eliminar al usuario {usuarioSeleccionado.nombreUsuario}?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (resultado == DialogResult.Yes)
                     {
                         await BorrarUsuario(usuarioSeleccionado);
@@ -143,11 +136,11 @@ namespace MoodByte
             }
         }
 
-        public async Task BorrarUsuario(Usuario usuario)
+        public async Task BorrarUsuario(UsuarioDTO usuario)
         {
             try
             {
-                var respuesta = await _httpClient.DeleteAsync($"{ConexionTabla.TablaUsuario}/{usuario.Id}");
+                var respuesta = await Cliente.DeleteAsync($"{ConexionTabla.TablaUsuario}/{usuario.id}");
                 if (respuesta.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Usuario borrado correctamente.");

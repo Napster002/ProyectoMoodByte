@@ -176,6 +176,7 @@ namespace MoodByte
                             frasesSeleccionadas.Add(frase);
                         }
                     }
+
                     dgvFrases.DataSource = null;
                     dgvFrases.DataSource = frasesSeleccionadas;
                     dgvFrases.AutoGenerateColumns = true;

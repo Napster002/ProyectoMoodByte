@@ -17,9 +17,9 @@ namespace ModeloDTO
         public string password { get; set; }
         public int edad { get; set; }
 
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public Genero genero { get; set; }
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public TipoUsuario tipoUsuario { get; set; }
         public DateOnly fechaRegistro { get; set; }
         public DateOnly fechaNacimiento { get; set; }

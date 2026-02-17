@@ -1,6 +1,7 @@
 package org.example.Conexion;
 
 import org.example.Modelo.Ejercicio;
+import org.example.ModeloDTO.EjercicioDTO;
 import org.example.servicio.EjercicioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,8 +22,8 @@ class EjercicioController {
         return ejercicioService.crear(ejercicio);
     }
     @GetMapping
-    public List<Ejercicio> findAll() {
-        return ejercicioService.listar();
+    public List<EjercicioDTO> findAll() {
+        return ejercicioService.listar().stream().map(EjercicioDTO::new).toList();
     }
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {

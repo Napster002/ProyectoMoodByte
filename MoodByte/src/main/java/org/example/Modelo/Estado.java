@@ -11,7 +11,7 @@ public class Estado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(length = 25)
-    private String Nombre;
+    private String nombre;
     @OneToMany(mappedBy = "estado", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Musica> musica;
     @OneToMany(mappedBy = "estado", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -22,8 +22,8 @@ public class Estado {
 
     public void setId(long id) {this.id = id;}
 
-    public String getNombre() {return Nombre;}
+    public String getNombre() {return nombre;}
 
-    public void setNombre(String nombre) {Nombre = nombre;}
+    public void setNombre(String nombre) {nombre = nombre;}
 
 }

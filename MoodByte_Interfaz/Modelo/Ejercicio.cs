@@ -11,7 +11,8 @@ namespace Modelo
         public long id { get; set; }
         public string titulo { get; set; }
         public string descripcion { get; set; }
-        public TimeOnly duracion { get; set; }
+        public string recursoUrl { get; set; }
+        public string duracion { get; set; }
         public Estado estado { get; set; }
     }
 }

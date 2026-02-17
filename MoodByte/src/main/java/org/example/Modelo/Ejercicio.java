@@ -3,6 +3,7 @@ package org.example.Modelo;
 import jakarta.persistence.*;
 
 import java.sql.Time;
+import java.time.LocalTime;
 
 @Entity
 @Table(name="ejercicio")
@@ -16,8 +17,9 @@ public class Ejercicio {
     private String descripcion;
     @Column(length = 255)
     private String recursoUrl;
-    private Time duracion;
+    private LocalTime duracion;
     @ManyToOne
+    @JoinColumn(name = "estado_id")
     private Estado estado;
 
     public Ejercicio() {}
@@ -34,9 +36,9 @@ public class Ejercicio {
 
     public void setDescripcion(String descripcion) {this.descripcion = descripcion;}
 
-    public Time getDuracion() {return duracion;}
+    public LocalTime getDuracion() {return duracion;}
 
-    public void setDuracion(Time duracion) {this.duracion = duracion;}
+    public void setDuracion(LocalTime duracion) {this.duracion = duracion;}
 
     public String getRecursoUrl() {
         return recursoUrl;

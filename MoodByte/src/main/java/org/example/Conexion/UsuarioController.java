@@ -2,6 +2,7 @@ package org.example.Conexion;
 
 
 import org.example.Modelo.Usuario;
+import org.example.ModeloDTO.UsuarioDTO;
 import org.example.servicio.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,8 @@ public class UsuarioController {  // ⚡ Ahora es public
     }
 
     @GetMapping
-    public List<Usuario> findAll() {
-        return usuarioService.listar();
+    public List<UsuarioDTO> findAll() {
+        return usuarioService.listar().stream().map(UsuarioDTO::new).toList();
     }
 
     @GetMapping("/{id}")

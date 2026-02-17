@@ -8,6 +8,7 @@ public record EjercicioDTO (
         long id,
         String titulo,
         String descripcion,
+        String recursoUrl,
         Time duracion,
         long idEstado
 ){
@@ -16,6 +17,7 @@ public record EjercicioDTO (
           ejercicio.getId(),
           ejercicio.getTitulo(),
           ejercicio.getDescripcion(),
+          ejercicio.getRecursoUrl(),
           ejercicio.getDuracion(),
           ejercicio.getEstado().getId()
         );

@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.compose.runtime.livedata)
+    implementation(libs.androidx.navigation.compose)
 
     // Tests
     testImplementation(libs.junit)
@@ -86,4 +87,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.0")
 
     implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
+
+    //Koin
+    implementation("io.insert-koin:koin-androidx-compose:3.5.3")
+    implementation("io.insert-koin:koin-android:3.5.3")
 }

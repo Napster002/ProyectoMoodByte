@@ -1,13 +1,12 @@
 package com.example.moodbyte.data.repository
 
-import com.example.moodbyte.data.local.UsuarioDao
-import com.example.moodbyte.data.local.toDomain
+import com.example.moodbyte.data.local.daos.UsuarioDao
+import com.example.moodbyte.data.local.entities.toDomain
 import com.example.moodbyte.data.remote.ApiService
-import com.example.moodbyte.data.remote.toEntity
+import com.example.moodbyte.data.remote.dtos.toEntity
 import com.example.moodbyte.domain.model.Usuario
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 
 class UsuarioRepository(
     private val api: ApiService,

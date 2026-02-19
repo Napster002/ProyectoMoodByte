@@ -8,10 +8,11 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 
 @Composable
-fun UsuarioView(viewModel: UsuarioViewModel) {
+fun UsuarioView(navController: NavController, viewModel: UsuarioViewModel) {
 
     val usuarios by viewModel.usuarios.observeAsState(emptyList())
 

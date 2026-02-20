@@ -1,12 +1,71 @@
-name: CI Proyecto Intermodular
+name: Pipeline CI Proyecto Intermodular
 
 on:
   push:
+    branches:
+      - develop
+      - 'feature/**'
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
+env:
+  JAVA_VERSION: '17'
+
 jobs:
-  test:
+
+  build-intermodular:
+
+    name: Build y tests del proyecto intermodular
     runs-on: ubuntu-latest
+
     steps:
-      - name: Paso prueba
-        run: echo "Workflow funcionando correctamente"
+
+      # Step 1 - uses
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      # Step 2 - uses
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+
+      # Step 3 - uses (valor añadido)
+      - name: Cache de dependencias Maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            maven-${{ runner.os }}
+
+      # Step 4 - run (comando real del proyecto)
+      - name: Compilar API
+        run: |
+          if [ -d "api" ]; then
+            cd api
+            mvn clean compile
+          fi
+
+      # Step 5 - run (comando real del proyecto)
+      - name: Ejecutar tests API
+        run: |
+          if [ -d "api" ]; then
+            cd api
+            mvn test
+          fi
+
+      # Step 6 - run (comando real)
+      - name: Compilar app escritorio
+        run: |
+          if [ -d "app-escritorio" ]; then
+            cd app-escritorio
+            mvn clean compile
+          fi
+
+      # Step 7 - run (valor informativo)
+      - name: Resultado final
+        run: echo "Pipeline ejecutado correctamente en la rama ${{ github.ref }}"

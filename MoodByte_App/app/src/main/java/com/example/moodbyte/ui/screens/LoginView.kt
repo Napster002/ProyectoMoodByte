@@ -9,7 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
+import com.example.moodbyte.components.ContentLoginView
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
+import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -23,7 +25,7 @@ fun LoginView(navController: NavController, loginViewModel: LoginViewModel){
                 ),
                 title = {
                     Text(
-                        text = "Reta Cantabria",
+                        text = "MoodByte",
                         fontWeight = FontWeight.Bold
                     )
                 }

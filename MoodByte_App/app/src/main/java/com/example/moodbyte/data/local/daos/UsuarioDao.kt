@@ -15,6 +15,9 @@ interface UsuarioDao {
     @Query("SELECT * FROM usuarios WHERE id = :id")
     suspend fun getById(id: Long): UsuarioEntity?
 
+@Query("SELECT * FROM usuarios WHERE nombreUsuario=:nomUsu AND password= :password")
+suspend fun login(nomUsu:String,password:String):UsuarioEntity?
+
     @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insert(usuario: UsuarioEntity)
 

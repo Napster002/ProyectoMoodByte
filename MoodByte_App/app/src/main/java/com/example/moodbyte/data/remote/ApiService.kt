@@ -7,7 +7,10 @@ import com.example.moodbyte.data.remote.dtos.EstadoDto
 import com.example.moodbyte.data.remote.dtos.FraseDto
 import com.example.moodbyte.data.remote.dtos.RegistroDto
 import com.example.moodbyte.data.remote.dtos.UsuarioDto
+import com.example.moodbyte.domain.model.Registro
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ApiService {
@@ -74,4 +77,7 @@ interface ApiService {
 
     @GET("registro/{id}")
     suspend fun getRegistroById(@Path("id")id:Long): RegistroDto
+
+    @POST("registro")
+    suspend fun insertarRegistro(@Body registro: RegistroDto)
 }

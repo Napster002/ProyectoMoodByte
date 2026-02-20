@@ -1,6 +1,7 @@
 package com.example.moodbyte.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.AlertDialog
@@ -29,17 +31,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import com.example.moodbyte.domain.model.Usuario
+import com.example.moodbyte.ui.viewmodel.HomeViewModel
+import com.example.moodbyte.ui.viewmodel.UsuarioSesionViewModel
 
 //================ Contenido de la ventana home =================
 @Composable
 fun ContentHomeView(
     innerPadding: PaddingValues,
     navController: NavController,
-    usuarioViewModel: UsuarioViewModel) {
+    homeViewModel: HomeViewModel) {
+    var showMoodDialog by remember { mutableStateOf(true) }
     LazyColumn (
         modifier = Modifier
             .padding(innerPadding)
@@ -56,6 +62,48 @@ fun ContentHomeView(
                 modifier = Modifier.fillMaxWidth(),
                 color = Color.Black
             )
+        }
+        item {
+            if (showMoodDialog) {
+                AlertDialog(
+                    onDismissRequest = { showMoodDialog = false },
+                    title = { Text("¿Cómo te sientes hoy?") },
+                    text = {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Text("Elige tu estado de ánimo")
+
+                            Spacer(Modifier.height(16.dp))
+
+                            Row(
+                                horizontalArrangement = Arrangement.SpaceEvenly,
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                MoodButton("😄", "Feliz") { mood ->
+                                    homeViewModel.setMood(mood)
+                                    showMoodDialog = false
+                                }
+                                MoodButton("🙂", "Bien") { mood ->
+                                    homeViewModel.setMood(mood)
+                                    showMoodDialog = false
+                                }
+                                MoodButton("😐", "Regular") { mood ->
+                                    homeViewModel.setMood(mood)
+                                    showMoodDialog = false
+                                }
+                                MoodButton("\uD83D\uDE30","Estresado"){ mood->
+                                    homeViewModel.setMood(mood)
+                                    showMoodDialog=false
+                                }
+                                MoodButton("😔", "Triste") { mood ->
+                                    homeViewModel.setMood(mood)
+                                    showMoodDialog = false
+                                }
+                            }
+                        }
+                    },
+                    confirmButton = {}
+                )
+            }
         }
     }
 }
@@ -87,7 +135,7 @@ fun ContentLoginView(
     loginViewModel: LoginViewModel
 ) {
     val usuario: Usuario? by loginViewModel.usuario.observeAsState()
-    var email by remember { mutableStateOf("") }
+    var nomUsu by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var showDialog by remember { mutableStateOf(false) }
     var loginAttempted by remember { mutableStateOf(false) }
@@ -107,8 +155,8 @@ fun ContentLoginView(
                 Spacer(modifier = Modifier.padding(10.dp))
 
                 TextField(
-                    value = email,
-                    onValueChange = { email = it },
+                    value = nomUsu,
+                    onValueChange = { nomUsu = it },
                     label = { Text("Usuario") },
                     singleLine = true
                 )
@@ -126,12 +174,10 @@ fun ContentLoginView(
                 Spacer(modifier = Modifier.padding(4.dp))
 
                 Button(onClick = {
-                    loginViewModel.getLoginUsuario(email, password)
+                    loginViewModel.getLoginUsuario(nomUsu, password)
                     loginAttempted = true
 
                     //LaunchedEffect
-
-
 
                 }) {
                     Text("Entrar")
@@ -139,10 +185,10 @@ fun ContentLoginView(
             }
         }
 
-        LaunchedEffect(usuario) {
+        LaunchedEffect(usuario,loginAttempted) {
             if (loginAttempted) {
                 if (usuario != null) {
-                    navController.navigate("Home")
+                    navController.navigate("home")
                 } else {
                     showDialog = true
                 }
@@ -161,16 +207,18 @@ fun ContentLoginView(
                 }
             )
         }
+    }
+}
 
-        Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.End){
-            Button(onClick = {
-                loginViewModel.setUsuarioInvitado()
-                navController.navigate("Home")
-            }) {
-                Text("Entrar como usuario invitado") }
-        }
-
-
-
+@Composable
+fun MoodButton(emoji: String, label: String, onClick: (String) -> Unit) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .clickable { onClick(label) }
+            .padding(8.dp)
+    ) {
+        Text(text = emoji, fontSize = 40.sp)
+        Text(text = label)
     }
 }

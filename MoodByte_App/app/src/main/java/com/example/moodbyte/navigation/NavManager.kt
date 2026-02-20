@@ -2,26 +2,40 @@ package com.example.moodbyte.navigation
 
 import com.example.moodbyte.ui.screens.UsuarioView
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.moodbyte.ui.screens.HomeView
+import com.example.moodbyte.ui.screens.LoginView
+import com.example.moodbyte.ui.viewmodel.HomeViewModel
+import com.example.moodbyte.ui.viewmodel.LoginViewModel
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun NavManager(usuarioViewModel: UsuarioViewModel) {
+fun NavManager() {
 
     val navController = rememberNavController()
 
     NavHost(
         navController = navController,
-        startDestination = "usuarios"
+        startDestination = "login"
     ) {
-
+        composable ("login"){
+            val loginViewModel: LoginViewModel = koinViewModel()
+            LoginView(navController, loginViewModel)
+        }
+        composable ("home"){
+            val homeViewModel: HomeViewModel = koinViewModel()
+            HomeView(navController,homeViewModel)
+        }
         // Lista de usuarios
         composable("usuarios") {
-            UsuarioView(navController, usuarioViewModel)
+            val usuarioViewModel: UsuarioViewModel = koinViewModel()
+            UsuarioView(navController,usuarioViewModel)
         }
 
         // Detalle de usuario

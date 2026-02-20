@@ -20,6 +20,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -35,12 +36,19 @@ import com.example.moodbyte.components.DialogoInformativo
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import kotlinx.coroutines.launch
 import com.example.moodbyte.R
+import com.example.moodbyte.ui.viewmodel.HomeViewModel
+import com.example.moodbyte.ui.viewmodel.LoginViewModel
+import androidx.compose.runtime.collectAsState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeView(navController: NavController, usuarioViewModel: UsuarioViewModel){
+fun HomeView(navController: NavController, homeViewModel: HomeViewModel){
     var mostrarDialogo by remember { mutableStateOf(false) }
+    val usuarioState=homeViewModel.usuario.collectAsState()
+    if (usuarioState.value == null) {
+        Text("Cargando usuario...")
+        return }
     var selectedIndex by remember { mutableStateOf(0) }
     val items = listOf(
         BottomNavItem("Inicio", R.drawable.home),
@@ -69,7 +77,7 @@ fun HomeView(navController: NavController, usuarioViewModel: UsuarioViewModel){
                 },
                 title = {
                     Text(
-                        text = "MoodByte",
+                        text = "${usuarioState.value?.nombreUsuario?:"null"}",
                         fontWeight = FontWeight.Bold,
                         fontFamily = TitleFont
                     )
@@ -83,12 +91,12 @@ fun HomeView(navController: NavController, usuarioViewModel: UsuarioViewModel){
                         icon = { item.icon },
                         label = { Text(item.label) },
                         selected = selectedIndex == index,
-                        onClick = { mostrarDialogo = true}
+                        onClick = { navController.navigate(item.label)}
                     )
                 }
             }
         }
-    ) { innerPadding -> ContentHomeView(innerPadding, navController, usuarioViewModel)
+    ) { innerPadding -> ContentHomeView(innerPadding, navController, homeViewModel)
 
         if(mostrarDialogo == true){
             DialogoInformativo(

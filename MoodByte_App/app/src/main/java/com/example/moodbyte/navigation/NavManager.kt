@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.moodbyte.ui.screens.HomeView
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 
 @Composable
@@ -16,12 +17,17 @@ fun NavManager(usuarioViewModel: UsuarioViewModel) {
 
     NavHost(
         navController = navController,
-        startDestination = "usuarios"
+        startDestination = "Home"
     ) {
 
         // Lista de usuarios
         composable("usuarios") {
             UsuarioView(navController, usuarioViewModel)
+        }
+
+        // Ventana home
+        composable("Home") {
+            HomeView(navController, usuarioViewModel)
         }
 
         // Detalle de usuario

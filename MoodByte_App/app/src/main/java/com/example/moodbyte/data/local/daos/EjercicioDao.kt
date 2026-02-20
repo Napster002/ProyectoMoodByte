@@ -13,7 +13,7 @@ interface EjercicioDao {
     @Query("SELECT * FROM ejercicios")
     suspend fun getAll():List<EjercicioEntity>
 
-    @Query("SELECT * FROM articulos WHERE id= :idEjercicio")
+    @Query("SELECT * FROM ejercicios WHERE id= :idEjercicio")
     suspend fun getById(idEjercicio:Long):EjercicioEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

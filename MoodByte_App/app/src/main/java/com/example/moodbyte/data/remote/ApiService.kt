@@ -21,40 +21,54 @@ interface ApiService {
     @GET("usuario/{id}")
     suspend fun getUsuarioById(@Path("id") id: Long): UsuarioDto
 
-    //Articulos
+    /**
+     * Metodos de articulo
+     **/
     @GET("articulo")
     suspend fun getArticulos(): List<ArticuloDto>
 
     @GET("articulo/{id}")
     suspend fun getArticuloById(@Path("id") id:Long) :ArticuloDto
-    //Ejercicio
+
+    /**
+     * Metodos de ejercicio
+     **/
     @GET("ejercicio")
     suspend fun getEjercicios() : List<EjercicioDto>
 
     @GET("ejercicio/{id}")
     suspend fun getEjercicioById(@Path("id") id:Long) : EjercicioDto
 
-    //Entrada
+    /**
+     * Metodos de entrada
+     **/
     @GET("entrada")
     suspend fun getEntradas(): List<EntradaDto>
+
     @GET("entrada/{id}")
     suspend fun getEntradaById(@Path("id")id:Long): EntradaDto
 
-    //Estado
+    /**
+     * Metodos de estado
+     **/
     @GET("estado")
     suspend fun getEstados(): List<EstadoDto>
 
     @GET("estado/{id}")
     suspend fun getEstadoById(@Path("id")id:Long): EstadoDto
 
-    //Frases
+    /**
+     * Metodos de frase
+     **/
     @GET("frase")
     suspend fun getFrases(): List<FraseDto>
 
     @GET("frase/{id}")
     suspend fun getFraseById(@Path("id")id:Long): FraseDto
 
-    //Registro
+    /**
+     * Metodos de registro
+     **/
     @GET("registro")
     suspend fun getRegistros():List<RegistroDto>
 

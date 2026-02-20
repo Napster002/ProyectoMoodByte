@@ -12,7 +12,7 @@ interface DiarioDao {
     @Query("SELECT * FROM diarios")
     suspend fun getAll():List<DiarioEntity>
 
-    @Query("SELECT * FROM articulos WHERE id= :idDiario")
+    @Query("SELECT * FROM diarios WHERE idUsuario= :idDiario")
     suspend fun getById(idDiario:Long):DiarioEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

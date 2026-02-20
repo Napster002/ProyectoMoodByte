@@ -13,7 +13,7 @@ interface FraseDao {
     @Query("SELECT * FROM frases")
     suspend fun getAll():List<FraseEntity>
 
-    @Query("SELECT * FROM articulos WHERE id= :idFrase")
+    @Query("SELECT * FROM frases WHERE id= :idFrase")
     suspend fun getById(idFrase:Long):FraseEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

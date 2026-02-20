@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.moodbyte.components.TypeConverter
 import com.example.moodbyte.data.local.daos.ArticuloDao
 import com.example.moodbyte.data.local.daos.DiarioDao
 import com.example.moodbyte.data.local.daos.EjercicioDao
@@ -22,11 +24,19 @@ import com.example.moodbyte.data.local.entities.EstadoEntity
 import com.example.moodbyte.data.local.entities.FraseEntity
 
 @Database(
-    entities = [UsuarioEntity::class, ArticuloEntity::class, DiarioEntity::class, EjercicioEntity::class,
-        EntradaEntity::class, EstadoEntity::class, FraseEntity::class, RegistroEntity::class],
+    entities = [
+        UsuarioEntity::class,
+        ArticuloEntity::class,
+        DiarioEntity::class,
+        EjercicioEntity::class,
+        EntradaEntity::class,
+        EstadoEntity::class,
+        FraseEntity::class,
+        RegistroEntity::class],
     version = 2,
     exportSchema = false
 )
+@TypeConverters(TypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun usuarioDao(): UsuarioDao
     abstract fun articuloDao(): ArticuloDao

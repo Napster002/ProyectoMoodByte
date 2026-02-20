@@ -12,7 +12,7 @@ interface RegistroDao {
     @Query("SELECT * FROM registros")
     suspend fun getAll():List<RegistroEntity>
 
-    @Query("SELECT * FROM articulos WHERE id= :idRegistro")
+    @Query("SELECT * FROM registros WHERE id= :idRegistro")
     suspend fun getById(idRegistro:Long):RegistroEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -13,7 +13,7 @@ interface EntradaDao {
     @Query("SELECT * FROM entradas")
     suspend fun getAll():List<EntradaEntity>
 
-    @Query("SELECT * FROM articulos WHERE id= :idEntrada")
+    @Query("SELECT * FROM entradas WHERE id= :idEntrada")
     suspend fun getById(idEntrada:Long):EntradaEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

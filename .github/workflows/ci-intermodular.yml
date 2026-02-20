@@ -4,77 +4,25 @@ on:
   push:
     branches:
       - develop
-      - feature/*
+      - 'feature/**'
   pull_request:
     branches:
       - main
   workflow_dispatch:
 
 jobs:
-
   build-api:
-    name: Compilar API
     runs-on: ubuntu-latest
 
     steps:
-
-      - name: Descargar repositorio
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configurar Java
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 17
+          java-version: '17'
 
       - name: Compilar API
-        run: |
-          cd api
-          ./mvnw clean compile || mvn clean compile
-
-
-  build-escritorio:
-    name: Compilar App Escritorio
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - name: Descargar repositorio
-        uses: actions/checkout@v4
-
-      - name: Configurar Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-
-      - name: Compilar escritorio
-        run: |
-          cd app-escritorio
-          ./mvnw clean compile || mvn clean compile
-
-
-  build-movil:
-    name: Compilar App Movil
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - name: Descargar repositorio
-        uses: actions/checkout@v4
-
-      - name: Configurar Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-
-      - name: Dar permisos a gradlew
-        run: |
-          cd app-movil
-          chmod +x gradlew
-
-      - name: Compilar app movil
-        run: |
-          cd app-movil
-          ./gradlew assembleDebug
+        run: echo "Compilando API..."

@@ -56,8 +56,8 @@ jobs:
 
       - name: Compilar app escritorio
         run: |
-          if [ -d "app-escritorio" ]; then
-            cd app-escritorio
+          if [ -d "MoodByte" ]; then
+            cd MoodByte
             mvn clean compile
           fi
           

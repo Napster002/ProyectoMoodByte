@@ -2,27 +2,11 @@ name: CI Proyecto Intermodular
 
 on:
   push:
-    branches:
-      - develop
-      - 'feature/**'
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
-  build-api:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Compilar API
-        run: echo "Compilando API..."
+      - name: Paso prueba
+        run: echo "Workflow funcionando correctamente"

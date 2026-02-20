@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
+import com.example.moodbyte.components.ContentLoginView
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)

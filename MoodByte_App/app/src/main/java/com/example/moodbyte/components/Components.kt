@@ -1,5 +1,7 @@
 package com.example.moodbyte.components
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +21,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -26,16 +29,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
+import com.example.moodbyte.domain.model.Articulo
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import com.example.moodbyte.domain.model.Usuario
+import com.example.moodbyte.ui.viewmodel.ArticulosViewModel
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.UsuarioSesionViewModel
 
@@ -188,7 +200,7 @@ fun ContentLoginView(
         LaunchedEffect(usuario,loginAttempted) {
             if (loginAttempted) {
                 if (usuario != null) {
-                    navController.navigate("home")
+                    navController.navigate("Inicio")
                 } else {
                     showDialog = true
                 }
@@ -210,6 +222,7 @@ fun ContentLoginView(
     }
 }
 
+//==========Boton selector de Estado emocional===========
 @Composable
 fun MoodButton(emoji: String, label: String, onClick: (String) -> Unit) {
     Column(
@@ -220,5 +233,68 @@ fun MoodButton(emoji: String, label: String, onClick: (String) -> Unit) {
     ) {
         Text(text = emoji, fontSize = 40.sp)
         Text(text = label)
+    }
+}
+
+//=============Contenido de la ventana Articulos=================
+@Composable
+fun ArticulosViewContent(paddingValues: PaddingValues,articulosViewModel: ArticulosViewModel){
+    val articulos=articulosViewModel.articulos.collectAsState()
+    val context = LocalContext.current
+    LazyColumn(
+        modifier=Modifier.fillMaxSize()
+            .padding(paddingValues)
+    ) {
+        items(articulos.value){
+            articulo-> ArticuloCard(articulo){
+                url ->
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            context.startActivity(intent)
+        }
+        }
+    }
+}
+
+
+//=========Composable para mostrar los articulos========
+@Composable
+fun ArticuloCard(
+    articulo: Articulo,
+    onClick: (String) -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(12.dp)
+            .clickable { onClick(articulo.enlace) },
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(6.dp)
+    ) {
+        Column {
+            AsyncImage(
+                model = articulo.imagen,
+                contentDescription = articulo.titulo,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(180.dp),
+                contentScale = ContentScale.Crop
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = articulo.titulo,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(horizontal = 12.dp)
+            )
+
+            Text(
+                text = articulo.subtitulo,
+                fontSize = 14.sp,
+                color = Color.Gray,
+                modifier = Modifier.padding(12.dp)
+            )
+        }
     }
 }

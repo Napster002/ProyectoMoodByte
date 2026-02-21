@@ -13,11 +13,11 @@ class ArticuloRepository (
     private val api:ApiService,
     private val dao: ArticuloDao
 ) {
-    val articulos : Flow<List<Articulo>> = flow{
-        emit(
-            dao.getAll().map {it.toDomain() }
-        )
-            }
+
+    suspend fun getArticulos(): List<Articulo>{
+        return dao.getAll().map { it.toDomain() }
+    }
+
 
     suspend fun refreshArticulos(){
         val articulosApi=api.getArticulos()

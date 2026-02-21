@@ -8,8 +8,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.moodbyte.ui.screens.ArticulosView
 import com.example.moodbyte.ui.screens.HomeView
 import com.example.moodbyte.ui.screens.LoginView
+import com.example.moodbyte.ui.viewmodel.ArticulosViewModel
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
@@ -28,7 +30,7 @@ fun NavManager() {
             val loginViewModel: LoginViewModel = koinViewModel()
             LoginView(navController, loginViewModel)
         }
-        composable ("home"){
+        composable ("Inicio"){
             val homeViewModel: HomeViewModel = koinViewModel()
             HomeView(navController,homeViewModel)
         }
@@ -36,6 +38,10 @@ fun NavManager() {
         composable("usuarios") {
             val usuarioViewModel: UsuarioViewModel = koinViewModel()
             UsuarioView(navController,usuarioViewModel)
+        }
+        composable("Articulos"){
+            val articulosViewModel: ArticulosViewModel=koinViewModel()
+            ArticulosView(navController,articulosViewModel)
         }
 
         // Detalle de usuario

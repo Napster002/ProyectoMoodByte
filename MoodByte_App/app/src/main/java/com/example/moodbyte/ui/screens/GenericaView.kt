@@ -25,9 +25,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 
 
@@ -129,6 +131,13 @@ fun MainScreen(usuarioViewModel: UsuarioViewModel) {
 
             composable("perfil") {
               //  PerfilView(navController)
+            }
+            composable(
+                route = "detalle/{id}",
+                arguments = listOf(navArgument("id") { type = NavType.LongType })
+            ) { backStackEntry ->
+                val id = backStackEntry.arguments?.getLong("id") ?: 0L
+                //UsuarioDetailScreen(navController, id, usuarioViewModel)
             }
         }
     }

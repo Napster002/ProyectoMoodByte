@@ -1,5 +1,6 @@
 package com.example.moodbyte.navigation
 
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.moodbyte.ui.screens.UsuarioView
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
@@ -8,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.moodbyte.ui.screens.HomeView
+import com.example.moodbyte.ui.screens.IAView
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 
 @Composable
@@ -37,6 +39,9 @@ fun NavManager(usuarioViewModel: UsuarioViewModel) {
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getLong("id") ?: 0L
             //UsuarioDetailScreen(navController, id, usuarioViewModel)
+        }
+        composable("camara"){
+            IAView()
         }
     }
 }

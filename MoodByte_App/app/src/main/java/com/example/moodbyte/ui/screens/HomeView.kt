@@ -36,11 +36,11 @@ import com.example.moodbyte.components.ContentHomeView
 import com.example.moodbyte.components.DialogoInformativo
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import kotlinx.coroutines.launch
+import com.example.moodbyte.R
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.moodbyte.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -93,8 +93,8 @@ fun HomeView(navController: NavController, homeViewModel: HomeViewModel){
                     NavigationBarItem(
                         icon = {
                             Icon(
-                                painter = painterResource(id = item.icon),
-                                contentDescription = item.label)
+                            painter = painterResource(id = item.icon),
+                            contentDescription = item.label)
                         },
                         label = { Text("") },
                         selected = selectedIndex == index,
@@ -114,5 +114,3 @@ fun HomeView(navController: NavController, homeViewModel: HomeViewModel){
         }
     }
 }
-
-

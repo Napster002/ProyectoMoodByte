@@ -90,11 +90,4 @@ dependencies {
     //Koin
     implementation("io.insert-koin:koin-androidx-compose:3.5.3")
     implementation("io.insert-koin:koin-android:3.5.3")
-
-    // Detectar Emociones + Chat
-    implementation("com.microsoft.onnxruntime:onnxruntime-android:1.19.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.mlkit:face-detection:16.1.6")
-
-
 }

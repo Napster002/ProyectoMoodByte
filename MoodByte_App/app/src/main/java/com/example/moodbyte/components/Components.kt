@@ -79,8 +79,11 @@ import com.example.moodbyte.ui.viewmodel.ArticulosViewModel
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.PerfilViewModel
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import com.example.moodbyte.ui.viewmodel.UsuarioSesionViewModel
 import kotlinx.coroutines.Dispatchers
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 import kotlinx.coroutines.launch
@@ -353,6 +356,9 @@ fun PerfilViewContent(paddingValues: PaddingValues, perfilViewModel: PerfilViewM
     ){
         item{
             DatosPerfil(usuario)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         }
         item {
@@ -380,6 +386,9 @@ fun PerfilViewContent(paddingValues: PaddingValues, perfilViewModel: PerfilViewM
 =======
     if (mostrarDialogo){
         EditarPerfilDialog( usuario = usuario,
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             onDismiss = {
                 mostrarDialogo = false },
@@ -430,7 +439,11 @@ fun DatosPerfil(usuario: State<Usuario?>){
         }
     }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 }
+=======
+    }
+>>>>>>> Stashed changes
 =======
     }
 >>>>>>> Stashed changes
@@ -524,11 +537,14 @@ fun IAViewContent(paddingValues: PaddingValues){
     val chatBot = remember { ChatBot() }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     var bitmap by remember { mutableStateOf<Bitmap?>(null) }
     var emocionActual by remember { mutableStateOf("Neutral") }
     var caraDetectada by remember { mutableStateOf(false) }
     var primerMensajeMostrado by remember { mutableStateOf(false) } // <-- NUEVO
 =======
+=======
+>>>>>>> Stashed changes
 @Composable
 fun CerrarSesion(onEdit:()-> Unit) {
     Card(
@@ -552,6 +568,15 @@ fun CerrarSesion(onEdit:()-> Unit) {
         )
     }
 }
+<<<<<<< Updated upstream
+=======
+
+@Composable
+fun CambiarModoVisual(){
+
+}
+
+>>>>>>> Stashed changes
 
 @Composable
 fun CambiarModoVisual(){

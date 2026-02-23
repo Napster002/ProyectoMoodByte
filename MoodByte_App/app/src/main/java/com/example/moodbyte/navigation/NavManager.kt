@@ -28,7 +28,7 @@ fun NavManager() {
 
     NavHost(
         navController = navController,
-        startDestination = "camara"
+        startDestination = "login"
     ) {
         composable ("login"){
             val loginViewModel: LoginViewModel = koinViewModel()
@@ -60,7 +60,7 @@ fun NavManager() {
             val id = backStackEntry.arguments?.getLong("id") ?: 0L
             //UsuarioDetailScreen(navController, id, usuarioViewModel)
         }
-        composable("camara"){
+        composable("Camara"){
             IAView(navController)
         }
     }

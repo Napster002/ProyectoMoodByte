@@ -400,7 +400,6 @@ fun DatosPerfil(usuario:Usuario){
                 color = Color.Gray
             )
         }
-    }
 }
 
 @Composable

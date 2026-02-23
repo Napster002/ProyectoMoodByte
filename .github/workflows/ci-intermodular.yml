@@ -1,0 +1,65 @@
+name: Proyecto Intermodular
+
+on:
+  push:
+    branches:
+      - develop
+      - 'feature/**'
+      - 'Workflow' 
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  JAVA_VERSION: '17'
+
+jobs:
+
+  build-intermodular:
+
+    name: Build y tests del proyecto intermodular
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Cache de dependencias Maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            maven-${{ runner.os }}
+
+      - name: Compilar API
+        run: |
+          if [ -d "api" ]; then
+            cd api
+            mvn clean compile
+          fi
+
+      - name: Ejecutar tests API
+        run: |
+          if [ -d "api" ]; then
+            cd api
+            mvn test
+          fi
+
+      - name: Compilar app escritorio
+        run: |
+          if [ -d "MoodByte" ]; then
+            cd MoodByte
+            mvn clean compile
+          fi
+          
+      - name: Resultado final
+        run: echo "Pipeline ejecutado correctamente en la rama ${{ github.ref }}"

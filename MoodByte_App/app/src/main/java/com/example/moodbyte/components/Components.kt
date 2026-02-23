@@ -154,7 +154,7 @@ fun ContentLoginView(
     innerPadding: PaddingValues,
     navController: NavController,
     loginViewModel: LoginViewModel
-) {
+) {/*
     val usuario: Usuario? by loginViewModel.usuario.observeAsState()
     var nomUsu by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }

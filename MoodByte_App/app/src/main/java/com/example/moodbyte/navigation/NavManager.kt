@@ -50,6 +50,11 @@ fun NavManager() {
             PerfilView(navController, perfilViewModel)
         }
 
+        // Ventana home
+        composable("Home") {
+            HomeView(navController, usuarioViewModel)
+        }
+
         // Detalle de usuario
         composable(
             route = "detalle/{id}",

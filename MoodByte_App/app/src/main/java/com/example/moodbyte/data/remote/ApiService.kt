@@ -24,6 +24,9 @@ interface ApiService {
     @GET("usuario/{id}")
     suspend fun getUsuarioById(@Path("id") id: Long): UsuarioDto
 
+    @POST("usuario")
+    suspend fun insertUsuario(@Body usuario: UsuarioDto)
+
     /**
      * Metodos de articulo
      **/

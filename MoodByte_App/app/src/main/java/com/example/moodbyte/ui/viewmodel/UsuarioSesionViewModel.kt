@@ -15,7 +15,4 @@ class UsuarioSesionViewModel : ViewModel(){
         _usuario.value=usuario
     }
 
-    fun actualizarUsuario(nombre:String,nomUsu:String){
-
-    }
 }

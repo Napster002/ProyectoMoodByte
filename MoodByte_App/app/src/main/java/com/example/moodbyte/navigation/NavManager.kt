@@ -51,6 +51,7 @@ fun NavManager() {
             val perfilViewModel: PerfilViewModel=koinViewModel()
             PerfilView(navController, perfilViewModel)
         }
+
         // Detalle de usuario
         composable(
             route = "detalle/{id}",

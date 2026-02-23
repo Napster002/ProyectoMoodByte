@@ -42,6 +42,7 @@ import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.State
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -59,6 +60,7 @@ import com.example.moodbyte.ui.viewmodel.ArticulosViewModel
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.PerfilViewModel
 import com.example.moodbyte.ui.viewmodel.UsuarioSesionViewModel
+import kotlinx.coroutines.launch
 
 //================ Contenido de la ventana home =================
 @Composable
@@ -195,6 +197,7 @@ fun ContentLoginView(
                 Spacer(modifier = Modifier.padding(4.dp))
 
                 Button(onClick = {
+
                     loginViewModel.getLoginUsuario(nomUsu, password)
                 }) {
                     Text("Entrar")
@@ -311,6 +314,7 @@ fun ArticuloCard(
 @Composable
 fun PerfilViewContent(paddingValues: PaddingValues, perfilViewModel: PerfilViewModel){
     val usuario=perfilViewModel.usuario
+    val scope = rememberCoroutineScope()
     var mostrarDialogo by remember { mutableStateOf(false) }
     LazyColumn(
         modifier=Modifier.padding(paddingValues)
@@ -330,29 +334,45 @@ fun PerfilViewContent(paddingValues: PaddingValues, perfilViewModel: PerfilViewM
         EditarPerfilDialog( usuario = usuario!!,
             onDismiss = {
                 mostrarDialogo = false },
-            onSave = { nuevoNombre, nuevoNomUsu -> perfilViewModel.actualizarUsuario(nuevoNombre, nuevoNomUsu); mostrarDialogo = false })
+            onSave = { nuevoNombre, nuevoNomUsu,password ->
+                scope.launch {
+                    perfilViewModel.actualizarUsuario(nuevoNombre, nuevoNomUsu, password)
+                }; mostrarDialogo = false })
     }
 }
 
 @Composable
 fun DatosPerfil(usuario:Usuario){
+    var genero1=usuario.genero.toString().substring(0,1)
+    var genero2=usuario.genero.toString().substring(1).lowercase()
+    val generoUsu=genero1+genero2
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             Spacer(Modifier.height(12.dp))
-
             Text(
                 text = usuario.nombreCompleto,
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold
             )
-
+            Spacer(Modifier.height(8.dp))
             Text(
-                text = usuario.nombreUsuario,
+                text = "Usuario: "+usuario.nombreUsuario,
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.Gray
+            )
+            Spacer(Modifier.height(8.dp))
+            Text(
+                text = "Genero: "+generoUsu,
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.Gray
+            )
+            Spacer(Modifier.height(8.dp))
+            Text(
+                text = "Nivel: "+usuario.nivel.toString()+" Exp: "+usuario.expAcumulada.toString(),
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color.Gray
             )
@@ -385,15 +405,16 @@ fun EditarPerfilSection(onEdit: () -> Unit) {
 fun EditarPerfilDialog(
     usuario: Usuario,
     onDismiss: () -> Unit,
-    onSave: (String, String) -> Unit
+    onSave: (String, String,String) -> Unit
 ) {
     var nombre by remember { mutableStateOf(usuario.nombreCompleto) }
     var nomUsu by remember { mutableStateOf(usuario.nombreUsuario) }
+    var password by remember {mutableStateOf(usuario.password)}
 
     AlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
-            TextButton(onClick = { onSave(nombre, nomUsu) }) {
+            TextButton(onClick = { onSave(nombre, nomUsu,password) }) {
                 Text("Guardar")
             }
         },
@@ -420,6 +441,16 @@ fun EditarPerfilDialog(
                     value = nomUsu,
                     onValueChange = { nomUsu = it },
                     label = { Text("Nombre de Usuario") },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp)
+                )
+
+                Spacer(Modifier.height(12.dp))
+
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    label = { Text("Contaseña") },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp)
                 )

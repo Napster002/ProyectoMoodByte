@@ -20,12 +20,12 @@ fun UsuarioDto.toEntity() = UsuarioEntity(
     id = id,
     nombreCompleto = nombreCompleto,
     nombreUsuario = nombreUsuario,
+    password = password,
     edad = edad,
     genero = genero,
     tipoUsuario = tipoUsuario,
     fechaRegistro = fechaRegistro,
     fechaNacimiento = fechaNacimiento,
     nivel = nivel,
-    password = password,
     expAcumulada = expAcumulada
 )

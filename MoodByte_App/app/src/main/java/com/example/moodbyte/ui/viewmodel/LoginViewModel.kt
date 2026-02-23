@@ -36,11 +36,6 @@ class LoginViewModel(
     val loginState: LiveData<LoginState> = _loginState
     private val _usuario = MutableLiveData<Usuario?>()
     val usuario: LiveData<Usuario?> = _usuario
-
-    fun resetUsuario(){
-        _usuario.value=Usuario(-1,"prueba","prueba",-12, Genero.MASCULINO, TipoUsuario.NORMAL,LocalDate.now(),
-            LocalDate.now(),1,1.0)
-    }
     fun getLoginUsuario(nomUsu: String, password: String) {
         viewModelScope.launch {
             _loginState.value = LoginState.Loading

@@ -13,28 +13,50 @@ import com.example.moodbyte.data.local.daos.UsuarioDao
 import com.example.moodbyte.data.local.entities.toDomain
 import com.example.moodbyte.data.remote.ApiService
 import com.example.moodbyte.data.repository.UsuarioRepository
+import com.example.moodbyte.domain.model.Genero
+import com.example.moodbyte.domain.model.TipoUsuario
 import com.example.moodbyte.domain.model.Usuario
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 class LoginViewModel(
     private val repo: UsuarioRepository,
     private val dao: UsuarioDao,
     private val session: UsuarioSesionViewModel
 ) : ViewModel() {
+
+    sealed class LoginState {
+        object Idle : LoginState()
+        object Loading : LoginState()
+        object Success : LoginState()
+        object Error : LoginState()
+    }
+
+    private val _loginState = MutableLiveData<LoginState>(LoginState.Idle)
+    val loginState: LiveData<LoginState> = _loginState
     private val _usuario = MutableLiveData<Usuario?>()
     val usuario: LiveData<Usuario?> = _usuario
 
-    fun getLoginUsuario(nomUsu:String,password:String){
+    fun resetUsuario(){
+        _usuario.value=Usuario(-1,"prueba","prueba",-12, Genero.MASCULINO, TipoUsuario.NORMAL,LocalDate.now(),
+            LocalDate.now(),1,1.0)
+    }
+    fun getLoginUsuario(nomUsu: String, password: String) {
         viewModelScope.launch {
-            repo.refreshUsuarios()
-            try{
-                val usuarioRecibido=dao.login(nomUsu,password)
-                if(usuarioRecibido!=null){
+            _loginState.value = LoginState.Loading
+
+            try {
+                val usuarioRecibido = dao.login(nomUsu, password)
+
+                if (usuarioRecibido != null) {
                     session.setusuario(usuarioRecibido.toDomain())
+                    _loginState.value = LoginState.Success
+                } else {
+                    _loginState.value = LoginState.Error
                 }
-                _usuario.value= usuarioRecibido?.toDomain()
-            }catch(e:Exception){
-                _usuario.value=null
+
+            } catch (e: Exception) {
+                _loginState.value = LoginState.Error
             }
         }
     }

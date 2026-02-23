@@ -49,7 +49,6 @@ dependencies {
     // AndroidX base
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
     implementation("io.coil-kt:coil-compose:2.6.0")
     // Compose
     implementation(platform(libs.androidx.compose.bom))
@@ -57,11 +56,9 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.material3)
-    implementation("androidx.compose.material:material-icons-extended:1.6.0")
+    implementation("androidx.compose.material:material-icons-extended")
 
     // Tests
     testImplementation(libs.junit)

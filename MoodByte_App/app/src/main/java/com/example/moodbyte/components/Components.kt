@@ -154,13 +154,12 @@ fun ContentLoginView(
     innerPadding: PaddingValues,
     navController: NavController,
     loginViewModel: LoginViewModel
-) {/*
+) {
     val usuario: Usuario? by loginViewModel.usuario.observeAsState()
     var nomUsu by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var showDialog by remember { mutableStateOf(false) }
-    var loginAttempted by remember { mutableStateOf(false) }
-    var isLoading by remember { mutableStateOf(false) }
+    val loginState by loginViewModel.loginState.observeAsState(LoginViewModel.LoginState.Idle)
 
 
     Column(
@@ -196,31 +195,27 @@ fun ContentLoginView(
                 Spacer(modifier = Modifier.padding(4.dp))
 
                 Button(onClick = {
-                    loginAttempted = true
-                    isLoading=true
                     loginViewModel.getLoginUsuario(nomUsu, password)
-
-                    //LaunchedEffect
-
                 }) {
                     Text("Entrar")
                 }
             }
-        }
+            }
 
-        LaunchedEffect(usuario,loginAttempted) {
-            if (loginAttempted) {
-                if(isLoading) {
-                    if (usuario != null) {
-                        isLoading = false
-                        navController.navigate("Inicio")
-                    } else {
-                        isLoading = false
-                        showDialog = true
-                    }
+        LaunchedEffect(loginState) {
+            when (loginState) {
+                LoginViewModel.LoginState.Success -> {
+                    navController.navigate("Inicio")
                 }
+                LoginViewModel.LoginState.Error -> {
+                    showDialog = true
+                }
+                else -> Unit
             }
         }
+
+
+    }
 
         if (showDialog) {
             AlertDialog(
@@ -235,8 +230,6 @@ fun ContentLoginView(
             )
         }
     }
-}
-
 //==========Boton selector de Estado emocional===========
 @Composable
 fun MoodButton(emoji: String, label: String, onClick: (String) -> Unit) {

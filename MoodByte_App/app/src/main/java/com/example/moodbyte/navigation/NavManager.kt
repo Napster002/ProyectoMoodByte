@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.moodbyte.ui.screens.ArticulosView
+import com.example.moodbyte.ui.screens.EjercicioView
 import com.example.moodbyte.ui.screens.HomeView
 import com.example.moodbyte.ui.screens.LoginView
 import com.example.moodbyte.ui.screens.PerfilView
@@ -18,6 +19,8 @@ import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
 import com.example.moodbyte.ui.viewmodel.PerfilViewModel
 import com.example.moodbyte.ui.screens.IAView
+import com.example.moodbyte.ui.viewmodel.EjercicioViewModel
+import com.example.moodbyte.ui.viewmodel.EmocionViewModel
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -28,7 +31,7 @@ fun NavManager() {
 
     NavHost(
         navController = navController,
-        startDestination = "login"
+        startDestination = "Ejercicio"
     ) {
         composable ("login"){
             val loginViewModel: LoginViewModel = koinViewModel()
@@ -62,6 +65,11 @@ fun NavManager() {
         }
         composable("Camara"){
             IAView(navController)
+        }
+        composable("Ejercicio"){
+            val ejercicioViewModel: EjercicioViewModel =koinViewModel()
+            val emocionViewModel: EmocionViewModel =koinViewModel()
+            EjercicioView(navController, ejercicioViewModel,emocionViewModel)
         }
     }
 }

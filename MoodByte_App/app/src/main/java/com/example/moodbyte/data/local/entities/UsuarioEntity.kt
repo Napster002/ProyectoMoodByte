@@ -9,12 +9,14 @@ import java.time.LocalDate
 
 @Entity(tableName = "usuarios")
 data class UsuarioEntity(
-    @PrimaryKey val id: Long,
+    @PrimaryKey(autoGenerate = true)
+    val id: Long=0,
     val nombreCompleto: String,
     val nombreUsuario: String,
     val edad: Int,
     val genero: String,
     val tipoUsuario: String,
+    val password: String,
     val fechaRegistro: String,
     val fechaNacimiento: String,
     val nivel: Int,

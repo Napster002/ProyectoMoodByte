@@ -26,5 +26,6 @@ fun UsuarioDto.toEntity() = UsuarioEntity(
     fechaRegistro = fechaRegistro,
     fechaNacimiento = fechaNacimiento,
     nivel = nivel,
+    password = password,
     expAcumulada = expAcumulada
 )

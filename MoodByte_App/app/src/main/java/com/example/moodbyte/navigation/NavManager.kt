@@ -31,7 +31,7 @@ fun NavManager() {
 
     NavHost(
         navController = navController,
-        startDestination = "Ejercicio"
+        startDestination = "login"
     ) {
         composable ("login"){
             val loginViewModel: LoginViewModel = koinViewModel()

@@ -1,37 +1,36 @@
 package com.example.moodbyte.ui.viewmodel
 
-import androidx.compose.runtime.collectAsState
+
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.asLiveData
 import com.example.moodbyte.data.local.daos.UsuarioDao
-import com.example.moodbyte.data.local.entities.UsuarioEntity
-import com.example.moodbyte.data.local.entities.toDomain
 import com.example.moodbyte.data.remote.ApiService
 import com.example.moodbyte.domain.model.toDto
 import com.example.moodbyte.domain.model.toEntity
-import kotlinx.coroutines.launch
 
 class PerfilViewModel(
     private val session: UsuarioSesionViewModel,
     private val api: ApiService,
     private val dao: UsuarioDao
 ): ViewModel() {
-    val usuario=session.usuario.value
+    val usuario=session.usuario.asLiveData()
 
-    suspend fun actualizarUsuario(nombre:String, nomUsu:String, password:String){
-        val usuarioEdit = usuario?.copy(
+    suspend fun actualizarUsuario(nombre:String, nomUsu:String, password:String) {
+        val usuarioActual=usuario.value?:return
+        val usuarioEdit = usuarioActual.copy(
             nombreUsuario = nomUsu,
             nombreCompleto = nombre,
-            password = password )
-        try{
-                usuarioEdit?.let {
-                    api.insertUsuario(it.toDto())
-                    dao.insert(it.toEntity())
-                    session.setusuario(usuarioEdit)
-                }
-        }catch(e:Exception){
+            password = password
+        )
+        try {
+                api.insertUsuario(usuarioEdit.toDto())
+                dao.insert(usuarioEdit.toEntity())
+                session.setusuario(usuarioEdit)
+        } catch (e: Exception) {
         }
     }
-
+    fun cerrarSesion(){
+        session.setusuario(null)
+    }
 
 }

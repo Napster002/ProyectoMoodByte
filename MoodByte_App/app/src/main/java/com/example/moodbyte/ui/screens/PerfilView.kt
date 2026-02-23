@@ -78,6 +78,6 @@ fun PerfilView(navController: NavController,perfilViewModel: PerfilViewModel){
             }
         }
     ) { innerPadding ->
-        PerfilViewContent(innerPadding,perfilViewModel)
+        PerfilViewContent(innerPadding,perfilViewModel,navController)
     }
 }

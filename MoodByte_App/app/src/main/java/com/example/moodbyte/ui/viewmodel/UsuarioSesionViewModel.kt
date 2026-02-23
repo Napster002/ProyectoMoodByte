@@ -1,7 +1,5 @@
 package com.example.moodbyte.ui.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moodbyte.domain.model.Usuario
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,5 +12,4 @@ class UsuarioSesionViewModel : ViewModel(){
     fun setusuario(usuario:Usuario?){
         _usuario.value=usuario
     }
-
 }

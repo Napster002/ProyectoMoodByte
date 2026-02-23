@@ -43,8 +43,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -78,8 +78,11 @@ import com.example.moodbyte.domain.model.Usuario
 import com.example.moodbyte.ui.viewmodel.ArticulosViewModel
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.PerfilViewModel
+<<<<<<< Updated upstream
 import com.example.moodbyte.ui.viewmodel.UsuarioSesionViewModel
 import kotlinx.coroutines.Dispatchers
+=======
+>>>>>>> Stashed changes
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -333,8 +336,8 @@ fun ArticuloCard(
 
 //=================== Contenido del Perfil ============
 @Composable
-fun PerfilViewContent(paddingValues: PaddingValues, perfilViewModel: PerfilViewModel){
-    val usuario=perfilViewModel.usuario
+fun PerfilViewContent(paddingValues: PaddingValues, perfilViewModel: PerfilViewModel,navController: NavController){
+    val usuario=perfilViewModel.usuario.observeAsState()
     val scope = rememberCoroutineScope()
     var mostrarDialogo by remember { mutableStateOf(false) }
     LazyColumn(
@@ -342,22 +345,45 @@ fun PerfilViewContent(paddingValues: PaddingValues, perfilViewModel: PerfilViewM
             .padding(paddingValues)
             .fillMaxSize()
             .padding(16.dp)
+<<<<<<< Updated upstream
     ) {
         item {
             DatosPerfil(usuario!!)
+=======
+    ){
+        item{
+            DatosPerfil(usuario)
+>>>>>>> Stashed changes
         }
         item {
             EditarPerfilSection {
                 mostrarDialogo = true
             }
         }
+        item{
+           CambiarModoVisual()
+        }
+        item{
+            CerrarSesion(onEdit = {
+                navController.navigate("Login"){
+                    popUpTo(0){inclusive=true}
+                    perfilViewModel.cerrarSesion();
+                }
+            }
+            )
+        }
     }
+<<<<<<< Updated upstream
     if (mostrarDialogo) {
         EditarPerfilDialog(
             usuario = usuario!!,
+=======
+    if (mostrarDialogo){
+        EditarPerfilDialog( usuario = usuario,
+>>>>>>> Stashed changes
             onDismiss = {
                 mostrarDialogo = false },
-            onSave = { nuevoNombre, nuevoNomUsu,password ->
+            onSave = { nuevoNombre, nuevoNomUsu, password ->
                 scope.launch {
                     perfilViewModel.actualizarUsuario(nuevoNombre, nuevoNomUsu, password)
                 }; mostrarDialogo = false })
@@ -365,10 +391,12 @@ fun PerfilViewContent(paddingValues: PaddingValues, perfilViewModel: PerfilViewM
 }
 
 @Composable
-fun DatosPerfil(usuario:Usuario){
-    var genero1=usuario.genero.toString().substring(0,1)
-    var genero2=usuario.genero.toString().substring(1).lowercase()
-    val generoUsu=genero1+genero2
+fun DatosPerfil(usuario: State<Usuario?>){
+    if(usuario!=null) {
+        val genero1 = usuario.value?.genero.toString().substring(0, 1)
+        val genero2 = usuario.value?.genero.toString().substring(1).lowercase()
+        val generoUsu = genero1 + genero2
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -377,31 +405,35 @@ fun DatosPerfil(usuario:Usuario){
         ) {
             Spacer(Modifier.height(12.dp))
             Text(
-                text = usuario.nombreCompleto,
+                text = usuario.value?.nombreCompleto?:"",
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                text = "Usuario: "+usuario.nombreUsuario,
+                text = "Usuario: " + usuario.value?.nombreUsuario,
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color.Gray
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                text = "Genero: "+generoUsu,
+                text = "Genero: " + generoUsu,
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color.Gray
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                text = "Nivel: "+usuario.nivel.toString()+" Exp: "+usuario.expAcumulada.toString(),
+                text = "Nivel: " + usuario.value?.nivel?.toString() + " Exp: " + usuario.value?.expAcumulada?.toString(),
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color.Gray
             )
         }
     }
+<<<<<<< Updated upstream
 }
+=======
+    }
+>>>>>>> Stashed changes
 
 @Composable
 fun EditarPerfilSection(onEdit: () -> Unit) {
@@ -427,18 +459,18 @@ fun EditarPerfilSection(onEdit: () -> Unit) {
 
 @Composable
 fun EditarPerfilDialog(
-    usuario: Usuario,
+    usuario: State<Usuario?>,
     onDismiss: () -> Unit,
-    onSave: (String, String,String) -> Unit
+    onSave: (String, String, String) -> Unit
 ) {
-    var nombre by remember { mutableStateOf(usuario.nombreCompleto) }
-    var nomUsu by remember { mutableStateOf(usuario.nombreUsuario) }
-    var password by remember {mutableStateOf(usuario.password)}
+    var nombre by remember { mutableStateOf(usuario.value?.nombreCompleto) }
+    var nomUsu by remember { mutableStateOf(usuario.value?.nombreUsuario) }
+    var password by remember {mutableStateOf(usuario.value?.password)}
 
     AlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
-            TextButton(onClick = { onSave(nombre, nomUsu,password) }) {
+            TextButton(onClick = { onSave(nombre!!, nomUsu!!,password!!) }) {
                 Text("Guardar")
             }
         },
@@ -452,7 +484,7 @@ fun EditarPerfilDialog(
             Column {
 
                 OutlinedTextField(
-                    value = nombre,
+                    value = nombre!!,
                     onValueChange = { nombre = it },
                     label = { Text("Nombre de usuario") },
                     modifier = Modifier.fillMaxWidth(),
@@ -462,7 +494,7 @@ fun EditarPerfilDialog(
                 Spacer(Modifier.height(12.dp))
 
                 OutlinedTextField(
-                    value = nomUsu,
+                    value = nomUsu!!,
                     onValueChange = { nomUsu = it },
                     label = { Text("Nombre de Usuario") },
                     modifier = Modifier.fillMaxWidth(),
@@ -472,7 +504,7 @@ fun EditarPerfilDialog(
                 Spacer(Modifier.height(12.dp))
 
                 OutlinedTextField(
-                    value = password,
+                    value = password!!,
                     onValueChange = { password = it },
                     label = { Text("Contaseña") },
                     modifier = Modifier.fillMaxWidth(),
@@ -491,10 +523,42 @@ fun IAViewContent(paddingValues: PaddingValues){
     val detectorCara = remember { DetectorCara(context) } // Detector de cara real
     val chatBot = remember { ChatBot() }
 
+<<<<<<< Updated upstream
     var bitmap by remember { mutableStateOf<Bitmap?>(null) }
     var emocionActual by remember { mutableStateOf("Neutral") }
     var caraDetectada by remember { mutableStateOf(false) }
     var primerMensajeMostrado by remember { mutableStateOf(false) } // <-- NUEVO
+=======
+@Composable
+fun CerrarSesion(onEdit:()-> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        shape = RoundedCornerShape(16.dp)
+    ) {
+        ListItem(
+            headlineContent = { Text("Cerrar Sesión") },
+            supportingContent = { Text("Termina la sesión activa y vuelve al login") },
+            leadingContent = {
+                Icon(Icons.Default.Close, contentDescription = null)
+            },
+            trailingContent = {
+                Icon(Icons.Default.ArrowForward, contentDescription = null)
+            },
+            modifier = Modifier.clickable {
+                onEdit()
+            }
+        )
+    }
+}
+
+@Composable
+fun CambiarModoVisual(){
+
+}
+
+>>>>>>> Stashed changes
 
     var pregunta by remember { mutableStateOf("") }
 

@@ -14,4 +14,8 @@ class UsuarioSesionViewModel : ViewModel(){
     fun setusuario(usuario:Usuario?){
         _usuario.value=usuario
     }
+
+    fun actualizarUsuario(nombre:String,nomUsu:String){
+
+    }
 }

@@ -11,9 +11,11 @@ import androidx.navigation.navArgument
 import com.example.moodbyte.ui.screens.ArticulosView
 import com.example.moodbyte.ui.screens.HomeView
 import com.example.moodbyte.ui.screens.LoginView
+import com.example.moodbyte.ui.screens.PerfilView
 import com.example.moodbyte.ui.viewmodel.ArticulosViewModel
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
+import com.example.moodbyte.ui.viewmodel.PerfilViewModel
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -42,6 +44,10 @@ fun NavManager() {
         composable("Articulos"){
             val articulosViewModel: ArticulosViewModel=koinViewModel()
             ArticulosView(navController,articulosViewModel)
+        }
+        composable("Perfil"){
+            val perfilViewModel: PerfilViewModel=koinViewModel()
+            PerfilView(navController, perfilViewModel)
         }
 
         // Detalle de usuario

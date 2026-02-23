@@ -8,6 +8,7 @@ import com.example.moodbyte.data.repository.RegistroRepository
 import com.example.moodbyte.ui.viewmodel.ArticulosViewModel
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
+import com.example.moodbyte.ui.viewmodel.PerfilViewModel
 import com.example.moodbyte.ui.viewmodel.UsuarioSesionViewModel
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -37,4 +38,5 @@ val appModule = module {
     viewModel { LoginViewModel(get(), get(), get()) }
     viewModel { HomeViewModel(get(), get()) }
     viewModel{ ArticulosViewModel(get()) }
+    viewModel{ PerfilViewModel(get()) }
 }

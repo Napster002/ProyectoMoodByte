@@ -31,8 +31,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.runtime.State
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -45,10 +54,10 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.moodbyte.domain.model.Articulo
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
-import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import com.example.moodbyte.domain.model.Usuario
 import com.example.moodbyte.ui.viewmodel.ArticulosViewModel
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
+import com.example.moodbyte.ui.viewmodel.PerfilViewModel
 import com.example.moodbyte.ui.viewmodel.UsuarioSesionViewModel
 
 //================ Contenido de la ventana home =================
@@ -151,6 +160,7 @@ fun ContentLoginView(
     var password by remember { mutableStateOf("") }
     var showDialog by remember { mutableStateOf(false) }
     var loginAttempted by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(false) }
 
 
     Column(
@@ -186,8 +196,9 @@ fun ContentLoginView(
                 Spacer(modifier = Modifier.padding(4.dp))
 
                 Button(onClick = {
-                    loginViewModel.getLoginUsuario(nomUsu, password)
                     loginAttempted = true
+                    isLoading=true
+                    loginViewModel.getLoginUsuario(nomUsu, password)
 
                     //LaunchedEffect
 
@@ -199,10 +210,14 @@ fun ContentLoginView(
 
         LaunchedEffect(usuario,loginAttempted) {
             if (loginAttempted) {
-                if (usuario != null) {
-                    navController.navigate("Inicio")
-                } else {
-                    showDialog = true
+                if(isLoading) {
+                    if (usuario != null) {
+                        isLoading = false
+                        navController.navigate("Inicio")
+                    } else {
+                        isLoading = false
+                        showDialog = true
+                    }
                 }
             }
         }
@@ -298,3 +313,130 @@ fun ArticuloCard(
         }
     }
 }
+
+//=================== Contenido del Perfil ============
+@Composable
+fun PerfilViewContent(paddingValues: PaddingValues, perfilViewModel: PerfilViewModel){
+    val usuario=perfilViewModel.usuario
+    var mostrarDialogo by remember { mutableStateOf(false) }
+    LazyColumn(
+        modifier=Modifier.padding(paddingValues)
+            .fillMaxSize()
+            .padding(16.dp)
+    ){
+        item{
+            DatosPerfil(usuario!!)
+        }
+        item{
+            EditarPerfilSection {
+                mostrarDialogo=true
+            }
+        }
+    }
+    if (mostrarDialogo){
+        EditarPerfilDialog( usuario = usuario!!,
+            onDismiss = {
+                mostrarDialogo = false },
+            onSave = { nuevoNombre, nuevoNomUsu -> perfilViewModel.actualizarUsuario(nuevoNombre, nuevoNomUsu); mostrarDialogo = false })
+    }
+}
+
+@Composable
+fun DatosPerfil(usuario:Usuario){
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            Spacer(Modifier.height(12.dp))
+
+            Text(
+                text = usuario.nombreCompleto,
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold
+            )
+
+            Text(
+                text = usuario.nombreUsuario,
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.Gray
+            )
+        }
+    }
+
+@Composable
+fun EditarPerfilSection(onEdit: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        shape = RoundedCornerShape(16.dp)
+    ) {
+        ListItem(
+            headlineContent = { Text("Editar perfil") },
+            supportingContent = { Text("Cambia tu nombre, nombre de usuario o contraseña") },
+            leadingContent = {
+                Icon(Icons.Default.Edit, contentDescription = null)
+            },
+            trailingContent = {
+                Icon(Icons.Default.ArrowForward, contentDescription = null)
+            },
+            modifier = Modifier.clickable { onEdit() }
+        )
+    }
+}
+
+@Composable
+fun EditarPerfilDialog(
+    usuario: Usuario,
+    onDismiss: () -> Unit,
+    onSave: (String, String) -> Unit
+) {
+    var nombre by remember { mutableStateOf(usuario.nombreCompleto) }
+    var nomUsu by remember { mutableStateOf(usuario.nombreUsuario) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = {
+            TextButton(onClick = { onSave(nombre, nomUsu) }) {
+                Text("Guardar")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancelar")
+            }
+        },
+        title = { Text("Editar perfil") },
+        text = {
+            Column {
+
+                OutlinedTextField(
+                    value = nombre,
+                    onValueChange = { nombre = it },
+                    label = { Text("Nombre de usuario") },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp)
+                )
+
+                Spacer(Modifier.height(12.dp))
+
+                OutlinedTextField(
+                    value = nomUsu,
+                    onValueChange = { nomUsu = it },
+                    label = { Text("Nombre de Usuario") },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp)
+                )
+            }
+        },
+        shape = RoundedCornerShape(20.dp)
+    )
+}
+
+
+
+
+

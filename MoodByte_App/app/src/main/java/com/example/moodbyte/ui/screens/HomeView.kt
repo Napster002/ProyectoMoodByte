@@ -93,8 +93,8 @@ fun HomeView(navController: NavController, homeViewModel: HomeViewModel){
                     NavigationBarItem(
                         icon = {
                             Icon(
-                            painter = painterResource(id = item.icon),
-                            contentDescription = item.label)
+                                painter = painterResource(id = item.icon),
+                                contentDescription = item.label)
                         },
                         label = { Text("") },
                         selected = selectedIndex == index,
@@ -114,3 +114,5 @@ fun HomeView(navController: NavController, homeViewModel: HomeViewModel){
         }
     }
 }
+
+

@@ -36,11 +36,11 @@ import com.example.moodbyte.components.ContentHomeView
 import com.example.moodbyte.components.DialogoInformativo
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import kotlinx.coroutines.launch
-import com.example.moodbyte.R
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.moodbyte.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)

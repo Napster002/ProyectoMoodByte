@@ -28,7 +28,7 @@ fun NavManager() {
 
     NavHost(
         navController = navController,
-        startDestination = "login"
+        startDestination = "camara"
     ) {
         composable ("login"){
             val loginViewModel: LoginViewModel = koinViewModel()
@@ -38,7 +38,7 @@ fun NavManager() {
             val homeViewModel: HomeViewModel = koinViewModel()
             HomeView(navController,homeViewModel)
         }
-        // Lista de usuarios
+        // Borrar
         composable("usuarios") {
             val usuarioViewModel: UsuarioViewModel = koinViewModel()
             UsuarioView(navController,usuarioViewModel)
@@ -51,12 +51,6 @@ fun NavManager() {
             val perfilViewModel: PerfilViewModel=koinViewModel()
             PerfilView(navController, perfilViewModel)
         }
-
-        // Ventana home
-        composable("Home") {
-            HomeView(navController, usuarioViewModel)
-        }
-
         // Detalle de usuario
         composable(
             route = "detalle/{id}",
@@ -66,7 +60,7 @@ fun NavManager() {
             //UsuarioDetailScreen(navController, id, usuarioViewModel)
         }
         composable("camara"){
-            IAView()
+            IAView(navController)
         }
     }
 }

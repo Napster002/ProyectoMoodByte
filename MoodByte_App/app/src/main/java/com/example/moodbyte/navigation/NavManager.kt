@@ -8,8 +8,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+<<<<<<< Updated upstream
+=======
+import com.example.moodbyte.ui.screens.ArticulosView
+import com.example.moodbyte.ui.screens.EjercicioView
+>>>>>>> Stashed changes
 import com.example.moodbyte.ui.screens.HomeView
 import com.example.moodbyte.ui.screens.IAView
+import com.example.moodbyte.ui.viewmodel.EjercicioViewModel
+import com.example.moodbyte.ui.viewmodel.EmocionViewModel
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 
 @Composable
@@ -39,6 +46,11 @@ fun NavManager(usuarioViewModel: UsuarioViewModel) {
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getLong("id") ?: 0L
             //UsuarioDetailScreen(navController, id, usuarioViewModel)
+        }
+        composable("Ejercicio"){
+            val ejercicioViewModel: EjercicioViewModel=koinViewModel()
+            val emocionViewModel: EmocionViewModel=koinViewModel()
+            EjercicioView(navController, ejercicioViewModel,emocionViewModel)
         }
         composable("camara"){
             IAView()

@@ -33,13 +33,31 @@ import androidx.navigation.NavController
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import com.example.moodbyte.domain.model.Usuario
+<<<<<<< Updated upstream
+=======
+import com.example.moodbyte.ui.viewmodel.ArticulosViewModel
+import com.example.moodbyte.ui.viewmodel.EjercicioViewModel
+import com.example.moodbyte.ui.viewmodel.EmocionViewModel
+import com.example.moodbyte.ui.viewmodel.HomeViewModel
+import com.example.moodbyte.ui.viewmodel.PerfilViewModel
+import com.example.moodbyte.ui.viewmodel.UsuarioSesionViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+>>>>>>> Stashed changes
 
 //================ Contenido de la ventana home =================
 @Composable
 fun ContentHomeView(
     innerPadding: PaddingValues,
     navController: NavController,
+<<<<<<< Updated upstream
     usuarioViewModel: UsuarioViewModel) {
+=======
+    homeViewModel: HomeViewModel) {
+    var showMoodDialog by remember { mutableStateOf(true) }
+    var selectedMood by remember { mutableStateOf<String?>("Regular") }
+>>>>>>> Stashed changes
     LazyColumn (
         modifier = Modifier
             .padding(innerPadding)
@@ -57,6 +75,56 @@ fun ContentHomeView(
                 color = Color.Black
             )
         }
+<<<<<<< Updated upstream
+=======
+        item {
+            if (showMoodDialog) {
+                AlertDialog(
+                    onDismissRequest = { showMoodDialog = false },
+                    title = { Text("¿Cómo te sientes hoy?") },
+                    text = {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Text("Elige tu estado de ánimo")
+
+                            Spacer(Modifier.height(16.dp))
+
+                            Row(
+                                horizontalArrangement = Arrangement.SpaceEvenly,
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                MoodButton("😄", "Feliz") { mood ->
+                                    homeViewModel.setMood(mood)
+                                    selectedMood="Feliz"
+                                    showMoodDialog = false
+                                }
+                                MoodButton("🙂", "Bien") { mood ->
+                                    homeViewModel.setMood(mood)
+                                    selectedMood="Bien"
+                                    showMoodDialog = false
+                                }
+                                MoodButton("😐", "Regular") { mood ->
+                                    homeViewModel.setMood(mood)
+                                    showMoodDialog = false
+                                }
+                                MoodButton("\uD83D\uDE30","Estresado"){ mood->
+                                    homeViewModel.setMood(mood)
+                                    selectedMood="Estresado"
+                                    showMoodDialog=false
+                                }
+                                MoodButton("😔", "Triste") { mood ->
+                                    homeViewModel.setMood(mood)
+                                    selectedMood="Triste"
+                                    showMoodDialog = false
+                                }
+                            }
+                        }
+                    },
+                    confirmButton = {}
+                )
+            }
+        }
+
+>>>>>>> Stashed changes
     }
 }
 
@@ -162,15 +230,457 @@ fun ContentLoginView(
             )
         }
 
+<<<<<<< Updated upstream
         Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.End){
             Button(onClick = {
                 loginViewModel.setUsuarioInvitado()
                 navController.navigate("Home")
             }) {
                 Text("Entrar como usuario invitado") }
+=======
+//==========Boton selector de Estado emocional===========
+@Composable
+fun MoodButton(emoji: String, label: String, onClick: (String) -> Unit) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .clickable { onClick(label) }
+            .padding(8.dp)
+    ) {
+        Text(text = emoji, fontSize = 40.sp)
+        Text(text = label)
+    }
+}
+
+//=============Contenido de la ventana Articulos=================
+@Composable
+fun ArticulosViewContent(paddingValues: PaddingValues, articulosViewModel: ArticulosViewModel) {
+    val articulos = articulosViewModel.articulos.collectAsState()
+    val context = LocalContext.current
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues)
+    ) {
+        items(articulos.value) { articulo ->
+            ArticuloCard(articulo) { url ->
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                context.startActivity(intent)
+            }
+        }
+    }
+}
+
+
+//=========Composable para mostrar los articulos========
+@Composable
+fun ArticuloCard(
+    articulo: Articulo,
+    onClick: (String) -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(12.dp)
+            .clickable { onClick(articulo.enlace) },
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(6.dp)
+    ) {
+        Column {
+            AsyncImage(
+                model = articulo.imagen,
+                contentDescription = articulo.titulo,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(180.dp),
+                contentScale = ContentScale.Crop
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = articulo.titulo,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(horizontal = 12.dp)
+            )
+
+            Text(
+                text = articulo.subtitulo,
+                fontSize = 14.sp,
+                color = Color.Gray,
+                modifier = Modifier.padding(12.dp)
+            )
+        }
+    }
+}
+
+//=================== Contenido del Perfil ============
+@Composable
+fun PerfilViewContent(paddingValues: PaddingValues, perfilViewModel: PerfilViewModel) {
+    val usuario = perfilViewModel.usuario
+    var mostrarDialogo by remember { mutableStateOf(false) }
+    LazyColumn(
+        modifier = Modifier
+            .padding(paddingValues)
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        item {
+            DatosPerfil(usuario!!)
+        }
+        item {
+            EditarPerfilSection {
+                mostrarDialogo = true
+            }
+        }
+    }
+    if (mostrarDialogo) {
+        EditarPerfilDialog(
+            usuario = usuario!!,
+            onDismiss = {
+                mostrarDialogo = false
+            },
+            onSave = { nuevoNombre, nuevoNomUsu ->
+                perfilViewModel.actualizarUsuario(
+                    nuevoNombre,
+                    nuevoNomUsu
+                ); mostrarDialogo = false
+            })
+    }
+}
+
+@Composable
+fun DatosPerfil(usuario: Usuario) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Spacer(Modifier.height(12.dp))
+
+        Text(
+            text = usuario.nombreCompleto,
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold
+        )
+
+        Text(
+            text = usuario.nombreUsuario,
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color.Gray
+        )
+    }
+}
+
+@Composable
+fun EditarPerfilSection(onEdit: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        shape = RoundedCornerShape(16.dp)
+    ) {
+        ListItem(
+            headlineContent = { Text("Editar perfil") },
+            supportingContent = { Text("Cambia tu nombre, nombre de usuario o contraseña") },
+            leadingContent = {
+                Icon(Icons.Default.Edit, contentDescription = null)
+            },
+            trailingContent = {
+                Icon(Icons.Default.ArrowForward, contentDescription = null)
+            },
+            modifier = Modifier.clickable { onEdit() }
+        )
+    }
+}
+
+@Composable
+fun EditarPerfilDialog(
+    usuario: Usuario,
+    onDismiss: () -> Unit,
+    onSave: (String, String) -> Unit
+) {
+    var nombre by remember { mutableStateOf(usuario.nombreCompleto) }
+    var nomUsu by remember { mutableStateOf(usuario.nombreUsuario) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = {
+            TextButton(onClick = { onSave(nombre, nomUsu) }) {
+                Text("Guardar")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancelar")
+            }
+        },
+        title = { Text("Editar perfil") },
+        text = {
+            Column {
+
+                OutlinedTextField(
+                    value = nombre,
+                    onValueChange = { nombre = it },
+                    label = { Text("Nombre de usuario") },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp)
+                )
+
+                Spacer(Modifier.height(12.dp))
+
+                OutlinedTextField(
+                    value = nomUsu,
+                    onValueChange = { nomUsu = it },
+                    label = { Text("Nombre de Usuario") },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp)
+                )
+            }
+        },
+        shape = RoundedCornerShape(20.dp)
+    )
+}
+//=================== Contenido de la pantalla IA ============
+@Composable
+fun IAViewContent(paddingValues: PaddingValues){
+    val context = LocalContext.current
+    val detector = remember { DetectorEmociones(context) }
+    val detectorCara = remember { DetectorCara(context) } // Detector de cara real
+    val chatBot = remember { ChatBot() }
+
+    var bitmap by remember { mutableStateOf<Bitmap?>(null) }
+    var emocionActual by remember { mutableStateOf("Neutral") }
+    var caraDetectada by remember { mutableStateOf(false) }
+    var primerMensajeMostrado by remember { mutableStateOf(false) } // <-- NUEVO
+
+    var pregunta by remember { mutableStateOf("") }
+
+    val chats = remember { mutableStateListOf<Mensaje>() }
+
+    val scope = rememberCoroutineScope()
+
+    // SELECTOR IMAGEN
+    val launcher = rememberLauncherForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+
+        uri ?: return@rememberLauncherForActivityResult
+
+        scope.launch(Dispatchers.IO) {
+
+            try {
+
+                val bmp = MediaStore.Images.Media.getBitmap(
+                    context.contentResolver,
+                    uri
+                )
+
+                val scaled = Bitmap.createScaledBitmap(
+                    bmp,
+                    64,
+                    64,
+                    true
+                )
+
+                val hayCara = detectorCara.hayCara(bmp) // Detecta si hay cara real
+                val emocion = if (hayCara) detector.detectar(scaled) else "Neutral"
+
+                withContext(Dispatchers.Main) {
+
+                    bitmap = bmp // Actualizar imagen
+                    chats.clear() // Reiniciar chat al cambiar imagen
+                    caraDetectada = false // Bloquea chat por defecto
+                    primerMensajeMostrado = false // Reinicia flag si se cambia imagen
+
+                    if (hayCara) {
+
+                        caraDetectada = true
+                        emocionActual = emocion
+
+                        // MENSAJE AUTOMÁTICO SOLO EN LA PRIMERA FOTO
+                        if (!primerMensajeMostrado) {
+                            val saludo = obtenerSaludo()
+                            val respuesta = chatBot.responder("", emocion)
+
+                            chats.add(
+                                Mensaje(
+                                    texto = "$saludo 😊",
+                                    esUsuario = false
+                                )
+                            )
+
+                            primerMensajeMostrado = true
+                        }
+
+                    } else {
+
+                        emocionActual = "Neutral"
+
+                        chats.add(
+                            Mensaje(
+                                texto = "No se detectó ninguna cara.\nSube una imagen válida para activar el chat.",
+                                esUsuario = false
+                            )
+                        )
+                    }
+                }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues)
+            .padding(9.dp)
+            .imePadding()
+            .navigationBarsPadding(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = { launcher.launch("image/*") }
+        ) {
+            Text("Seleccionar imagen")
+>>>>>>> Stashed changes
         }
 
 
 
+<<<<<<< Updated upstream
     }*/
+=======
+            Image(
+                bitmap = it.asImageBitmap(),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .background(
+                        Color.LightGray,
+                        RoundedCornerShape(8.dp)
+                    )
+            )
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text("Emoción: $emocionActual")
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        LazyColumn(
+            modifier = Modifier.weight(1f)
+        ) {
+
+            items(chats) { chat ->
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(4.dp),
+                    horizontalArrangement =
+                        if (chat.esUsuario)
+                            Arrangement.Start
+                        else
+                            Arrangement.End
+                ) {
+
+                    Box(
+                        modifier = Modifier
+                            .background(
+                                if (chat.esUsuario) Color(0xFF2196F3) else Color.LightGray,
+                                RoundedCornerShape(8.dp)
+                            )
+                            .clickable(enabled = chat.url != null) {
+                                chat.url?.let {
+                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
+                                    context.startActivity(intent)
+                                }
+                            }
+                            .padding(10.dp)
+                    ) {
+
+                        Text(
+                            chat.texto,
+                            color = if (chat.esUsuario) Color.White else Color.Black
+                        )
+                    }
+                }
+            }
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // CAMPO BLOQUEADO SI NO HAY CARA
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+
+        ) {
+            OutlinedTextField(
+                value = pregunta,
+                onValueChange = { pregunta = it },
+                label = { Text("Pregunta") },
+                modifier = Modifier
+                    .weight(0.8f), // ocupa 80% del espacio disponible
+                enabled = caraDetectada,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Send // Cambia el botón Enter a "Send"
+                ),
+                keyboardActions = KeyboardActions(
+                    onSend = {
+                        // Se ejecuta cuando se pulsa Enter/Send
+                        if (pregunta.isNotBlank()) {
+                            chats.add(Mensaje(texto = pregunta, esUsuario = true))
+                            val respuesta = chatBot.responder(pregunta, emocionActual)
+                            chats.add(
+                                Mensaje(
+                                    texto = respuesta.texto,
+                                    url = respuesta.url,
+                                    esUsuario = false
+                                )
+                            )
+                            pregunta = ""
+                        }
+                    }
+                )
+            )
+            Spacer(modifier = Modifier.width(8.dp)) // separación
+
+            Button(
+                onClick = {
+                    if (pregunta.isNotBlank()) {
+                        chats.add(Mensaje(texto = pregunta, esUsuario = true))
+                        val respuesta = chatBot.responder(pregunta, emocionActual)
+                        chats.add(
+                            Mensaje(
+                                texto = respuesta.texto,
+                                url = respuesta.url,
+                                esUsuario = false
+                            )
+                        )
+                        pregunta = ""
+                    }
+                },
+                enabled = caraDetectada
+            ) {
+                Text("->")
+            }
+        }
+    }
+    // ============ Contenido de la pantalla ejercicios
+    @Composable
+    fun EjerciciosViewContent(paddingValues: PaddingValues,ejercicioViewModel: EjercicioViewModel,emocionViewModel: EmocionViewModel) {
+      var emocion =emocionViewModel.getEmocion()
+        Text(emocion)
+    }
+>>>>>>> Stashed changes
 }

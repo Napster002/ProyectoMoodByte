@@ -1,5 +1,6 @@
 package com.example.moodbyte.ui.screens
 
+<<<<<<< Updated upstream
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -281,5 +282,90 @@ fun IAView() {
                 Text("->")
             }
         }
+=======
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.navigation.NavController
+import com.example.moodbyte.R
+import com.example.moodbyte.components.ArticulosViewContent
+import com.example.moodbyte.components.BottomNavItem
+import com.example.moodbyte.components.IAViewContent
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun IAView(navController:NavController){
+    val TitleFont= FontFamily(Font(R.font.hollyberrypop))
+    var selectedIndex by remember { mutableStateOf(0) }
+    val items = listOf(
+        BottomNavItem("Inicio", R.drawable.home),
+        BottomNavItem("Diario", R.drawable.agenda),
+        BottomNavItem("Articulos", R.drawable.articulos),
+        BottomNavItem("Ejercicios", R.drawable.ejercicios),
+        BottomNavItem("Camara", R.drawable.cam),
+        BottomNavItem("Perfil", R.drawable.user)
+    )
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = topAppBarColors(
+                    containerColor = Color(0xFFF56D5F),
+                    titleContentColor = Color(0xFF60F5D8),
+                ),
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back"
+                        )
+                    }
+                },
+                title = {
+                    Text(
+                        text = "MoodByte",
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = TitleFont
+                    )
+                }
+            )
+        },
+        bottomBar = {
+            NavigationBar{
+                items.forEachIndexed { index, item ->
+                    NavigationBarItem(
+                        icon = {
+                            Icon(
+                                painter= painterResource(id=item.icon),
+                                contentDescription = item.label
+                            )
+                        },
+                        label = { Text("") },
+                        selected= selectedIndex==index,
+                        onClick = { navController.navigate(item.label)}
+                    )
+                }
+            }
+        }
+    ) { innerPadding ->
+        IAViewContent(innerPadding)
+>>>>>>> Stashed changes
     }
 }

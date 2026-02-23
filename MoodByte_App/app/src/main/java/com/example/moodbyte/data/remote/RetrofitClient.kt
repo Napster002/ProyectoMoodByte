@@ -1,5 +1,6 @@
 package com.example.moodbyte.data.remote
 
+import com.example.moodbyte.components.LocalTimeAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -12,6 +13,7 @@ object RetrofitClient {
     private const val BASE_URL = "http://10.0.2.2:5500/api/"
 
     private val moshi = Moshi.Builder()
+        .add(LocalTimeAdapter())
         .add(KotlinJsonAdapterFactory())
         .build()
 

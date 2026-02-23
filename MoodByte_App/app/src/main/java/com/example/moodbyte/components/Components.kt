@@ -1,5 +1,6 @@
 package com.example.moodbyte.components
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -580,6 +581,7 @@ fun IAViewContent(paddingValues: PaddingValues){
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues)
+            .padding(9.dp)
             .imePadding()
             .navigationBarsPadding(),
         verticalArrangement = Arrangement.Center,

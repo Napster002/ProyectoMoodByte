@@ -8,11 +8,11 @@ import java.time.LocalDate
 data class EntradaDto(
     val id: Long,
     val texto: String,
-    val fechaEntrada: LocalDate
+    val fechaEntrada: String
 )
 
 fun EntradaDto.toEntity() = EntradaEntity(
     id = id,
     texto = texto,
-    fechaEntrada = fechaEntrada
+    fechaEntrada = LocalDate.parse(fechaEntrada)
 )

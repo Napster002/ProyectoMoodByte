@@ -2,13 +2,14 @@ package org.example.servicio;
 
 import org.example.Logica.EntradaRepository;
 import org.example.Modelo.Entrada;
-import org.example.Modelo.Estado;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
-public class EntradaService implements IEntradaService<Entrada,Long>{
-    private EntradaRepository repository;
+public class EntradaService implements IEntradaService<Entrada,Long> {
+
+    private final EntradaRepository repository;
 
     public EntradaService(EntradaRepository repository) {
         this.repository = repository;
@@ -21,11 +22,11 @@ public class EntradaService implements IEntradaService<Entrada,Long>{
 
     @Override
     public Entrada modificar(Entrada entrada, Long id) {
-        Entrada entrada1=repository.findById(id).orElse(null);
-        if(entrada1!=null){
-           entrada1.setTexto(entrada.getTexto());
-           entrada1.setDiario(entrada.getDiario());
-           entrada1.setFechaEntrada(entrada.getFechaEntrada());
+        Entrada entrada1 = repository.findById(id).orElse(null);
+        if (entrada1 != null) {
+            entrada1.setTexto(entrada.getTexto());
+            entrada1.setDiario(entrada.getDiario());
+            entrada1.setFechaEntrada(entrada.getFechaEntrada());
         }
         return repository.save(entrada1);
     }
@@ -43,5 +44,9 @@ public class EntradaService implements IEntradaService<Entrada,Long>{
     @Override
     public Entrada buscar(Long id) {
         return repository.findById(id).orElse(null);
+    }
+
+    public List<Entrada> listarPorUsuario(Long idUsuario) {
+        return repository.findByDiarioIdUsuario(idUsuario);
     }
 }

@@ -18,8 +18,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            val LoginViewModel: LoginViewModel = koinViewModel()
-            val usuarioViewModel: UsuarioViewModel=koinViewModel ()
             NavManager()
         }
     }

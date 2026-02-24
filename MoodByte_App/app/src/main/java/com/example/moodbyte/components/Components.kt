@@ -5,6 +5,9 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
+import android.view.ViewGroup
+import android.widget.CalendarView
+import android.widget.TextView
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -44,7 +47,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
@@ -53,11 +55,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -66,6 +68,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.moodbyte.components.chatbotcomponents.ChatBot
@@ -74,10 +77,13 @@ import com.example.moodbyte.components.chatbotcomponents.DetectorEmociones
 import com.example.moodbyte.components.chatbotcomponents.Mensaje
 import com.example.moodbyte.components.chatbotcomponents.obtenerSaludo
 import com.example.moodbyte.domain.model.Articulo
-import com.example.moodbyte.domain.model.Ejercicio
+
+import com.example.moodbyte.domain.model.Entrada
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
 import com.example.moodbyte.domain.model.Usuario
 import com.example.moodbyte.ui.viewmodel.ArticulosViewModel
+import com.example.moodbyte.ui.viewmodel.DiarioViewModel
+import com.example.moodbyte.domain.model.Ejercicio
 import com.example.moodbyte.ui.viewmodel.EjercicioViewModel
 import com.example.moodbyte.ui.viewmodel.EmocionViewModel
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
@@ -86,6 +92,8 @@ import com.example.moodbyte.ui.viewmodel.UsuarioSesionViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.LocalDate
+import java.util.Calendar
 
 //================ Contenido de la ventana home =================
 @Composable
@@ -222,42 +230,41 @@ fun ContentLoginView(
                 Spacer(modifier = Modifier.padding(4.dp))
 
                 Button(onClick = {
-
                     loginViewModel.getLoginUsuario(nomUsu, password)
                 }) {
                     Text("Entrar")
                 }
             }
-            }
+        }
 
         LaunchedEffect(loginState) {
             when (loginState) {
                 LoginViewModel.LoginState.Success -> {
                     navController.navigate("Inicio")
                 }
+
                 LoginViewModel.LoginState.Error -> {
                     showDialog = true
                 }
+
                 else -> Unit
             }
         }
-
-
     }
-
-        if (showDialog) {
-            AlertDialog(
-                onDismissRequest = { showDialog = false },
-                title = { Text("Error al Iniciar sesión") },
-                text = { Text("No se ha encontrado al usuario. Inténtalo otra vez") },
-                confirmButton = {
-                    TextButton(onClick = { showDialog = false }) {
-                        Text("OK")
-                    }
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = { showDialog = false },
+            title = { Text("Error al Iniciar sesión") },
+            text = { Text("No se ha encontrado al usuario. Inténtalo otra vez") },
+            confirmButton = {
+                TextButton(onClick = { showDialog = false }) {
+                    Text("OK")
                 }
-            )
-        }
+            }
+        )
     }
+}
+
 //==========Boton selector de Estado emocional===========
 @Composable
 fun MoodButton(emoji: String, label: String, onClick: (String) -> Unit) {
@@ -373,6 +380,7 @@ fun DatosPerfil(usuario:Usuario){
     var genero1=usuario.genero.toString().substring(0,1)
     var genero2=usuario.genero.toString().substring(1).lowercase()
     val generoUsu=genero1+genero2
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -717,6 +725,105 @@ fun IAViewContent(paddingValues: PaddingValues){
         }
     }
 }
+
+//================ Contenido de la ventana diario =================
+@Composable
+fun ContentDiarioView(
+    innerPadding: PaddingValues,
+    navController: NavController,
+    diarioViewModel: DiarioViewModel
+) {
+    val entradas by diarioViewModel.entradas.collectAsState()
+
+    Column(
+        modifier = Modifier
+            .padding(innerPadding)
+            .fillMaxSize()
+            .background(Color(0xFFD2E6F6)),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Tu Diario",
+            fontWeight = FontWeight.Bold,
+            fontSize = 22.sp,
+            modifier = Modifier.padding(16.dp)
+        )
+
+        DiarioCalendarView(
+            entradas = diarioViewModel.entradas.collectAsState().value,
+            onDaySelected = { date ->
+                val entrada = diarioViewModel.getEntradaFor(date)
+                if (entrada != null) {
+                    navController.navigate("diarioDetalle/$date")
+                } else {
+                    navController.navigate("diarioEditar/$date")
+                }
+            }
+        )
+    }
+
+}
+
+@Composable
+fun DiarioCalendarView(
+    entradas: List<Entrada>,
+    onDaySelected: (LocalDate) -> Unit
+) {
+    AndroidView(
+        factory = { context ->
+            CalendarView(context).apply {
+
+                val fechasConEntrada = entradas.map { it.fechaEntrada }
+
+                fun decorate() {
+                    val calendar = Calendar.getInstance()
+                    val root = getChildAt(0) as? ViewGroup ?: return
+
+                    for (i in 0 until root.childCount) {
+                        val monthView = root.getChildAt(i)
+                        if (monthView is ViewGroup) {
+                            for (j in 0 until monthView.childCount) {
+                                val dayView = monthView.getChildAt(j)
+                                if (dayView is TextView) {
+                                    val day = dayView.text.toString().toIntOrNull()
+                                    if (day != null) {
+                                        calendar.timeInMillis = this.date
+                                        calendar.set(Calendar.DAY_OF_MONTH, day)
+                                        val date = LocalDate.of(
+                                            calendar.get(Calendar.YEAR),
+                                            calendar.get(Calendar.MONTH) + 1,
+                                            day
+                                        )
+
+                                        when {
+                                            date == LocalDate.now() ->
+                                                dayView.setBackgroundColor(Color(0xFF60F5D8).toArgb())
+
+                                            date in fechasConEntrada ->
+                                                dayView.setBackgroundColor(Color(0xFFF5A15F).toArgb())
+
+                                            else ->
+                                                dayView.setBackgroundColor(Color(0x00F55F5F).toArgb())
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                post { decorate() }
+
+                setOnScrollChangeListener { _, _, _, _, _ ->
+                    post { decorate() }
+                }
+
+                setOnDateChangeListener { _, year, month, day ->
+                    onDaySelected(LocalDate.of(year, month + 1, day))
+                }
+            }
+        }
+    )
 //=============Contenido de la ventana Ejercicios=================
 @Composable
 fun EjercicioViewContent(

@@ -4,8 +4,10 @@ import com.example.moodbyte.data.local.AppDatabase
 import com.example.moodbyte.data.repository.UsuarioRepository
 import com.example.moodbyte.data.remote.RetrofitClient
 import com.example.moodbyte.data.repository.ArticuloRepository
+import com.example.moodbyte.data.repository.EntradaRepository
 import com.example.moodbyte.data.repository.RegistroRepository
 import com.example.moodbyte.ui.viewmodel.ArticulosViewModel
+import com.example.moodbyte.ui.viewmodel.DiarioViewModel
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
 import com.example.moodbyte.ui.viewmodel.PerfilViewModel
@@ -26,11 +28,13 @@ val appModule = module {
     single { get<AppDatabase>().usuarioDao() }
     single { get<AppDatabase>().registroDao() }
     single {get<AppDatabase>().articuloDao()}
+    single {get<AppDatabase>().entradaDao()}
 
     // Repository
     single { UsuarioRepository(get(), get()) }
     single { RegistroRepository(get(), get()) }
     single { ArticuloRepository(get(),get()) }
+    single { EntradaRepository(get(),get()) }
 
     // ViewModel
     single { UsuarioSesionViewModel() }
@@ -39,4 +43,5 @@ val appModule = module {
     viewModel { HomeViewModel(get(), get()) }
     viewModel{ ArticulosViewModel(get()) }
     viewModel{ PerfilViewModel(get(),get(),get()) }
+    viewModel{ DiarioViewModel(get(),get()) }
 }

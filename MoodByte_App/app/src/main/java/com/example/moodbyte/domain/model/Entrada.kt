@@ -1,5 +1,6 @@
 package com.example.moodbyte.domain.model
 
+import com.example.moodbyte.data.remote.dtos.EntradaDto
 import java.time.LocalDate
 
 data class Entrada(
@@ -7,3 +8,9 @@ data class Entrada(
     val texto:String,
     val fechaEntrada: LocalDate
     )
+
+fun Entrada.toDto() = EntradaDto(
+    id = id,
+    texto = texto,
+    fechaEntrada = fechaEntrada.toString()
+)

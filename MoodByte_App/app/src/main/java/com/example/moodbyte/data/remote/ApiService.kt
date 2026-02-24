@@ -1,6 +1,7 @@
 package com.example.moodbyte.data.remote
 
 import com.example.moodbyte.data.remote.dtos.ArticuloDto
+import com.example.moodbyte.data.remote.dtos.DiarioDto
 import com.example.moodbyte.data.remote.dtos.EjercicioDto
 import com.example.moodbyte.data.remote.dtos.EntradaDto
 import com.example.moodbyte.data.remote.dtos.EstadoDto
@@ -46,15 +47,6 @@ interface ApiService {
     suspend fun getEjercicioById(@Path("id") id:Long) : EjercicioDto
 
     /**
-     * Metodos de entrada
-     **/
-    @GET("entrada")
-    suspend fun getEntradas(): List<EntradaDto>
-
-    @GET("entrada/{id}")
-    suspend fun getEntradaById(@Path("id")id:Long): EntradaDto
-
-    /**
      * Metodos de estado
      **/
     @GET("estado")
@@ -83,4 +75,13 @@ interface ApiService {
 
     @POST("registro")
     suspend fun insertarRegistro(@Body registro: RegistroDto)
+
+    /**
+     * Metodos de entradas diario
+     **/
+    @GET("entrada/usuario/{idUsuario}")
+    suspend fun getEntradas(@Path("idUsuario") idUsuario: Long): List<EntradaDto>
+
+    @POST("entrada")
+    suspend fun insertarEntrada(@Body entrada: EntradaDto)
 }

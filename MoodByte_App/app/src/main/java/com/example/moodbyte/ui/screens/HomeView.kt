@@ -34,7 +34,6 @@ import androidx.navigation.NavController
 import com.example.moodbyte.components.BottomNavItem
 import com.example.moodbyte.components.ContentHomeView
 import com.example.moodbyte.components.DialogoInformativo
-import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import kotlinx.coroutines.launch
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.LoginViewModel

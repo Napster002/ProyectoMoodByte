@@ -88,7 +88,7 @@ fun IAView(navController:NavController){
     val TitleFont= FontFamily(Font(R.font.hollyberrypop))
     var selectedIndex by remember { mutableStateOf(0) }
     val items = listOf(
-        BottomNavItem("Inicio", R.drawable.home),
+        BottomNavItem("Home", R.drawable.home),
         BottomNavItem("Diario", R.drawable.agenda),
         BottomNavItem("Articulos", R.drawable.articulos),
         BottomNavItem("Ejercicios", R.drawable.ejercicios),
@@ -125,12 +125,11 @@ fun IAView(navController:NavController){
                     NavigationBarItem(
                         icon = {
                             Icon(
-                                painter= painterResource(id=item.icon),
-                                contentDescription = item.label
-                            )
+                                painter = painterResource(id = item.icon),
+                                contentDescription = item.label)
                         },
                         label = { Text("") },
-                        selected= selectedIndex==index,
+                        selected = selectedIndex == index,
                         onClick = { navController.navigate(item.label)}
                     )
                 }

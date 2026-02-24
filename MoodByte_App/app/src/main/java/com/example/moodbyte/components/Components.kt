@@ -1,10 +1,12 @@
 package com.example.moodbyte.components
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.provider.MediaStore
+import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import android.widget.TextView
@@ -88,7 +90,6 @@ import com.example.moodbyte.ui.viewmodel.EjercicioViewModel
 import com.example.moodbyte.ui.viewmodel.EmocionViewModel
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.PerfilViewModel
-import com.example.moodbyte.ui.viewmodel.UsuarioSesionViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -763,7 +764,6 @@ fun ContentDiarioView(
     }
 
 }
-
 @Composable
 fun DiarioCalendarView(
     entradas: List<Entrada>,
@@ -772,55 +772,16 @@ fun DiarioCalendarView(
     AndroidView(
         factory = { context ->
             CalendarView(context).apply {
+                val fechasConEntrada = entradas.map { it.fechaEntrada }.toSet()
 
-                val fechasConEntrada = entradas.map { it.fechaEntrada }
+                setOnDateChangeListener { _, year, month, day ->
+                    val fecha = LocalDate.of(year, month + 1, day)
 
-                fun decorate() {
-                    val calendar = Calendar.getInstance()
-                    val root = getChildAt(0) as? ViewGroup ?: return
-
-                    for (i in 0 until root.childCount) {
-                        val monthView = root.getChildAt(i)
-                        if (monthView is ViewGroup) {
-                            for (j in 0 until monthView.childCount) {
-                                val dayView = monthView.getChildAt(j)
-                                if (dayView is TextView) {
-                                    val day = dayView.text.toString().toIntOrNull()
-                                    if (day != null) {
-                                        calendar.timeInMillis = this.date
-                                        calendar.set(Calendar.DAY_OF_MONTH, day)
-                                        val date = LocalDate.of(
-                                            calendar.get(Calendar.YEAR),
-                                            calendar.get(Calendar.MONTH) + 1,
-                                            day
-                                        )
-
-                                        when {
-                                            date == LocalDate.now() ->
-                                                dayView.setBackgroundColor(Color(0xFF60F5D8).toArgb())
-
-                                            date in fechasConEntrada ->
-                                                dayView.setBackgroundColor(Color(0xFFF5A15F).toArgb())
-
-                                            else ->
-                                                dayView.setBackgroundColor(Color(0x00F55F5F).toArgb())
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    if (fecha in fechasConEntrada) {
+                        onDaySelected(fecha)
                     }
                 }
 
-                post { decorate() }
-
-                setOnScrollChangeListener { _, _, _, _, _ ->
-                    post { decorate() }
-                }
-
-                setOnDateChangeListener { _, year, month, day ->
-                    onDaySelected(LocalDate.of(year, month + 1, day))
-                }
             }
         }
     )

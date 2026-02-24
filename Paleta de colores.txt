@@ -1,0 +1,4 @@
+Azulito = #60f5d8
+Rojito = #f56d5f
+Rosita = #fc908b
+Naranjito = #f5a15f

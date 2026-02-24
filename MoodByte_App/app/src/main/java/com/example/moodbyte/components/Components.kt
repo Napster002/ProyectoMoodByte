@@ -53,6 +53,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
@@ -64,7 +65,9 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -80,6 +83,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.moodbyte.components.chatbotcomponents.ChatBot
@@ -609,9 +613,20 @@ fun IAViewContent(paddingValues: PaddingValues){
     ) {
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            onClick = { launcher.launch("image/*") }
+            onClick = { launcher.launch("image/*") },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFFFC908B), // Rosita
+                contentColor = Color.White           // Letras blancas
+            ),
+            shape = RoundedCornerShape(12.dp),
+            modifier = Modifier
+                .height(50.dp)
+                .fillMaxWidth()
         ) {
-            Text("Seleccionar imagen")
+            Text("Seleccionar imagen",
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -633,7 +648,8 @@ fun IAViewContent(paddingValues: PaddingValues){
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        Text("Emoción: $emocionActual")
+        Text("Emoción: $emocionActual",
+            color = Color(0xFFFC908B))
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -692,6 +708,14 @@ fun IAViewContent(paddingValues: PaddingValues){
                 modifier = Modifier
                     .weight(0.8f), // ocupa 80% del espacio disponible
                 enabled = caraDetectada,
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color(0xFFFC908B),
+                    unfocusedBorderColor = Color(0xFFFC908B),
+                    focusedLabelColor = Color(0xFFFC908B),
+                    unfocusedLabelColor = Color(0xFFFC908B),
+                    cursorColor = Color(0xFFFC908B)
+                ),
+                shape = RoundedCornerShape(12.dp),
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Send // Cambia el botón Enter a "Send"
                 ),
@@ -730,7 +754,13 @@ fun IAViewContent(paddingValues: PaddingValues){
                         pregunta = ""
                     }
                 },
-                enabled = caraDetectada
+                enabled = caraDetectada,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFFFC908B),
+                    contentColor = Color.White
+                ),
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier.height(50.dp)
             ) {
                 Text("->")
             }
@@ -831,18 +861,28 @@ fun EjercicioViewContent(
                         ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
                     },
                     modifier = Modifier.menuAnchor().fillMaxWidth()
+                , colors= OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color(0xFFFC908B),
+                    unfocusedBorderColor = Color(0xFFFC908B),
+                    focusedLabelColor = Color(0xFFFC908B),
+                    unfocusedLabelColor = Color(0xFFFC908B),
+                    cursorColor = Color(0xFFFC908B)
+                )
                 )
                 ExposedDropdownMenu(
                     expanded = expanded,
                     onDismissRequest = { expanded = false }) {
                     estados.forEach { estados ->
                         DropdownMenuItem(
-                            text = { Text(estados.nombre) },
+                            text = { Text(estados.nombre,color =Color(0xFFFC908B) ) },
                             onClick = {
                                 selectedOption = estados.nombre
                                 expanded = false
                                 ejercicioViewModel.cargarEjerciciosPorEstado(estados.nombre)
-                            }
+                            },
+                            colors= MenuDefaults.itemColors(
+                                textColor=Color(0xFFFC908B)
+                            )
                         )
                     }
                 }
@@ -904,6 +944,137 @@ fun EjercicioCard(
                 color = Color.Blue,
                 modifier = Modifier.padding(12.dp)
             )
+        }
+    }
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CrearEjercicioDialog(
+    onDismiss: () -> Unit,
+    onGuardar: (titulo: String, descripcion: String, recursoUrl: String, duracion: String, estadoId: Long) -> Unit,
+    estadoViewModel: EstadoViewModel
+) {
+    val estados by estadoViewModel.estados.collectAsState()
+    var titulo by remember { mutableStateOf("") }
+    var descripcion by remember { mutableStateOf("") }
+    var recursoUrl by remember { mutableStateOf("") }
+    var duracion by remember { mutableStateOf("") }
+    var estadoSeleccionado by remember { mutableStateOf<Estado?>(null) }
+    var expanded by remember { mutableStateOf(false) }
+
+    Dialog(onDismissRequest = onDismiss) {
+        Card(
+            shape = RoundedCornerShape(16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            elevation = CardDefaults.cardElevation(8.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .background(Color.White)
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Text(
+                    "Crear Ejercicio",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color(0xFFFC908B)
+                )
+
+                OutlinedTextField(
+                    value = titulo,
+                    onValueChange = { titulo = it },
+                    label = { Text("Título") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                OutlinedTextField(
+                    value = descripcion,
+                    onValueChange = { descripcion = it },
+                    label = { Text("Descripción") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                OutlinedTextField(
+                    value = recursoUrl,
+                    onValueChange = { recursoUrl = it },
+                    label = { Text("URL Recurso") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                OutlinedTextField(
+                    value = duracion,
+                    onValueChange = { duracion = it },
+                    label = { Text("Duración (HH:MM:SS)") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                // Dropdown para seleccionar estado
+                ExposedDropdownMenuBox(
+                    expanded = expanded,
+                    onExpandedChange = { expanded = !expanded },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    OutlinedTextField(
+                        value = estadoSeleccionado?.nombre ?: "Selecciona estado",
+                        onValueChange = {},
+                        readOnly = true,
+                        label = { Text("Estado") },
+                        trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded) },
+                        modifier = Modifier.menuAnchor().fillMaxWidth()
+                    )
+                    ExposedDropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false }
+                    ) {
+                        estados.forEach { estado ->
+                            DropdownMenuItem(
+                                text = { Text(estado.nombre, color = Color(0xFFFC908B)) },
+                                onClick = {
+                                    estadoSeleccionado = estado
+                                    expanded = false
+                                },
+                                colors = MenuDefaults.itemColors(
+                                    textColor = Color(0xFFFC908B)
+                                )
+                            )
+                        }
+                    }
+                }
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    TextButton(onClick = onDismiss) {
+                        Text("Cancelar", color = Color.Gray)
+                    }
+
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    Button(
+                        onClick = {
+                            if (titulo.isNotBlank() && descripcion.isNotBlank() && estadoSeleccionado != null) {
+                                onGuardar(
+                                    titulo,
+                                    descripcion,
+                                    recursoUrl,
+                                    duracion,
+                                    estadoSeleccionado!!.id
+                                )
+                            }
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFFFC908B),
+                            contentColor = Color.White
+                        )
+                    ) {
+                        Text("Guardar")
+                    }
+                }
+            }
         }
     }
 }

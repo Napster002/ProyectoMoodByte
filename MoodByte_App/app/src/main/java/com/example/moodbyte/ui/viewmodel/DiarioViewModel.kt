@@ -46,7 +46,8 @@ class DiarioViewModel(
             val entrada = Entrada(
                 id = existing?.id ?: 0L,
                 texto = text,
-                fechaEntrada = date
+                fechaEntrada = date,
+                1
             )
 
             repo.saveEntrada(entrada)

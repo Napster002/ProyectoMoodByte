@@ -2,6 +2,7 @@ package com.example.moodbyte.data.repository
 
 import androidx.lifecycle.viewModelScope
 import com.example.moodbyte.data.local.daos.EjercicioDao
+import com.example.moodbyte.data.local.entities.EjercicioEntity
 import com.example.moodbyte.data.local.entities.toDomain
 import com.example.moodbyte.data.remote.ApiService
 import com.example.moodbyte.data.remote.dtos.toEntity
@@ -29,5 +30,8 @@ class EjercicioRepository(
     }
     suspend fun cargarEjercicios(): List<Ejercicio>{
         return dao.getAll().map { it.toDomain() }
+    }
+    suspend fun insertarEjercicio(ejercicio: EjercicioEntity) {
+        dao.insert(ejercicio)
     }
 }

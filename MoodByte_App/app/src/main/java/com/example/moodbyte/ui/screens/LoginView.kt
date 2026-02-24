@@ -16,21 +16,5 @@ import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginView(navController: NavController, loginViewModel: LoginViewModel){
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                colors = topAppBarColors(
-                    containerColor = Color(0xFFF56D5F),
-                    titleContentColor = Color(0xFF60F5D8),
-                ),
-                title = {
-                    Text(
-                        text = "MoodByte",
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-            )
-        },
-
-        ) { innerPadding -> ContentLoginView(innerPadding, navController, loginViewModel) }
+   ContentLoginView(navController, loginViewModel)
 }

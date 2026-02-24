@@ -1,10 +1,13 @@
 package com.example.moodbyte.data.repository
 
 import com.example.moodbyte.data.local.daos.UsuarioDao
+import com.example.moodbyte.data.local.entities.UsuarioEntity
 import com.example.moodbyte.data.local.entities.toDomain
 import com.example.moodbyte.data.remote.ApiService
 import com.example.moodbyte.data.remote.dtos.toEntity
 import com.example.moodbyte.domain.model.Usuario
+import com.example.moodbyte.domain.model.toDto
+import com.example.moodbyte.domain.model.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -19,5 +22,9 @@ class UsuarioRepository(
     suspend fun refreshUsuarios() {
         val usuariosApi = api.getUsuarios()
         dao.insertAll(usuariosApi.map { it.toEntity() })
+    }
+    suspend fun insertarusuario(usuario: Usuario){
+        dao.insert(usuario.toEntity())
+        api.insertUsuario(usuario.toDto())
     }
 }

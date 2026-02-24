@@ -33,7 +33,7 @@ import com.example.moodbyte.data.local.entities.FraseEntity
         EstadoEntity::class,
         FraseEntity::class,
         RegistroEntity::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 @TypeConverters(TypeConverter::class)
@@ -52,10 +52,10 @@ abstract class AppDatabase : RoomDatabase() {
         fun getDatabase(context: Context): AppDatabase =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: Room.databaseBuilder(
-                    context,
-                    AppDatabase::class.java,
-                    "moodbyte_db"
-                ).build().also { INSTANCE = it }
+                                context,
+                                AppDatabase::class.java,
+                                "moodbyte_db"
+                            ).build().also { INSTANCE = it }
             }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.moodbyte.navigation
 
-import androidx.activity.result.contract.ActivityResultContracts
 import com.example.moodbyte.ui.screens.UsuarioView
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -17,12 +16,11 @@ import com.example.moodbyte.ui.viewmodel.ArticulosViewModel
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
 import com.example.moodbyte.ui.viewmodel.PerfilViewModel
-import com.example.moodbyte.ui.screens.IAView
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun NavManager() {
+fun NavManager(onToggleTheme: () -> Unit) {
 
     val navController = rememberNavController()
 
@@ -38,7 +36,7 @@ fun NavManager() {
             val homeViewModel: HomeViewModel = koinViewModel()
             HomeView(navController,homeViewModel)
         }
-        // Borrar
+        // Lista de usuarios
         composable("usuarios") {
             val usuarioViewModel: UsuarioViewModel = koinViewModel()
             UsuarioView(navController,usuarioViewModel)
@@ -49,7 +47,7 @@ fun NavManager() {
         }
         composable("Perfil"){
             val perfilViewModel: PerfilViewModel=koinViewModel()
-            PerfilView(navController, perfilViewModel)
+            PerfilView(navController, perfilViewModel,onToggleTheme)
         }
 
         // Detalle de usuario
@@ -59,9 +57,6 @@ fun NavManager() {
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getLong("id") ?: 0L
             //UsuarioDetailScreen(navController, id, usuarioViewModel)
-        }
-        composable("Camara"){
-            IAView(navController)
         }
     }
 }

@@ -12,7 +12,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,11 +25,10 @@ import com.example.moodbyte.R
 import com.example.moodbyte.components.BottomNavItem
 import com.example.moodbyte.components.PerfilViewContent
 import com.example.moodbyte.ui.viewmodel.PerfilViewModel
-import com.example.moodbyte.ui.viewmodel.UsuarioSesionViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PerfilView(navController: NavController,perfilViewModel: PerfilViewModel){
+fun PerfilView(navController: NavController,perfilViewModel: PerfilViewModel,onToggleTheme:()->Unit){
     val TitleFont= FontFamily(Font(R.font.hollyberrypop))
     var selectedIndex by remember { mutableStateOf(0) }
     val items = listOf(
@@ -78,6 +76,6 @@ fun PerfilView(navController: NavController,perfilViewModel: PerfilViewModel){
             }
         }
     ) { innerPadding ->
-        PerfilViewContent(innerPadding,perfilViewModel,navController)
+        PerfilViewContent(innerPadding,perfilViewModel,navController,onToggleTheme)
     }
 }

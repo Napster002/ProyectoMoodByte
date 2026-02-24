@@ -10,11 +10,13 @@ data class EntradaEntity(
     @PrimaryKey
     val id: Long,
     val texto: String,
-    val fechaEntrada: LocalDate
+    val fechaEntrada: LocalDate,
+    val idDiario: Long
 )
 
 fun EntradaEntity.toDomain() = Entrada(
     id = id,
     texto = texto,
-    fechaEntrada = fechaEntrada
+    fechaEntrada = fechaEntrada,
+    idDiario = idDiario
 )

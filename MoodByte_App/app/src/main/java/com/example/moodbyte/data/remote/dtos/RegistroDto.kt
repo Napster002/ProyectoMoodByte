@@ -6,10 +6,10 @@ import java.time.LocalDate
 data class RegistroDto(
     val puntuacion: Int,
     val fechaRegistro: String,
-    val id_usuario: Long?
+    val idUsuario: Long?
 )
 fun RegistroDto.toEntity() = RegistroEntity(
     puntuacion = puntuacion,
     fechaRegistro = fechaRegistro,
-    id_usuario = id_usuario
+    idUsuario = idUsuario
 )

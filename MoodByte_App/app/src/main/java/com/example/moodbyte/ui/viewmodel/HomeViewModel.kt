@@ -1,5 +1,7 @@
 package com.example.moodbyte.ui.viewmodel
 
+import android.util.Log
+import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moodbyte.data.remote.ApiService
@@ -15,10 +17,11 @@ class HomeViewModel(
     val usuario = session.usuario
     fun setMood(mood: String) {
         val punt = MoodAPuntuacion(mood)
+        Log.i("Usuario_Registro",usuario.value!!.id.toString())
         val registro: Registro = Registro(
             fechaRegistro = LocalDate.now(),
-            id_usuario = usuario.value?.id,
-            puntuacion = punt
+            puntuacion = punt,
+            idUsuario = usuario.value!!.id!!,
         )
         viewModelScope.launch {
             repo.insertarRegistro(registro)

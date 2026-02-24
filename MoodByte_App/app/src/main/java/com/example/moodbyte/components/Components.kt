@@ -9,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -44,7 +46,11 @@ import androidx.compose.material.icons.filled.ModeNight
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -65,6 +71,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
@@ -85,9 +92,11 @@ import java.time.Period
 fun ContentHomeView(
     innerPadding: PaddingValues,
     navController: NavController,
-    homeViewModel: HomeViewModel) {
+    homeViewModel: HomeViewModel
+) {
     var showMoodDialog by remember { mutableStateOf(true) }
-    LazyColumn (
+    var showTareasDiarias by remember { mutableStateOf(false) }
+    LazyColumn(
         modifier = Modifier
             .padding(innerPadding)
             .fillMaxSize()
@@ -104,50 +113,53 @@ fun ContentHomeView(
                 color = Color.Black
             )
         }
-        item {
-            if (showMoodDialog) {
-                AlertDialog(
-                    onDismissRequest = { showMoodDialog = false },
-                    title = { Text("¿Cómo te sientes hoy?") },
-                    text = {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text("Elige tu estado de ánimo")
-
-                            Spacer(Modifier.height(16.dp))
-
-                            Row(
-                                horizontalArrangement = Arrangement.SpaceEvenly,
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                MoodButton("😄", "Feliz") { mood ->
-                                    homeViewModel.setMood(mood)
-                                    showMoodDialog = false
-                                }
-                                MoodButton("🙂", "Bien") { mood ->
-                                    homeViewModel.setMood(mood)
-                                    showMoodDialog = false
-                                }
-                                MoodButton("😐", "Regular") { mood ->
-                                    homeViewModel.setMood(mood)
-                                    showMoodDialog = false
-                                }
-                                MoodButton("\uD83D\uDE30","Estresado"){ mood->
-                                    homeViewModel.setMood(mood)
-                                    showMoodDialog=false
-                                }
-                                MoodButton("😔", "Triste") { mood ->
-                                    homeViewModel.setMood(mood)
-                                    showMoodDialog = false
-                                }
-                            }
-                        }
-                    },
-                    confirmButton = {}
-                )
-            }
+        item{
+            BotonHomeView("Acciones diarias","⭐", onClick = {showTareasDiarias=true})
         }
     }
+
+    // Diálogo de Mood diario
+    if (showMoodDialog) {
+        AlertDialog(
+            onDismissRequest = { showMoodDialog = false },
+            title = { Text("¿Cómo te sientes hoy?") },
+            text = {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text("Elige tu estado de ánimo")
+                    Spacer(Modifier.height(16.dp))
+
+                    FlowRow(
+                        maxLines = 2,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        MoodButton("😄", "Feliz") { mood ->
+                            homeViewModel.setMood(mood)
+                            showMoodDialog = false
+                        }
+                        MoodButton("🙂", "Bien") { mood ->
+                            homeViewModel.setMood(mood)
+                            showMoodDialog = false
+                        }
+                        MoodButton("😐", "Regular") { mood ->
+                            homeViewModel.setMood(mood)
+                            showMoodDialog = false
+                        }
+                        MoodButton("\uD83D\uDE30", "Estresado") { mood ->
+                            homeViewModel.setMood(mood)
+                            showMoodDialog = false
+                        }
+                        MoodButton("😔", "Triste") { mood ->
+                            homeViewModel.setMood(mood)
+                            showMoodDialog = false
+                        }
+                    }
+                }
+            },
+            confirmButton = {}
+        )
+    }
 }
+
 
 //================ Dialog de informacion =================
 @Composable
@@ -293,7 +305,7 @@ fun ContentLoginView(
     if (crearUsuario) {
         CrearUsuarioDialog(
             onDismiss ={ crearUsuario=false},
-            onSave ={usuario->loginViewModel.crearUsuario(usuario)
+            onSave ={ usuario->loginViewModel.crearUsuario(usuario)
             loginViewModel.getLoginUsuario(usuario.nombreUsuario,usuario.password)
             }
     )
@@ -620,8 +632,9 @@ fun CrearUsuarioDialog(
                         fechaNacimientoConvert =LocalDate.parse(fechaNacimiento)
                         edad= Period.between(fechaNacimientoConvert, LocalDate.now()).years
                         val usu=Usuario(
-                            null,nombreCompleto,nomUsu,password,
-                            edad,genero,tipoUsuario,fechaRegistro,fechaNacimientoConvert,nivel,expAcumulada
+                            id=null, nombreCompleto = nombreCompleto, nombreUsuario = nomUsu, password = password,
+                            edad=edad,genero=genero, tipoUsuario = tipoUsuario,fechaRegistro=fechaRegistro, fechaNacimiento = fechaNacimientoConvert,
+                            nivel=nivel, expAcumulada=expAcumulada
                         )
                         onSave(usu)
                         onDismiss()
@@ -738,6 +751,49 @@ fun CrearUsuarioDialog(
         shape = RoundedCornerShape(20.dp)
     )
 }
+
+@Composable
+fun BotonHomeView(
+    text:String,
+    icono:String,
+    onClick: () -> Unit
+){
+    ElevatedButton(onClick=onClick,
+        modifier=Modifier.fillMaxWidth()
+            .padding(horizontal = 24.dp)
+            .height(80.dp),
+        shape= RoundedCornerShape(20.dp),
+        colors= ButtonDefaults.buttonColors(
+            containerColor=Color(0xFF60F5D8),
+            contentColor=Color(0xFFF56D5F)
+        )
+        ){
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ){
+            Text(icono, fontSize = 32.sp)
+            Spacer(Modifier.width(12.dp))
+            Text(text, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+        }
+    }
+}
+
+@Composable
+fun AccionesDiariasDialog(
+    //onDismiss:onDismiss,
+    onConfirm:(Double)->Unit
+){
+    val accionesDiarias=listOf(
+        "Darme una ducha" to 10.0,
+        "Pasear por la naturaleza" to 30.0,
+        "Meditar al menos 10 minutos" to 20.0,
+        ""
+
+    )
+}
+
+
 
 
 

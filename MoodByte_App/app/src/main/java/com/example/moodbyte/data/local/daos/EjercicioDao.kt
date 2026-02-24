@@ -21,4 +21,12 @@ interface EjercicioDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(ejercicios:List<EjercicioEntity>)
+
+    @Query("""
+    SELECT j.* 
+    FROM ejercicios j
+    INNER JOIN estados e ON j.estado_id = e.id
+    WHERE e.nombre = :nombreEstado
+""")
+    suspend fun getByNombreEstado(nombreEstado: String): List<EjercicioEntity>
 }

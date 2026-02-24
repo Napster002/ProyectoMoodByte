@@ -13,6 +13,7 @@ import com.example.moodbyte.ui.screens.ArticulosView
 import com.example.moodbyte.ui.screens.DiarioView
 import com.example.moodbyte.ui.screens.EntryReadOnlyView
 import com.example.moodbyte.ui.screens.EntryView
+import com.example.moodbyte.ui.screens.EjercicioView
 import com.example.moodbyte.ui.screens.HomeView
 import com.example.moodbyte.ui.screens.LoginView
 import com.example.moodbyte.ui.screens.PerfilView
@@ -22,6 +23,8 @@ import com.example.moodbyte.ui.viewmodel.LoginViewModel
 import com.example.moodbyte.ui.viewmodel.PerfilViewModel
 import com.example.moodbyte.ui.screens.IAView
 import com.example.moodbyte.ui.viewmodel.DiarioViewModel
+import com.example.moodbyte.ui.viewmodel.EjercicioViewModel
+import com.example.moodbyte.ui.viewmodel.EmocionViewModel
 import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import org.koin.androidx.compose.koinViewModel
 import java.time.LocalDate
@@ -82,6 +85,10 @@ fun NavManager() {
             val date = LocalDate.parse(backStackEntry.arguments?.getString("date"))
             val diarioViewModel: DiarioViewModel=koinViewModel()
             EntryView(date, diarioViewModel, navController)
+        composable("Ejercicio"){
+            val ejercicioViewModel: EjercicioViewModel =koinViewModel()
+            val emocionViewModel: EmocionViewModel =koinViewModel()
+            EjercicioView(navController, ejercicioViewModel,emocionViewModel)
         }
     }
 }

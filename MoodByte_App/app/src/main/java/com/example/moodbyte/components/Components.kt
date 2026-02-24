@@ -1,5 +1,6 @@
 package com.example.moodbyte.components
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -76,11 +77,15 @@ import com.example.moodbyte.components.chatbotcomponents.DetectorEmociones
 import com.example.moodbyte.components.chatbotcomponents.Mensaje
 import com.example.moodbyte.components.chatbotcomponents.obtenerSaludo
 import com.example.moodbyte.domain.model.Articulo
+
 import com.example.moodbyte.domain.model.Entrada
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
 import com.example.moodbyte.domain.model.Usuario
 import com.example.moodbyte.ui.viewmodel.ArticulosViewModel
 import com.example.moodbyte.ui.viewmodel.DiarioViewModel
+import com.example.moodbyte.domain.model.Ejercicio
+import com.example.moodbyte.ui.viewmodel.EjercicioViewModel
+import com.example.moodbyte.ui.viewmodel.EmocionViewModel
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.PerfilViewModel
 import com.example.moodbyte.ui.viewmodel.UsuarioSesionViewModel
@@ -584,6 +589,7 @@ fun IAViewContent(paddingValues: PaddingValues){
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues)
+            .padding(9.dp)
             .imePadding()
             .navigationBarsPadding(),
         verticalArrangement = Arrangement.Center,
@@ -818,4 +824,55 @@ fun DiarioCalendarView(
             }
         }
     )
+//=============Contenido de la ventana Ejercicios=================
+@Composable
+fun EjercicioViewContent(
+    paddingValues: PaddingValues,
+    ejercicioViewModel: EjercicioViewModel,
+    emocionViewModel: EmocionViewModel
+) {
+    val ejercicios = ejercicioViewModel.ejercicios.collectAsState()
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues)
+    ) {
+        items(ejercicios.value) { ejercicio ->
+            EjercicioCard(ejercicio)
+        }
+    }
+}
+//=========Composable para mostrar los ejercicios========
+@Composable
+fun EjercicioCard(
+    ejercicio: Ejercicio
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(12.dp),
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(6.dp)
+    ) {
+        Column {
+            AsyncImage(
+                model = ejercicio.recursoUrl,
+                contentDescription = ejercicio.titulo,
+                modifier = Modifier
+                    .fillMaxWidth().height(180.dp),
+                contentScale = ContentScale.Crop
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            Text(text = ejercicio.titulo,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(horizontal = 12.dp)
+            )
+            Text(text = ejercicio.descripcion,
+                fontSize = 14.sp,
+                color = Color.Gray,
+                modifier = Modifier.padding(12.dp)
+            )
+        }
+    }
 }

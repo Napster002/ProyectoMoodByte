@@ -38,25 +38,25 @@ fun NavManager() {
         navController = navController,
         startDestination = "login"
     ) {
-        composable ("login"){
+        composable("login") {
             val loginViewModel: LoginViewModel = koinViewModel()
             LoginView(navController, loginViewModel)
         }
-        composable ("Inicio"){
+        composable("Inicio") {
             val homeViewModel: HomeViewModel = koinViewModel()
-            HomeView(navController,homeViewModel)
+            HomeView(navController, homeViewModel)
         }
         // Borrar
         composable("usuarios") {
             val usuarioViewModel: UsuarioViewModel = koinViewModel()
-            UsuarioView(navController,usuarioViewModel)
+            UsuarioView(navController, usuarioViewModel)
         }
-        composable("Articulos"){
-            val articulosViewModel: ArticulosViewModel=koinViewModel()
-            ArticulosView(navController,articulosViewModel)
+        composable("Articulos") {
+            val articulosViewModel: ArticulosViewModel = koinViewModel()
+            ArticulosView(navController, articulosViewModel)
         }
-        composable("Perfil"){
-            val perfilViewModel: PerfilViewModel=koinViewModel()
+        composable("Perfil") {
+            val perfilViewModel: PerfilViewModel = koinViewModel()
             PerfilView(navController, perfilViewModel)
         }
 
@@ -68,27 +68,28 @@ fun NavManager() {
             val id = backStackEntry.arguments?.getLong("id") ?: 0L
             //UsuarioDetailScreen(navController, id, usuarioViewModel)
         }
-        composable("Camara"){
+        composable("Camara") {
             IAView(navController)
         }
 
-        composable("Diario"){
-            val diarioViewModel: DiarioViewModel=koinViewModel()
+        composable("Diario") {
+            val diarioViewModel: DiarioViewModel = koinViewModel()
             DiarioView(navController, diarioViewModel)
         }
         composable("diarioDetalle/{date}") { backStackEntry ->
             val date = LocalDate.parse(backStackEntry.arguments?.getString("date"))
-            val diarioViewModel: DiarioViewModel=koinViewModel()
+            val diarioViewModel: DiarioViewModel = koinViewModel()
             EntryReadOnlyView(date, diarioViewModel, navController)
         }
         composable("diarioEditar/{date}") { backStackEntry ->
             val date = LocalDate.parse(backStackEntry.arguments?.getString("date"))
-            val diarioViewModel: DiarioViewModel=koinViewModel()
+            val diarioViewModel: DiarioViewModel = koinViewModel()
             EntryView(date, diarioViewModel, navController)
-        composable("Ejercicio"){
-            val ejercicioViewModel: EjercicioViewModel =koinViewModel()
-            val emocionViewModel: EmocionViewModel =koinViewModel()
-            EjercicioView(navController, ejercicioViewModel,emocionViewModel)
+        }
+        composable("Ejercicio") {
+            val ejercicioViewModel: EjercicioViewModel = koinViewModel()
+            val emocionViewModel: EmocionViewModel = koinViewModel()
+            EjercicioView(navController, ejercicioViewModel, emocionViewModel)
         }
     }
 }

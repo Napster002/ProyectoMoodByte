@@ -824,6 +824,7 @@ fun DiarioCalendarView(
             }
         }
     )
+}
 //=============Contenido de la ventana Ejercicios=================
 @Composable
 fun EjercicioViewContent(

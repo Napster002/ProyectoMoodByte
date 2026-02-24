@@ -1,9 +1,12 @@
 package com.example.moodbyte.ui.screens
 
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
@@ -17,22 +20,24 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.moodbyte.R
 import com.example.moodbyte.components.BottomNavItem
 import com.example.moodbyte.components.EjercicioViewContent
 import com.example.moodbyte.ui.viewmodel.EjercicioViewModel
-import com.example.moodbyte.ui.viewmodel.EmocionViewModel
+import com.example.moodbyte.ui.viewmodel.EstadoViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EjercicioView(navController:NavController,ejercicioViewModel: EjercicioViewModel,emocionViewModel: EmocionViewModel){
+fun EjercicioView(navController:NavController,ejercicioViewModel: EjercicioViewModel,emocionViewModel: EstadoViewModel){
     val TitleFont= FontFamily(Font(R.font.hollyberrypop))
     var selectedIndex by remember { mutableStateOf(0) }
     val items = listOf(
@@ -67,6 +72,17 @@ fun EjercicioView(navController:NavController,ejercicioViewModel: EjercicioViewM
                 }
             )
         },
+        floatingActionButton ={  FloatingActionButton(onClick = {},
+            containerColor = Color(0xFFF88383),
+            shape= RoundedCornerShape(16.dp),
+            modifier=Modifier.size(48.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.Add,
+                contentDescription = "Agregar",
+                tint = Color.Black
+            )
+        }},
         bottomBar = {
             NavigationBar{
                 items.forEachIndexed { index, item ->

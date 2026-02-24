@@ -9,8 +9,9 @@ import com.example.moodbyte.data.repository.RegistroRepository
 import com.example.moodbyte.ui.viewmodel.ArticulosViewModel
 import com.example.moodbyte.ui.viewmodel.DiarioViewModel
 import com.example.moodbyte.data.repository.EjercicioRepository
+import com.example.moodbyte.data.repository.EstadoRepository
 import com.example.moodbyte.ui.viewmodel.EjercicioViewModel
-import com.example.moodbyte.ui.viewmodel.EmocionViewModel
+import com.example.moodbyte.ui.viewmodel.EstadoViewModel
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
 import com.example.moodbyte.ui.viewmodel.PerfilViewModel
@@ -32,6 +33,7 @@ val appModule = module {
     single {get<AppDatabase>().articuloDao()}
     single {get<AppDatabase>().entradaDao()}
     single {get<AppDatabase>().ejercicioDao()}
+    single {get<AppDatabase>().estadoDao()}
 
     // Repository
     single { UsuarioRepository(get(), get()) }
@@ -39,6 +41,7 @@ val appModule = module {
     single { ArticuloRepository(get(),get()) }
     single { EntradaRepository(get(),get()) }
     single { EjercicioRepository(get(),get()) }
+    single { EstadoRepository(get(),get()) }
 
     // ViewModel
     single { UsuarioSesionViewModel() }
@@ -48,5 +51,5 @@ val appModule = module {
     viewModel{ PerfilViewModel(get(),get(),get()) }
     viewModel{ DiarioViewModel(get(),get()) }
     viewModel{ EjercicioViewModel(get()) }
-    viewModel{ EmocionViewModel() }
+    viewModel{ EstadoViewModel(get()) }
 }

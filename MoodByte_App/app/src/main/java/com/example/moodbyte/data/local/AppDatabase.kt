@@ -33,7 +33,7 @@ import com.example.moodbyte.data.local.entities.FraseEntity
         EstadoEntity::class,
         FraseEntity::class,
         RegistroEntity::class],
-    version = 3,
+    version =4 ,
     exportSchema = false
 )
 @TypeConverters(TypeConverter::class)

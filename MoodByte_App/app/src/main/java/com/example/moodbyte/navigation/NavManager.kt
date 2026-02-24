@@ -1,9 +1,14 @@
 package com.example.moodbyte.navigation
 
+import androidx.activity.result.contract.ActivityResultContracts
+import com.example.moodbyte.ui.screens.UsuarioView
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.moodbyte.ui.screens.ArticulosView
 import com.example.moodbyte.ui.screens.DiarioView
 import com.example.moodbyte.ui.screens.EntryReadOnlyView
@@ -20,6 +25,8 @@ import com.example.moodbyte.ui.screens.IAView
 import com.example.moodbyte.ui.viewmodel.DiarioViewModel
 import com.example.moodbyte.ui.viewmodel.EjercicioViewModel
 import com.example.moodbyte.ui.viewmodel.EmocionViewModel
+import com.example.moodbyte.ui.viewmodel.EstadoViewModel
+import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import org.koin.androidx.compose.koinViewModel
 import java.time.LocalDate
 
@@ -68,9 +75,9 @@ fun NavManager() {
             val diarioViewModel: DiarioViewModel = koinViewModel()
             EntryView(date, diarioViewModel, navController)
         }
-        composable("Ejercicio") {
+        composable("Ejercicios") {
             val ejercicioViewModel: EjercicioViewModel = koinViewModel()
-            val emocionViewModel: EmocionViewModel = koinViewModel()
+            val emocionViewModel: EstadoViewModel = koinViewModel()
             EjercicioView(navController, ejercicioViewModel, emocionViewModel)
         }
     }

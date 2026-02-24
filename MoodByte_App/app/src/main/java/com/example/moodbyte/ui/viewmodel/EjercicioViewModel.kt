@@ -22,4 +22,17 @@ class EjercicioViewModel(
             _ejercicios.value=listaEjercicio
         }
     }
+    fun cargarEjerciciosPorEstado(nombreEstado: String) {
+        viewModelScope.launch {
+            val listaFiltrada = repo.cargarEjerciciosPorEstado(nombreEstado)// repo debe tener función suspend
+            _ejercicios.value = listaFiltrada
+        }
+    }
+     fun recargarEjercicios(){
+        viewModelScope.launch {
+            repo.refreshEjercicios()
+            var listaEjercicio= repo.getEjercicios()
+            _ejercicios.value=listaEjercicio
+        }
+    }
 }

@@ -21,12 +21,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.AlertDialog
@@ -42,23 +44,30 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.toArgb
@@ -86,14 +95,16 @@ import com.example.moodbyte.domain.model.Usuario
 import com.example.moodbyte.ui.viewmodel.ArticulosViewModel
 import com.example.moodbyte.ui.viewmodel.DiarioViewModel
 import com.example.moodbyte.domain.model.Ejercicio
+import com.example.moodbyte.domain.model.Estado
 import com.example.moodbyte.ui.viewmodel.EjercicioViewModel
-import com.example.moodbyte.ui.viewmodel.EmocionViewModel
+import com.example.moodbyte.ui.viewmodel.EstadoViewModel
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
 import com.example.moodbyte.ui.viewmodel.PerfilViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
+import com.example.moodbyte.R
 import java.util.Calendar
 
 //================ Contenido de la ventana home =================
@@ -787,23 +798,75 @@ fun DiarioCalendarView(
     )
 }
 //=============Contenido de la ventana Ejercicios=================
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EjercicioViewContent(
     paddingValues: PaddingValues,
     ejercicioViewModel: EjercicioViewModel,
-    emocionViewModel: EmocionViewModel
+    emocionViewModel: EstadoViewModel
 ) {
-    val ejercicios = ejercicioViewModel.ejercicios.collectAsState()
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(paddingValues)
+        val estados by emocionViewModel.estados.collectAsState()
+        var expanded by remember { mutableStateOf(false) }
+        var selectedOption by remember{mutableStateOf("Todos")}
+        val ejercicios by ejercicioViewModel.ejercicios.collectAsState()
+    Column(modifier=Modifier.fillMaxSize().padding(paddingValues)
+        .padding(16.dp)
     ) {
-        items(ejercicios.value) { ejercicio ->
-            EjercicioCard(ejercicio)
+        Row(modifier= Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically) {
+            ExposedDropdownMenuBox(
+                expanded = expanded,
+                onExpandedChange = { expanded = !expanded },
+                modifier = Modifier.weight(0.7f),
+
+            ) {
+                OutlinedTextField(
+                    value = selectedOption,
+                    onValueChange = {},
+                    readOnly = true,
+                    label = { Text("Estados") },
+                    trailingIcon = {
+                        ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+                    },
+                    modifier = Modifier.menuAnchor().fillMaxWidth()
+                )
+                ExposedDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }) {
+                    estados.forEach { estados ->
+                        DropdownMenuItem(
+                            text = { Text(estados.nombre) },
+                            onClick = {
+                                selectedOption = estados.nombre
+                                expanded = false
+                                ejercicioViewModel.cargarEjerciciosPorEstado(estados.nombre)
+                            }
+                        )
+                    }
+                }
+            }
+
+            EjercicioCustomRoundedButton("Reset",Color(0xFFFC908B),modifier=Modifier.weight(0.3f),onClick = {
+                selectedOption = "Todos"
+                ejercicioViewModel.recargarEjercicios()
+            })
         }
+        Spacer(modifier=Modifier.height(5.dp))
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(5.dp)
+        ) {
+            items(ejercicios) { ejercicio ->
+                EjercicioCard(ejercicio)
+            }
+        }
+
     }
 }
+
 //=========Composable para mostrar los ejercicios========
 @Composable
 fun EjercicioCard(
@@ -811,28 +874,34 @@ fun EjercicioCard(
 ) {
     Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(12.dp),
+            .fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(6.dp)
+        elevation = CardDefaults.cardElevation(6.dp),
+        colors = CardColors(Color(0xFFD2E6F6),Color(0xFFD2E6F6),Color(0xFFD2E6F6),Color(0xFFD2E6F6))
     ) {
-        Column {
-            AsyncImage(
-                model = ejercicio.recursoUrl,
-                contentDescription = ejercicio.titulo,
-                modifier = Modifier
-                    .fillMaxWidth().height(180.dp),
-                contentScale = ContentScale.Crop
-            )
-            Spacer(modifier = Modifier.height(12.dp))
+        Column (verticalArrangement = Arrangement.spacedBy(5.dp),
+            ){
+            var imageLoadFailed by remember {mutableStateOf(false)}
+            if(!imageLoadFailed){
+                AsyncImage(
+                    model = ejercicio.recursoUrl,
+                    contentDescription = ejercicio.titulo,
+                    modifier = Modifier
+                        .fillMaxWidth().height(180.dp),
+                    contentScale = ContentScale.Crop,
+                    onError ={imageLoadFailed=true}
+                )
+            }
+            Spacer(modifier = Modifier.height(6.dp))
             Text(text = ejercicio.titulo,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(horizontal = 12.dp)
+                , color = Color(0xFF60F5D8)
             )
             Text(text = ejercicio.descripcion,
                 fontSize = 14.sp,
-                color = Color.Gray,
+                color = Color.Blue,
                 modifier = Modifier.padding(12.dp)
             )
         }

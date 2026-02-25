@@ -1,23 +1,11 @@
 package com.example.moodbyte.ui.screens
 
-import android.content.Intent
-import android.net.Uri
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
+import android.annotation.SuppressLint
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
@@ -31,28 +19,31 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
 import com.example.moodbyte.R
 import com.example.moodbyte.components.BottomNavItem
-import com.example.moodbyte.domain.model.Articulo
-import com.example.moodbyte.ui.viewmodel.ArticulosViewModel
+import com.example.moodbyte.components.ContentDiarioView
+import com.example.moodbyte.components.ContentHomeView
+import com.example.moodbyte.components.DialogoInformativo
+import com.example.moodbyte.ui.viewmodel.DiarioViewModel
+import java.time.LocalDate
 
 @OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ArticulosView(navController: NavController,articulosViewModel: ArticulosViewModel){
-    val TitleFont= FontFamily(Font(R.font.hollyberrypop))
+fun DiarioView(navController: NavController, diarioViewModel: DiarioViewModel){
+    var mostrarDialogo by remember { mutableStateOf(false) }
+    val usuarioState=diarioViewModel.usuario.collectAsState()
+    if (usuarioState.value == null) {
+        Text("Cargando usuario...")
+        return }
     var selectedIndex by remember { mutableStateOf(0) }
     val items = listOf(
         BottomNavItem("Home", R.drawable.home),
@@ -62,6 +53,8 @@ fun ArticulosView(navController: NavController,articulosViewModel: ArticulosView
         BottomNavItem("Camara", R.drawable.cam),
         BottomNavItem("Perfil", R.drawable.user)
     )
+    val coroutineScope = rememberCoroutineScope()
+    val TitleFont = FontFamily(Font(R.font.hollyberrypop))
     Scaffold(
         topBar = {
             TopAppBar(
@@ -86,6 +79,18 @@ fun ArticulosView(navController: NavController,articulosViewModel: ArticulosView
                 }
             )
         },
+        floatingActionButton =
+            {
+                FloatingActionButton(
+                    onClick = {
+                        val today = LocalDate.now()
+                        navController.navigate("diarioEditar/$today")
+                    },
+                    containerColor = Color(0xFFFC908B)
+                ) {
+                    Icon(Icons.Default.Add, contentDescription = "Añadir entrada")
+                }
+            },
         bottomBar = {
             NavigationBar{
                 items.forEachIndexed { index, item ->
@@ -102,71 +107,6 @@ fun ArticulosView(navController: NavController,articulosViewModel: ArticulosView
                 }
             }
         }
-    ) { innerPadding ->
-        ArticulosViewContent(innerPadding,articulosViewModel)
-    }
-}
-
-
-//=============Contenido de la ventana Articulos=================
-@Composable
-fun ArticulosViewContent(paddingValues: PaddingValues,articulosViewModel: ArticulosViewModel){
-    val articulos=articulosViewModel.articulos.collectAsState()
-    val context = LocalContext.current
-    LazyColumn(
-        modifier=Modifier.fillMaxSize()
-            .padding(paddingValues)
-    ) {
-        items(articulos.value){
-                articulo-> ArticuloCard(articulo){
-                url ->
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            context.startActivity(intent)
-        }
-        }
-    }
-}
-
-
-//=========Composable para mostrar los articulos========
-@Composable
-fun ArticuloCard(
-    articulo: Articulo,
-    onClick: (String) -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(12.dp)
-            .clickable { onClick(articulo.enlace) },
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(6.dp)
-    ) {
-        Column {
-            AsyncImage(
-                model = articulo.imagen,
-                contentDescription = articulo.titulo,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(180.dp),
-                contentScale = ContentScale.Crop
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            Text(
-                text = articulo.titulo,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(horizontal = 12.dp)
-            )
-
-            Text(
-                text = articulo.subtitulo,
-                fontSize = 14.sp,
-                color = Color.Gray,
-                modifier = Modifier.padding(12.dp)
-            )
-        }
+    ) { innerPadding -> ContentDiarioView(innerPadding, navController, diarioViewModel)
     }
 }

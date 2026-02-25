@@ -56,7 +56,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import com.example.moodbyte.components.BottomNavItem
 import com.example.moodbyte.components.DialogoInformativo
-import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import kotlinx.coroutines.launch
 import com.example.moodbyte.R
 import com.example.moodbyte.ui.viewmodel.HomeViewModel

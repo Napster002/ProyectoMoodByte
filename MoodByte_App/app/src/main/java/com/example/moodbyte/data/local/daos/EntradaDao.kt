@@ -6,19 +6,24 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.moodbyte.data.local.entities.EjercicioEntity
 import com.example.moodbyte.data.local.entities.EntradaEntity
+import kotlinx.coroutines.flow.Flow
+import java.time.LocalDate
 
 @Dao
 interface EntradaDao {
 
     @Query("SELECT * FROM entradas")
-    suspend fun getAll():List<EntradaEntity>
+    fun getAllFlow(): Flow<List<EntradaEntity>>
 
-    @Query("SELECT * FROM entradas WHERE id= :idEntrada")
-    suspend fun getById(idEntrada:Long):EntradaEntity?
+    @Query("SELECT * FROM entradas WHERE id = :idEntrada")
+    suspend fun getById(idEntrada: Long): EntradaEntity?
+
+    @Query("SELECT * FROM entradas WHERE fechaEntrada = :fecha")
+    suspend fun getByDate(fecha: LocalDate): EntradaEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(entrada:EntradaEntity)
+    suspend fun insert(entrada: EntradaEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(entradas:List<EntradaEntity>)
+    suspend fun insertAll(entradas: List<EntradaEntity>)
 }

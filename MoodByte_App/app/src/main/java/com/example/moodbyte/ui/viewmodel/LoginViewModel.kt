@@ -1,5 +1,6 @@
 package com.example.moodbyte.ui.viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,7 +41,6 @@ class LoginViewModel(
     fun getLoginUsuario(nomUsu: String, password: String) {
         viewModelScope.launch {
             _loginState.value = LoginState.Loading
-
             try {
                 repo.refreshUsuarios()
                 val usuarioRecibido = dao.login(nomUsu, password)
@@ -51,6 +51,7 @@ class LoginViewModel(
                     _loginState.value = LoginState.Error
                 }
             } catch (e: Exception) {
+                Log.e("LOGIN_ERROR", "Error en login", e)
                 _loginState.value = LoginState.Error
             }
         }

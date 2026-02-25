@@ -42,6 +42,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -59,7 +60,7 @@ fun PerfilView(navController: NavController,perfilViewModel: PerfilViewModel,onT
     val TitleFont= FontFamily(Font(R.font.hollyberrypop))
     var selectedIndex by remember { mutableStateOf(0) }
     val items = listOf(
-        BottomNavItem("Inicio", R.drawable.home),
+        BottomNavItem("Home", R.drawable.home),
         BottomNavItem("Diario", R.drawable.agenda),
         BottomNavItem("Articulos", R.drawable.articulos),
         BottomNavItem("Ejercicios", R.drawable.ejercicios),
@@ -94,9 +95,13 @@ fun PerfilView(navController: NavController,perfilViewModel: PerfilViewModel,onT
             NavigationBar{
                 items.forEachIndexed { index, item ->
                     NavigationBarItem(
-                        icon = { item.icon },
-                        label = { Text(item.label) },
-                        selected= selectedIndex==index,
+                        icon = {
+                            Icon(
+                                painter = painterResource(id = item.icon),
+                                contentDescription = item.label)
+                        },
+                        label = { Text("") },
+                        selected = selectedIndex == index,
                         onClick = { navController.navigate(item.label)}
                     )
                 }

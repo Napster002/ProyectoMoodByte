@@ -374,8 +374,7 @@ fun ContentDiarioView(
     Column(
         modifier = Modifier
             .padding(innerPadding)
-            .fillMaxSize()
-            .background(Color(0xFFD2E6F6)),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
@@ -418,7 +417,8 @@ fun DiarioCalendarView(
                 }
 
             }
-        }
+        },
+        modifier = Modifier.background(Color(0xEB8BFFE7))
     )
 }
 //=============Contenido de la ventana Ejercicios=================
@@ -494,7 +494,7 @@ fun EjercicioViewContent(
             verticalArrangement = Arrangement.spacedBy(5.dp)
         ) {
             items(ejercicios) { ejercicio ->
-                EjercicioCard(ejercicio)
+                EjercicioCard(ejercicio,emocionViewModel)
             }
         }
 
@@ -504,17 +504,22 @@ fun EjercicioViewContent(
 //=========Composable para mostrar los ejercicios========
 @Composable
 fun EjercicioCard(
-    ejercicio: Ejercicio
+    ejercicio: Ejercicio,
+    estadoViewModel: EstadoViewModel
 ) {
+    var showDialog by remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
             .fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(6.dp),
+        onClick = {
+            showDialog=true
+        },
         colors = CardColors(Color(0xFFD2E6F6),Color(0xFFD2E6F6),Color(0xFFD2E6F6),Color(0xFFD2E6F6))
     ) {
         Column (verticalArrangement = Arrangement.spacedBy(5.dp),
-            ){
+        ){
             var imageLoadFailed by remember {mutableStateOf(false)}
             if(!imageLoadFailed){
                 AsyncImage(
@@ -540,21 +545,23 @@ fun EjercicioCard(
             )
         }
     }
+    if (showDialog) {
+        VerEjercicioCard(
+            ejercicio = ejercicio,
+            onDismiss = { showDialog = false },
+            estadoViewModel
+        )
+    }
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CrearEjercicioDialog(
+fun VerEjercicioCard(
+    ejercicio: Ejercicio,
     onDismiss: () -> Unit,
-    onGuardar: (titulo: String, descripcion: String, recursoUrl: String, duracion: String, estadoId: Long) -> Unit,
     estadoViewModel: EstadoViewModel
 ) {
-    val estados by estadoViewModel.estados.collectAsState()
-    var titulo by remember { mutableStateOf("") }
-    var descripcion by remember { mutableStateOf("") }
-    var recursoUrl by remember { mutableStateOf("") }
-    var duracion by remember { mutableStateOf("") }
-    var estadoSeleccionado by remember { mutableStateOf<Estado?>(null) }
-    var expanded by remember { mutableStateOf(false) }
+    val estado=estadoViewModel.estados.collectAsState()
+    val estadoNombre = estado.value.firstOrNull { it.id == ejercicio.estado_id }?.nombre ?: "Sin estado"
 
     Dialog(onDismissRequest = onDismiss) {
         Card(
@@ -571,101 +578,64 @@ fun CrearEjercicioDialog(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Text(
-                    "Crear Ejercicio",
+                    "Ver Ejercicio",
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     color = Color(0xFFFC908B)
                 )
 
                 OutlinedTextField(
-                    value = titulo,
-                    onValueChange = { titulo = it },
+                    value = ejercicio.titulo,
+                    onValueChange = {},
                     label = { Text("Título") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = false
                 )
 
                 OutlinedTextField(
-                    value = descripcion,
-                    onValueChange = { descripcion = it },
+                    value = ejercicio.descripcion,
+                    onValueChange = {},
                     label = { Text("Descripción") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = false
                 )
 
                 OutlinedTextField(
-                    value = recursoUrl,
-                    onValueChange = { recursoUrl = it },
+                    value = ejercicio.recursoUrl,
+                    onValueChange = {},
                     label = { Text("URL Recurso") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = false
                 )
 
                 OutlinedTextField(
-                    value = duracion,
-                    onValueChange = { duracion = it },
-                    label = { Text("Duración (HH:MM:SS)") },
-                    modifier = Modifier.fillMaxWidth()
+                    value = ""+ejercicio.duracion ?:"",
+                    onValueChange = {},
+                    label = { Text("Duración") },
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = false
                 )
 
-                // Dropdown para seleccionar estado
-                ExposedDropdownMenuBox(
-                    expanded = expanded,
-                    onExpandedChange = { expanded = !expanded },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    OutlinedTextField(
-                        value = estadoSeleccionado?.nombre ?: "Selecciona estado",
-                        onValueChange = {},
-                        readOnly = true,
-                        label = { Text("Estado") },
-                        trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded) },
-                        modifier = Modifier.menuAnchor().fillMaxWidth()
-                    )
-                    ExposedDropdownMenu(
-                        expanded = expanded,
-                        onDismissRequest = { expanded = false }
-                    ) {
-                        estados.forEach { estado ->
-                            DropdownMenuItem(
-                                text = { Text(estado.nombre, color = Color(0xFFFC908B)) },
-                                onClick = {
-                                    estadoSeleccionado = estado
-                                    expanded = false
-                                },
-                                colors = MenuDefaults.itemColors(
-                                    textColor = Color(0xFFFC908B)
-                                )
-                            )
-                        }
-                    }
-                }
+                OutlinedTextField(
+                    value = estadoNombre,
+                    onValueChange = {},
+                    label = { Text("Estado") },
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = false
+                )
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End
                 ) {
-                    TextButton(onClick = onDismiss) {
-                        Text("Cancelar", color = Color.Gray)
-                    }
-
-                    Spacer(modifier = Modifier.width(8.dp))
-
                     Button(
-                        onClick = {
-                            if (titulo.isNotBlank() && descripcion.isNotBlank() && estadoSeleccionado != null) {
-                                onGuardar(
-                                    titulo,
-                                    descripcion,
-                                    recursoUrl,
-                                    duracion,
-                                    estadoSeleccionado!!.id
-                                )
-                            }
-                        },
+                        onClick = onDismiss,
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFFFC908B),
                             contentColor = Color.White
                         )
                     ) {
-                        Text("Guardar")
+                        Text("Salir")
                     }
                 }
             }

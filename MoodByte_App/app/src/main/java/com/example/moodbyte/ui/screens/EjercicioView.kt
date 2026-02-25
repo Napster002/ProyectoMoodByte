@@ -30,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.moodbyte.R
 import com.example.moodbyte.components.BottomNavItem
-import com.example.moodbyte.components.CrearEjercicioDialog
 import com.example.moodbyte.components.EjercicioViewContent
 import com.example.moodbyte.ui.viewmodel.EjercicioViewModel
 import com.example.moodbyte.ui.viewmodel.EstadoViewModel
@@ -40,8 +39,7 @@ import com.example.moodbyte.ui.viewmodel.EstadoViewModel
 @Composable
 fun EjercicioView(navController:NavController,ejercicioViewModel: EjercicioViewModel,emocionViewModel: EstadoViewModel){
     val TitleFont= FontFamily(Font(R.font.hollyberrypop))
-    var selectedIndex by remember { mutableStateOf(0) }
-    var showDialog by remember { mutableStateOf(false) }
+    var selectedIndex by remember { mutableStateOf(3) }
     val items = listOf(
         BottomNavItem("Home", R.drawable.home),
         BottomNavItem("Diario", R.drawable.agenda),
@@ -74,17 +72,6 @@ fun EjercicioView(navController:NavController,ejercicioViewModel: EjercicioViewM
                 }
             )
         },
-        floatingActionButton ={  FloatingActionButton(onClick = {showDialog = true},
-            containerColor = Color(0xFFF88383),
-            shape= RoundedCornerShape(16.dp),
-            modifier=Modifier.size(48.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Add,
-                contentDescription = "Agregar",
-                tint = Color.Black
-            )
-        }},
         bottomBar = {
             NavigationBar{
                 items.forEachIndexed { index, item ->
@@ -103,17 +90,5 @@ fun EjercicioView(navController:NavController,ejercicioViewModel: EjercicioViewM
         }
     ) { innerPadding ->
         EjercicioViewContent(innerPadding,ejercicioViewModel,emocionViewModel)
-        if (showDialog) {
-            CrearEjercicioDialog(
-                onDismiss = { showDialog = false },
-                onGuardar = { titulo, descripcion, recursoUrl, duracion, estadoId ->
-                    ejercicioViewModel.insertarEjercicio(
-                        titulo, descripcion, recursoUrl, duracion, estadoId
-                    )
-                    showDialog = false
-                },
-                estadoViewModel = emocionViewModel
-            )
-        }
     }
 }

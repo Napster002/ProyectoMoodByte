@@ -11,7 +11,7 @@ data class EjercicioDto(
     val descripcion:String,
     val recursoUrl:String,
     val duracion: LocalTime,
-    val estado_id: Long=0
+    val estado_id: Long=1L
 )
 
 fun EjercicioDto.toEntity()= EjercicioEntity(

@@ -97,9 +97,9 @@ fun ContentLoginView(
          )
       }
       Image(
-         painter = painterResource(id=R.drawable.moodbyte_logo),
+         painter = painterResource(id=R.drawable.icono_moodbyte),
          contentDescription = "Logo MoodByte",
-         modifier = Modifier.size(120.dp).padding(bottom = 24.dp)
+         modifier = Modifier.size(200.dp).padding(bottom = 14.dp)
       )
       Spacer(modifier = Modifier.height(16.dp))
 

@@ -170,6 +170,7 @@ fun ContentHomeView(
             .padding(innerPadding)
             .fillMaxSize()
             .background(Color(0xFFD2E6F6)),
+            .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

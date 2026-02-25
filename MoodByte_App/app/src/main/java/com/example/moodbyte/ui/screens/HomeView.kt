@@ -73,6 +73,7 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.moodbyte.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -127,8 +128,8 @@ fun HomeView(navController: NavController, homeViewModel: HomeViewModel){
                     NavigationBarItem(
                         icon = {
                             Icon(
-                            painter = painterResource(id = item.icon),
-                            contentDescription = item.label)
+                                painter = painterResource(id = item.icon),
+                                contentDescription = item.label)
                         },
                         label = { Text("") },
                         selected = selectedIndex == index,

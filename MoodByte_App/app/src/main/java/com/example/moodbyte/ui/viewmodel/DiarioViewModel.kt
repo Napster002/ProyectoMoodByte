@@ -47,7 +47,7 @@ class DiarioViewModel(
                 id = existing?.id ?: 0L,
                 texto = text,
                 fechaEntrada = date,
-                idDiario = user.id
+                idDiario = user.id!!
             )
 
             repo.saveEntrada(entrada)

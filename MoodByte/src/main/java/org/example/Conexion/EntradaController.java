@@ -1,6 +1,7 @@
 package org.example.Conexion;
 
 import org.example.Modelo.Entrada;
+import org.example.ModeloDTO.EntradaCreateDTO;
 import org.example.ModeloDTO.EntradaDTO;
 import org.example.servicio.EntradaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class EntradaController {
     }
 
     @PostMapping
-    public Entrada create(@RequestBody Entrada entrada) {
-        return entradaService.crear(entrada);
+    public EntradaDTO create(@RequestBody EntradaCreateDTO entrada) {
+        return new EntradaDTO(entradaService.create(entrada));
     }
 
     @GetMapping
@@ -38,8 +39,8 @@ public class EntradaController {
     }
 
     @PutMapping("/{id}")
-    public Entrada update(@RequestBody Entrada entrada, @PathVariable Long id) {
-        return entradaService.modificar(entrada, id);
+    public EntradaDTO update(@RequestBody EntradaCreateDTO dto, @PathVariable Long id) {
+        return new EntradaDTO(entradaService.update(dto, id));
     }
 
     @DeleteMapping("/{id}")

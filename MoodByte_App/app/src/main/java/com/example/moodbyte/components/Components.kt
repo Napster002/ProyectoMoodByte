@@ -256,7 +256,7 @@ fun ContentLoginView(
         LaunchedEffect(loginState) {
             when (loginState) {
                 LoginViewModel.LoginState.Success -> {
-                    navController.navigate("Inicio")
+                    navController.navigate("Home")
                 }
 
                 LoginViewModel.LoginState.Error -> {

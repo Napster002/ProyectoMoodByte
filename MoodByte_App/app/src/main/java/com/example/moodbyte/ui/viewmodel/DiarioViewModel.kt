@@ -41,13 +41,13 @@ class DiarioViewModel(
         viewModelScope.launch {
             val user = usuario.value ?: return@launch
 
-            val existing = getEntradaFor(date)
+            val existing = repo.getEntradaByDate(date)
 
             val entrada = Entrada(
                 id = existing?.id ?: 0L,
                 texto = text,
                 fechaEntrada = date,
-                1
+                idDiario = user.id
             )
 
             repo.saveEntrada(entrada)

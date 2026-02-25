@@ -7,10 +7,13 @@ import com.example.moodbyte.data.remote.dtos.EstadoDto
 import com.example.moodbyte.data.remote.dtos.FraseDto
 import com.example.moodbyte.data.remote.dtos.RegistroDto
 import com.example.moodbyte.data.remote.dtos.UsuarioDto
+import retrofit2.Response
 import com.example.moodbyte.domain.model.Registro
+import com.example.moodbyte.domain.model.Usuario
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface ApiService {
@@ -26,6 +29,9 @@ interface ApiService {
 
     @POST("usuario")
     suspend fun insertUsuario(@Body usuario: UsuarioDto)
+
+    @PUT("usuario/{id}")
+    suspend fun actualizarUsuario(@Path("id") id: Long, @Body usuario: UsuarioDto): Response<Unit>
 
     /**
      * Metodos de articulo

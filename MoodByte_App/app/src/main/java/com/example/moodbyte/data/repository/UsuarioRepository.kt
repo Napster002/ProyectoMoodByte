@@ -27,4 +27,8 @@ class UsuarioRepository(
         dao.insert(usuario.toEntity())
         api.insertUsuario(usuario.toDto())
     }
+    suspend fun actualizarUsuario(usuario:Usuario){
+        dao.insert(usuario.toEntity())
+        api.actualizarUsuario(usuario.id!!,usuario.toDto())
+    }
 }

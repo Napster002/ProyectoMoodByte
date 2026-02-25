@@ -36,7 +36,7 @@ val appModule = module {
     single { UsuarioSesionViewModel() }
     viewModel { UsuarioViewModel(get()) }
     viewModel { LoginViewModel(get(), get(), get()) }
-    viewModel { HomeViewModel(get(), get()) }
+    viewModel { HomeViewModel(get(), get(),get())}
     viewModel{ ArticulosViewModel(get()) }
     viewModel{ PerfilViewModel(get(),get(),get()) }
 }

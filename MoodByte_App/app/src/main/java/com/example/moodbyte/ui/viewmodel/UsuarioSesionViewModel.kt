@@ -15,6 +15,9 @@ class UsuarioSesionViewModel : ViewModel(){
     private val _registroDiario=MutableStateFlow<Boolean>(false)
     val registroDiario=_registroDiario.asStateFlow()
 
+    private val _subioNivel = MutableStateFlow(false)
+    val subioNivel = _subioNivel.asStateFlow()
+
     fun setusuario(usuario:Usuario?){
         _usuario.value=usuario
     }
@@ -25,7 +28,7 @@ class UsuarioSesionViewModel : ViewModel(){
         _registroDiario.value=check
     }
 
-    fun sumarExp(cantidad: Int){
+    fun sumarExp(cantidad: Double){
         val usuarioActual = _usuario.value ?: return
         var nuevaExp = usuarioActual.expAcumulada + cantidad
         var nuevoNivel = usuarioActual.nivel
@@ -34,11 +37,16 @@ class UsuarioSesionViewModel : ViewModel(){
         if (nuevaExp >= expNecesaria) {
             nuevaExp -= expNecesaria
             nuevoNivel++
+            _subioNivel.value=true
         }
         val usuarioActualizado = usuarioActual.copy(
             nivel = nuevoNivel,
             expAcumulada = nuevaExp
         )
         _usuario.value = usuarioActualizado
+
+    }
+    fun resetSubioNivel(){
+        _subioNivel.value=false
     }
 }

@@ -88,7 +88,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.0")
 
     implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
-
+    //Lottie para animación de subir nivel
+    implementation("com.airbnb.android:lottie-compose:6.0.0")
     //Koin
     implementation("io.insert-koin:koin-androidx-compose:3.5.3")
     implementation("io.insert-koin:koin-android:3.5.3")

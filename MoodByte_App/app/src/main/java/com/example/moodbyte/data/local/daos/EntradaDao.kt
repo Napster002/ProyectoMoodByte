@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.moodbyte.data.local.entities.EjercicioEntity
 import com.example.moodbyte.data.local.entities.EntradaEntity
 import kotlinx.coroutines.flow.Flow
@@ -23,6 +24,9 @@ interface EntradaDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(entrada: EntradaEntity)
+    
+    @Update
+    suspend fun update(entrada: EntradaEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(entradas: List<EntradaEntity>)

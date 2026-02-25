@@ -30,6 +30,14 @@ class EntradaRepository(
 
     suspend fun saveEntrada(entrada: Entrada) {
         api.insertarEntrada(entrada.toDto())
-        dao.insert(entrada.toDto().toEntity())
+
+        if (entrada.id == 0L) {
+            // Crear
+            dao.insert(entrada.toDto().toEntity())
+        } else {
+            // Editar
+            dao.update(entrada.toDto().toEntity())
+        }
     }
+
 }

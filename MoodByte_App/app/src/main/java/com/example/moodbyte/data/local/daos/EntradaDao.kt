@@ -19,6 +19,9 @@ interface EntradaDao {
     @Query("SELECT * FROM entradas WHERE id = :idEntrada")
     suspend fun getById(idEntrada: Long): EntradaEntity?
 
+    @Query("SELECT * FROM entradas WHERE id_diario = :idUsuario")
+    fun getEntradasByUsuario(idUsuario: Long): Flow<List<EntradaEntity>>
+
     @Query("SELECT * FROM entradas WHERE fechaEntrada = :fecha")
     suspend fun getByDate(fecha: LocalDate): EntradaEntity?
 

@@ -16,8 +16,8 @@ class EntradaRepository(
     private val api: ApiService,
     private val dao: EntradaDao
 ) {
-    val entradas: Flow<List<Entrada>> =
-        dao.getAllFlow().map { list -> list.map { it.toDomain() } }
+    fun entradasDeUsuario(idUsuario: Long): Flow<List<Entrada>> =
+        dao.getEntradasByUsuario(idUsuario).map { list -> list.map { it.toDomain() } }
 
     suspend fun refreshEntradas(idUsuario: Long) {
         val entradasApi = api.getEntradas(idUsuario)
@@ -39,5 +39,4 @@ class EntradaRepository(
             dao.update(entrada.toDto().toEntity())
         }
     }
-
 }

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface EntradaRepository extends JpaRepository<Entrada, Long> {
 
-    List<Entrada> findByDiarioIdUsuario(Long idUsuario);
+    List<Entrada> findByDiarioUsuarioId(Long idUsuario);
 }

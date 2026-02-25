@@ -5,7 +5,6 @@ import org.example.Logica.EntradaRepository;
 import org.example.Modelo.Diario;
 import org.example.Modelo.Entrada;
 import org.example.ModeloDTO.EntradaCreateDTO;
-import org.example.ModeloDTO.EntradaDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -74,6 +73,6 @@ public class EntradaService implements IEntradaService<Entrada,Long> {
     }
 
     public List<Entrada> listarPorUsuario(Long idUsuario) {
-        return repository.findByDiarioIdUsuario(idUsuario);
+        return repository.findByDiarioUsuarioId(idUsuario);
     }
 }

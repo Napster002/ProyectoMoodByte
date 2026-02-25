@@ -25,7 +25,7 @@ public class UsuarioController {  // ⚡ Ahora es public
     // Endpoint de prueba
     @GetMapping("/test")
     public String test() {
-        return "API funcionando";
+        return "MoodByteAPI funcionando";
     }
 
     @GetMapping

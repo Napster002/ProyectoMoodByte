@@ -33,7 +33,7 @@ import com.example.moodbyte.data.local.entities.FraseEntity
         EstadoEntity::class,
         FraseEntity::class,
         RegistroEntity::class],
-    version =4 ,
+    version = 3 ,
     exportSchema = false
 )
 @TypeConverters(TypeConverter::class)
@@ -55,7 +55,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context,
                     AppDatabase::class.java,
                     "moodbyte_db"
-                ).build().also { INSTANCE = it }
+                ).fallbackToDestructiveMigration()
+                    .fallbackToDestructiveMigrationOnDowngrade()
+                    .build().also { INSTANCE = it }
             }
     }
 }

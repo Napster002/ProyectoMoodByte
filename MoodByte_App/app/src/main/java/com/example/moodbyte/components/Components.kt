@@ -900,7 +900,7 @@ fun EjercicioViewContent(
             verticalArrangement = Arrangement.spacedBy(5.dp)
         ) {
             items(ejercicios) { ejercicio ->
-                EjercicioCard(ejercicio)
+                EjercicioCard(ejercicio, emocionViewModel)
             }
         }
 
@@ -910,13 +910,18 @@ fun EjercicioViewContent(
 //=========Composable para mostrar los ejercicios========
 @Composable
 fun EjercicioCard(
-    ejercicio: Ejercicio
+    ejercicio: Ejercicio,
+    estadoViewModel: EstadoViewModel
 ) {
+    var showDialog by remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
             .fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(6.dp),
+        onClick = {
+            showDialog=true
+        },
         colors = CardColors(Color(0xFFD2E6F6),Color(0xFFD2E6F6),Color(0xFFD2E6F6),Color(0xFFD2E6F6))
     ) {
         Column (verticalArrangement = Arrangement.spacedBy(5.dp),
@@ -946,7 +951,104 @@ fun EjercicioCard(
             )
         }
     }
+    if (showDialog) {
+        VerEjercicioCard(
+            ejercicio = ejercicio,
+            onDismiss = { showDialog = false },
+            estadoViewModel
+        )
+    }
 }
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun VerEjercicioCard(
+    ejercicio: Ejercicio,
+    onDismiss: () -> Unit,
+    estadoViewModel: EstadoViewModel
+) {
+    val estado=estadoViewModel.estados.collectAsState()
+    val estadoNombre = estado.value.firstOrNull { it.id == ejercicio.estado_id }?.nombre ?: "Sin estado"
+
+    Dialog(onDismissRequest = onDismiss) {
+        Card(
+            shape = RoundedCornerShape(16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            elevation = CardDefaults.cardElevation(8.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .background(Color.White)
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Text(
+                    "Ver Ejercicio",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color(0xFFFC908B)
+                )
+
+                OutlinedTextField(
+                    value = ejercicio.titulo,
+                    onValueChange = {},
+                    label = { Text("Título") },
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = false
+                )
+
+                OutlinedTextField(
+                    value = ejercicio.descripcion,
+                    onValueChange = {},
+                    label = { Text("Descripción") },
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = false
+                )
+
+                OutlinedTextField(
+                    value = ejercicio.recursoUrl,
+                    onValueChange = {},
+                    label = { Text("URL Recurso") },
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = false
+                )
+
+                OutlinedTextField(
+                    value = ""+ejercicio.duracion ?:"",
+                    onValueChange = {},
+                    label = { Text("Duración") },
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = false
+                )
+
+                OutlinedTextField(
+                    value = estadoNombre,
+                    onValueChange = {},
+                    label = { Text("Estado") },
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = false
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    Button(
+                        onClick = onDismiss,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFFFC908B),
+                            contentColor = Color.White
+                        )
+                    ) {
+                        Text("Salir")
+                    }
+                }
+            }
+        }
+    }
+}
+// eliminar
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CrearEjercicioDialog(

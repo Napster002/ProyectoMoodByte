@@ -50,6 +50,6 @@ val appModule = module {
     viewModel{ ArticulosViewModel(get()) }
     viewModel{ PerfilViewModel(get(),get(),get()) }
     viewModel{ DiarioViewModel(get(),get()) }
-    viewModel{ EjercicioViewModel(get()) }
+    viewModel{ EjercicioViewModel(get(),get()) }
     viewModel{ EstadoViewModel(get()) }
 }

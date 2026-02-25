@@ -8,5 +8,6 @@ data class Ejercicio(
     val descripcion:String,
     val recursoUrl:String,
     val duracion: LocalTime,
-    val estado_id: Long?=null
+    val estado_id: Long?=null,
+    val nombre: String?=null
 )

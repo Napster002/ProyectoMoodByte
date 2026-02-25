@@ -7,6 +7,7 @@ import com.example.moodbyte.data.local.entities.toDomain
 import com.example.moodbyte.data.remote.ApiService
 import com.example.moodbyte.data.remote.dtos.toEntity
 import com.example.moodbyte.domain.model.Ejercicio
+import com.example.moodbyte.domain.model.relaciones.EjercicioConEstado
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
@@ -33,5 +34,12 @@ class EjercicioRepository(
     }
     suspend fun insertarEjercicio(ejercicio: EjercicioEntity) {
         dao.insert(ejercicio)
+    }
+    suspend fun getEjerciciosConEstado(): List<EjercicioConEstado>{
+        return dao.getEjerciciosConEstado()
+    }
+    suspend fun getEjerciciosPorEstado(nombreEstado: String): List<EjercicioEntity>{
+        val estadoConEjercicio=dao.getEstadoConEjerciciosPorNombre(nombreEstado)
+        return estadoConEjercicio?.ejercicios ?: emptyList()
     }
 }

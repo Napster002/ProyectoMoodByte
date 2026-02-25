@@ -374,8 +374,7 @@ fun ContentDiarioView(
     Column(
         modifier = Modifier
             .padding(innerPadding)
-            .fillMaxSize()
-            .background(Color(0xFFD2E6F6)),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
@@ -418,7 +417,8 @@ fun DiarioCalendarView(
                 }
 
             }
-        }
+        },
+        modifier = Modifier.background(Color(0xEB8BFFE7))
     )
 }
 //=============Contenido de la ventana Ejercicios=================

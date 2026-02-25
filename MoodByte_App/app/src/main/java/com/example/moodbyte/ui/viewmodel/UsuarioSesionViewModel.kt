@@ -1,14 +1,21 @@
 package com.example.moodbyte.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.moodbyte.data.remote.ApiService
 import com.example.moodbyte.data.remote.dtos.DiarioDto
 import com.example.moodbyte.domain.model.Usuario
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import java.time.LocalDate
 
-class UsuarioSesionViewModel : ViewModel(){
+class UsuarioSesionViewModel(
+    private val api: ApiService
+) : ViewModel(){
     //Usuario que se guarda al loggearse
     private val _usuario = MutableStateFlow<Usuario?>(null)
     val usuario= _usuario.asStateFlow()
@@ -29,9 +36,6 @@ class UsuarioSesionViewModel : ViewModel(){
     }
     fun setMood(mood:Int){
         _mood.value=mood
-    }
-    fun checkRegistroDiario(check: Boolean){
-        _registroDiario.value=check
     }
 
     fun sumarExp(cantidad: Double){
@@ -57,5 +61,25 @@ class UsuarioSesionViewModel : ViewModel(){
     }
     fun setDiario(d: DiarioDto) {
         _diario.value = d
+    }
+
+    fun comprobarRegistro(){
+        viewModelScope.launch {
+            var mostrarDialog:Boolean=true
+        val registros=api.getRegistros()
+        registros.forEach{ registro->
+            if(registro.idUsuario!!.equals(usuario.value!!.id) && LocalDate.parse(registro.fechaRegistro).equals(
+                    LocalDate.now())) {
+                _mood.value=registro.puntuacion
+                mostrarDialog=false
+
+            }
+        }
+            _registroDiario.value = mostrarDialog
+        }
+    }
+
+    fun cerrarDialogRegistro(){
+        _registroDiario.value=false
     }
 }

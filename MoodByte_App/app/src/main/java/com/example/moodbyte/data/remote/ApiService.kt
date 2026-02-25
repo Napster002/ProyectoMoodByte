@@ -80,7 +80,7 @@ interface ApiService {
     suspend fun getRegistroById(@Path("id")id:Long): RegistroDto
 
     @POST("registro")
-    suspend fun insertarRegistro(@Body registro: RegistroDto)
+    suspend fun insertarRegistro(@Body registro: RegistroDto):Response<Void>
 
     /**
      * Metodos de entradas diario

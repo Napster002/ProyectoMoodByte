@@ -1,6 +1,6 @@
 package com.example.moodbyte.ui.screens
 
-import android.R
+import com.example.moodbyte.R
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -97,7 +97,7 @@ fun ContentLoginView(
          )
       }
       Image(
-         painter = painterResource(R.drawable.ic_menu_view),
+         painter = painterResource(id=R.drawable.moodbyte_logo),
          contentDescription = "Logo MoodByte",
          modifier = Modifier.size(120.dp).padding(bottom = 24.dp)
       )

@@ -1,6 +1,7 @@
 package com.example.moodbyte.ui.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,18 +20,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
@@ -43,7 +40,6 @@ import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -56,16 +52,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import com.example.moodbyte.components.BottomNavItem
 import com.example.moodbyte.components.DialogoInformativo
-import kotlinx.coroutines.launch
 import com.example.moodbyte.R
 import com.example.moodbyte.ui.viewmodel.HomeViewModel
-import com.example.moodbyte.ui.viewmodel.LoginViewModel
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.airbnb.lottie.compose.LottieAnimation
@@ -160,24 +155,62 @@ fun ContentHomeView(
     innerPadding: PaddingValues,
     homeViewModel: HomeViewModel
 ) {
-    var showMoodDialog by remember { mutableStateOf(true) }
+    val registroDiario by homeViewModel.registroDiario.collectAsState()
+    val usuario=homeViewModel.usuario.collectAsState()
+    var nombre=usuario.value!!.nombreCompleto.split(" ")
     var showTareasDiarias by remember { mutableStateOf(false) }
+    val fraseMoodActual by homeViewModel.fraseMood.collectAsState()
     LazyColumn(
         modifier = Modifier
             .padding(innerPadding)
             .fillMaxSize()
-            .background(Color(0xFFD2E6F6)),
+            .background(Color(0xFFD2E6F6))
+            .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        item {
-            Text(
-                text = "MoodByte",
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth(),
-                color = Color.Black
+        item{
+            Image(
+                painter = painterResource(id = R.drawable.fondo_calma),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(180.dp)
+                    .clip(RoundedCornerShape(20.dp)),
+                contentScale = ContentScale.Crop
             )
+
+        }
+        item {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 8.dp),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            ) {
+                Column(
+                    modifier = Modifier.padding(20.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Hola, ${nombre[0]}",
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF333333)
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    Text(
+                        text = fraseMoodActual ?: "No problemo",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Medium,
+                        fontStyle = FontStyle.Italic,
+                        color = Color(0xFF555555),
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
         }
         item{
             BotonHomeView("Acciones diarias","⭐", onClick = {showTareasDiarias=true})
@@ -185,9 +218,9 @@ fun ContentHomeView(
     }
 
     // Diálogo de Mood diario
-    if (showMoodDialog) {
+    if (registroDiario) {
         AlertDialog(
-            onDismissRequest = { showMoodDialog = false },
+            onDismissRequest = { homeViewModel.cerrarDialogRegistro() },
             title = { Text("¿Cómo te sientes hoy?") },
             text = {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -200,23 +233,23 @@ fun ContentHomeView(
                     ) {
                         MoodButton("😄", "Feliz") { mood ->
                             homeViewModel.setMood(mood)
-                            showMoodDialog = false
+                            homeViewModel.cerrarDialogRegistro()
                         }
                         MoodButton("🙂", "Bien") { mood ->
                             homeViewModel.setMood(mood)
-                            showMoodDialog = false
+                            homeViewModel.cerrarDialogRegistro()
                         }
                         MoodButton("😐", "Regular") { mood ->
                             homeViewModel.setMood(mood)
-                            showMoodDialog = false
+                            homeViewModel.cerrarDialogRegistro()
                         }
                         MoodButton("\uD83D\uDE30", "Estresado") { mood ->
                             homeViewModel.setMood(mood)
-                            showMoodDialog = false
+                            homeViewModel.cerrarDialogRegistro()
                         }
                         MoodButton("😔", "Triste") { mood ->
                             homeViewModel.setMood(mood)
-                            showMoodDialog = false
+                            homeViewModel.cerrarDialogRegistro()
                         }
                     }
                 }

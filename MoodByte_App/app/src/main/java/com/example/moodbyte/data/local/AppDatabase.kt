@@ -55,7 +55,7 @@ abstract class AppDatabase : RoomDatabase() {
                                 context,
                                 AppDatabase::class.java,
                                 "moodbyte_db"
-                            ).build().also { INSTANCE = it }
+                            ).fallbackToDestructiveMigration(true).build().also { INSTANCE = it }
             }
     }
 }

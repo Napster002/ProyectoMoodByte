@@ -1,6 +1,7 @@
 package com.example.moodbyte.ui.screens
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -59,7 +60,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -72,14 +72,15 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeView(navController: NavController, homeViewModel: HomeViewModel){
+fun HomeView(navController: NavController, homeViewModel: HomeViewModel) {
     var mostrarDialogo by remember { mutableStateOf(false) }
-    val usuarioState=homeViewModel.usuario.collectAsState()
-    val subioNivel=homeViewModel.subioNivel.collectAsState()
+    val usuarioState = homeViewModel.usuario.collectAsState()
+    val subioNivel = homeViewModel.subioNivel.collectAsState()
 
     if (usuarioState.value == null) {
         Text("Cargando usuario...")
-        return }
+        return
+    }
     var selectedIndex by remember { mutableStateOf(0) }
     val items = listOf(
         BottomNavItem("Home", R.drawable.home),
@@ -116,32 +117,34 @@ fun HomeView(navController: NavController, homeViewModel: HomeViewModel){
             )
         },
         bottomBar = {
-            NavigationBar{
+            NavigationBar {
                 items.forEachIndexed { index, item ->
                     NavigationBarItem(
                         icon = {
                             Icon(
                                 painter = painterResource(id = item.icon),
-                                contentDescription = item.label)
+                                contentDescription = item.label
+                            )
                         },
                         label = { Text("") },
                         selected = selectedIndex == index,
-                        onClick = { navController.navigate(item.label)}
+                        onClick = { navController.navigate(item.label) }
                     )
                 }
             }
         }
-    ) { innerPadding -> ContentHomeView(innerPadding, homeViewModel)
+    ) { innerPadding ->
+        ContentHomeView(innerPadding, homeViewModel)
 
-        if(mostrarDialogo == true){
+        if (mostrarDialogo == true) {
             DialogoInformativo(
                 titulo = "Advertencia",
                 mensaje = "Funcionalidad prevista en futuras versiones",
                 onCerrar = { mostrarDialogo = false }
             )
         }
-        if (subioNivel.value){
-            LevelUpDialog( onDismiss = {
+        if (subioNivel.value) {
+            LevelUpDialog(onDismiss = {
                 homeViewModel.resetSubioNivel()
             }
             )
@@ -156,26 +159,28 @@ fun ContentHomeView(
     homeViewModel: HomeViewModel
 ) {
     val registroDiario by homeViewModel.registroDiario.collectAsState()
-    val usuario=homeViewModel.usuario.collectAsState()
-    var nombre=usuario.value!!.nombreCompleto.split(" ")
+    val usuario = homeViewModel.usuario.collectAsState()
+    var nombre = usuario.value!!.nombreCompleto.split(" ")
     var showTareasDiarias by remember { mutableStateOf(false) }
     val fraseMoodActual by homeViewModel.fraseMood.collectAsState()
+    val semana by homeViewModel.semanaMoods.collectAsState()
+
     LazyColumn(
         modifier = Modifier
             .padding(innerPadding)
             .fillMaxSize()
+            .background(Color(0xFFD2E6F6)),
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        item{
+        item {
             Image(
                 painter = painterResource(id = R.drawable.fondo_calma),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(180.dp)
-                    .clip(RoundedCornerShape(20.dp)),
+                    .height(180.dp),
                 contentScale = ContentScale.Crop
             )
 
@@ -184,10 +189,10 @@ fun ContentHomeView(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 8.dp),
+                    .padding(vertical = 10.dp, horizontal = 25.dp),
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
-                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
             ) {
                 Column(
                     modifier = Modifier.padding(20.dp),
@@ -197,22 +202,75 @@ fun ContentHomeView(
                         text = "Hola, ${nombre[0]}",
                         fontSize = 28.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color(0xFF333333)
+                        color = Color(0xFF333333),
+                        textAlign = TextAlign.Center,
+                        modifier=Modifier.fillMaxWidth()
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        text = fraseMoodActual ?: "No problemo",
+                        text = fraseMoodActual ?: "",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Medium,
-                        fontStyle = FontStyle.Italic,
                         color = Color(0xFF555555),
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        modifier=Modifier.fillMaxWidth()
                     )
                 }
             }
         }
-        item{
-            BotonHomeView("Acciones diarias","⭐", onClick = {showTareasDiarias=true})
+        item {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 25.dp),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Tu estado los últimos 7 días",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xFF555555)
+                    )
+
+                    Spacer(Modifier.height(12.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.Bottom
+                    ) {
+                        semana.forEach { mood ->
+                            if (mood == 0) {
+                                // Día sin registro → espacio vacío
+                                Box(
+                                    modifier = Modifier
+                                        .width(24.dp)
+                                        .height(4.dp) // una línea pequeña o incluso 0.dp
+                                        .clip(RoundedCornerShape(6.dp))
+                                        .background(colorForMood(mood))
+                                )
+                            } else {
+                                Box(
+                                    modifier = Modifier
+                                        .width(24.dp)
+                                        .height(((6 - mood) * 20).dp) // altura invertida
+                                        .clip(RoundedCornerShape(6.dp))
+                                        .background(colorForMood(mood))
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        item {
+            BotonHomeView("Acciones Diarias", "⭐", onClick = { showTareasDiarias = true })
         }
     }
 
@@ -256,10 +314,13 @@ fun ContentHomeView(
             confirmButton = {}
         )
     }
-    if(showTareasDiarias){
-        AccionesDiariasDialog(onDismiss = {showTareasDiarias=false},
-            onConfirm ={ totalXp -> homeViewModel.sumarExp(totalXp);
-         showTareasDiarias = false }
+    if (showTareasDiarias) {
+        AccionesDiariasDialog(
+            onDismiss = { showTareasDiarias = false },
+            onConfirm = { totalXp ->
+                homeViewModel.sumarExp(totalXp);
+                showTareasDiarias = false
+            }
         )
     }
 }
@@ -282,24 +343,26 @@ fun MoodButton(emoji: String, label: String, onClick: (String) -> Unit) {
 
 @Composable
 fun BotonHomeView(
-    text:String,
-    icono:String,
+    text: String,
+    icono: String,
     onClick: () -> Unit
-){
-    ElevatedButton(onClick=onClick,
-        modifier=Modifier.fillMaxWidth()
-            .padding(horizontal = 24.dp)
+) {
+    ElevatedButton(
+        onClick = onClick,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 25.dp)
             .height(80.dp),
-        shape= RoundedCornerShape(20.dp),
-        colors= ButtonDefaults.buttonColors(
-            containerColor=Color(0xFF60F5D8),
-            contentColor=Color(0xFFF56D5F)
+        shape = RoundedCornerShape(20.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFF60F5D8),
+            contentColor = Color(0xFFF56D5F)
         )
-    ){
+    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
-        ){
+        ) {
             Text(icono, fontSize = 32.sp)
             Spacer(Modifier.width(12.dp))
             Text(text, fontSize = 20.sp, fontWeight = FontWeight.Bold)
@@ -309,60 +372,61 @@ fun BotonHomeView(
 
 @Composable
 fun AccionesDiariasDialog(
-    onDismiss:()->Unit,
-    onConfirm:(Double)->Unit
-){
-    val accionesDiarias=listOf(
+    onDismiss: () -> Unit,
+    onConfirm: (Double) -> Unit
+) {
+    val accionesDiarias = listOf(
         "Darme una ducha" to 10.0,
         "Pasear por la naturaleza" to 30.0,
         "Meditar al menos 10 minutos" to 20.0,
         "Escribir una lista de al menos 1 cosa positiva del día" to 25.0,
         "Leer durante 30 minutos" to 15.0
     )
-    var accionCheckeada by remember{mutableStateOf(accionesDiarias.map { false })}
+    var accionCheckeada by remember { mutableStateOf(accionesDiarias.map { false }) }
 
-        AlertDialog(
-            onDismissRequest = onDismiss,
-            title = { Text("Acciones diarias") },
-            text = {
-                Column {
-                    accionesDiarias.forEachIndexed { index, (title, xp) ->
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Checkbox(
-                                checked = accionCheckeada[index],
-                                onCheckedChange = { checked ->
-                                    accionCheckeada = accionCheckeada.toMutableList().also {
-                                        it[index] = checked
-                                    }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Acciones diarias") },
+        text = {
+            Column {
+                accionesDiarias.forEachIndexed { index, (title, xp) ->
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Checkbox(
+                            checked = accionCheckeada[index],
+                            onCheckedChange = { checked ->
+                                accionCheckeada = accionCheckeada.toMutableList().also {
+                                    it[index] = checked
                                 }
-                            )
-                            Text("$title (+$xp XP)")
-                        }
+                            }
+                        )
+                        Text("$title (+$xp XP)")
                     }
                 }
-            },
-            confirmButton = {
-                TextButton(onClick = {
-                    // Sumar XP de los elementos marcados
-                    val totalXp = accionesDiarias.indices
-                        .filter { accionCheckeada[it] }
-                        .sumOf { accionesDiarias[it].second }
-
-                    onConfirm(totalXp)
-                }) {
-                    Text("Confirmar")
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = onDismiss) {
-                    Text("Cancelar")
-                }
             }
-        )
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                // Sumar XP de los elementos marcados
+                val totalXp = accionesDiarias.indices
+                    .filter { accionCheckeada[it] }
+                    .sumOf { accionesDiarias[it].second }
+
+                onConfirm(totalXp)
+            }) {
+                Text("Confirmar")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancelar")
+            }
+        }
+    )
 }
+
 @Composable
 fun LevelUpDialog(onDismiss: () -> Unit) {
     AlertDialog(
@@ -378,7 +442,8 @@ fun LevelUpDialog(onDismiss: () -> Unit) {
                 val composition by rememberLottieComposition(
                     LottieCompositionSpec.Asset("level_up.json")
                 )
-                val progress by animateLottieCompositionAsState( composition = composition,
+                val progress by animateLottieCompositionAsState(
+                    composition = composition,
                     iterations = 1
                 )
                 LaunchedEffect(progress) {
@@ -387,7 +452,8 @@ fun LevelUpDialog(onDismiss: () -> Unit) {
                     }
                 }
                 Box(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
                         .size(200.dp)
                 ) {
                     LottieAnimation(
@@ -399,4 +465,17 @@ fun LevelUpDialog(onDismiss: () -> Unit) {
         }
     )
 }
+
+fun colorForMood(mood: Int): Color {
+    return when (mood) {
+        1 -> Color(0xFF81C784)
+        2 -> Color(0xFFAED581)
+        3 -> Color(0xFFFFF176)
+        4 -> Color(0xFFFFB74D)
+        5 -> Color(0xFFE57373)
+        else -> Color(0xFFCFD8DC)
+    }
+}
+
+
 

@@ -35,6 +35,10 @@ class HomeViewModel(
     private val _fraseMood = MutableStateFlow<String?>(null)
     val fraseMood = _fraseMood.asStateFlow()
     private var frasesRecibidas: List<Frase> = emptyList()
+    //Para el grafico semanal
+    private val _semanaMoods = MutableStateFlow<List<Int>>(emptyList())
+    val semanaMoods = _semanaMoods.asStateFlow()
+
 
 
 
@@ -42,9 +46,12 @@ class HomeViewModel(
     init {
         comprobarRegistros()
         cargarFrases()
+        cargarSemanaMoods()
+
         viewModelScope.launch {
             session.mood.collect {
                 actualizarFraseMood()
+                cargarSemanaMoods()
             }
         }
     }
@@ -102,6 +109,26 @@ class HomeViewModel(
         viewModelScope.launch {
             val frases = frasesApi.getFrases()
             frasesRecibidas = frases.map { it.toEntity().toDomain() }
+            actualizarFraseMood()
         }
     }
+    fun cargarSemanaMoods() {
+        viewModelScope.launch {
+            val registros = session.getRegistrosSemana()
+
+            // Creamos un mapa fecha → mood
+            val mapa = registros.associate {
+                LocalDate.parse(it.fechaRegistro) to it.puntuacion
+            }
+
+            val hoy = LocalDate.now()
+            val lista = (0..6).map { diasAtras ->
+                val fecha = hoy.minusDays(diasAtras.toLong())
+                mapa[fecha] ?: 0 // 0 = sin registro
+            }.reversed()
+            _semanaMoods.value = lista
+            Log.i("SEMANA", _semanaMoods.toString())
+        }
+    }
+
 }

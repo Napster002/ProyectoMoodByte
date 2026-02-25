@@ -29,7 +29,7 @@ import org.koin.androidx.compose.koinViewModel
 import java.time.LocalDate
 
 @Composable
-fun NavManager() {
+fun NavManager(onToggleTheme: () -> Unit) {
 
     val navController = rememberNavController()
 
@@ -50,9 +50,9 @@ fun NavManager() {
             val articulosViewModel: ArticulosViewModel = koinViewModel()
             ArticulosView(navController, articulosViewModel)
         }
-        composable("Perfil") {
-            val perfilViewModel: PerfilViewModel = koinViewModel()
-            PerfilView(navController, perfilViewModel)
+        composable("Perfil"){
+            val perfilViewModel: PerfilViewModel=koinViewModel()
+            PerfilView(navController, perfilViewModel,onToggleTheme)
         }
 
         composable("Camara") {

@@ -10,7 +10,7 @@ import java.time.LocalDate
 @Entity(tableName = "usuarios")
 data class UsuarioEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Long=0,
+    val id: Long?=0,
     val nombreCompleto: String,
     val nombreUsuario: String,
     val password:String,

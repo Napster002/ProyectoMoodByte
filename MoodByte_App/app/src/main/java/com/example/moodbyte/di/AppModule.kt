@@ -44,9 +44,9 @@ val appModule = module {
     single { EstadoRepository(get(),get()) }
 
     // ViewModel
-    single { UsuarioSesionViewModel() }
+    single { UsuarioSesionViewModel(get()) }
     viewModel { LoginViewModel(get(), get(), get()) }
-    viewModel { HomeViewModel(get(), get()) }
+    viewModel { HomeViewModel(get(), get(),get(),get())}
     viewModel{ ArticulosViewModel(get()) }
     viewModel{ PerfilViewModel(get(),get(),get()) }
     viewModel{ DiarioViewModel(get(),get()) }

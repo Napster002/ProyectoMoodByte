@@ -8,7 +8,6 @@ import org.koin.core.context.startKoin
 class MoodByteApp : Application() {
     override fun onCreate() {
         super.onCreate()
-
         startKoin {
             androidContext(this@MoodByteApp)
             modules(appModule)

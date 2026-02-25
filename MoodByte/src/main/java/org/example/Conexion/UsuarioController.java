@@ -1,10 +1,12 @@
 package org.example.Conexion;
 
 
+import org.apache.catalina.connector.Response;
 import org.example.Modelo.Usuario;
 import org.example.ModeloDTO.UsuarioDTO;
 import org.example.servicio.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,8 +44,9 @@ public class UsuarioController {  // ⚡ Ahora es public
     }
 
     @PutMapping("/{id}")
-    public Usuario update(@RequestBody Usuario usuario, @PathVariable Long id) {
-        return usuarioService.modificar(usuario, id);
+    public ResponseEntity<Void> update(@RequestBody Usuario usuario, @PathVariable Long id) {
+        usuarioService.modificar(usuario, id);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")

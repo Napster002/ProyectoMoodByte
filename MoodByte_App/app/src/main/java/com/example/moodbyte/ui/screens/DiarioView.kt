@@ -30,8 +30,6 @@ import androidx.navigation.NavController
 import com.example.moodbyte.R
 import com.example.moodbyte.components.BottomNavItem
 import com.example.moodbyte.components.ContentDiarioView
-import com.example.moodbyte.components.ContentHomeView
-import com.example.moodbyte.components.DialogoInformativo
 import com.example.moodbyte.ui.viewmodel.DiarioViewModel
 import java.time.LocalDate
 

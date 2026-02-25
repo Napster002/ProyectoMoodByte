@@ -13,6 +13,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import android.widget.TextView
+import java.time.LocalDate
+import java.time.Period
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -63,14 +65,12 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material.icons.filled.ModeNight
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.FloatingActionButton
@@ -132,80 +132,7 @@ import com.example.moodbyte.ui.viewmodel.PerfilViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.time.LocalDate
-import com.example.moodbyte.R
 import java.util.Calendar
-
-//================ Contenido de la ventana home =================
-@Composable
-fun ContentHomeView(
-    innerPadding: PaddingValues,
-    navController: NavController,
-    homeViewModel: HomeViewModel) {
-    var showMoodDialog by remember { mutableStateOf(true) }
-    LazyColumn (
-        modifier = Modifier
-            .padding(innerPadding)
-            .fillMaxSize()
-            .background(Color(0xFFD2E6F6)),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        item {
-            Text(
-                text = "MoodByte",
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth(),
-                color = Color.Black
-            )
-        }
-        item {
-            if (showMoodDialog) {
-                AlertDialog(
-                    onDismissRequest = { showMoodDialog = false },
-                    title = { Text("¿Cómo te sientes hoy?") },
-                    text = {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text("Elige tu estado de ánimo")
-import java.time.LocalDate
-import java.time.Period
-
-                            Spacer(Modifier.height(16.dp))
-
-                            Row(
-                                horizontalArrangement = Arrangement.SpaceEvenly,
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                MoodButton("😄", "Feliz") { mood ->
-                                    homeViewModel.setMood(mood)
-                                    showMoodDialog = false
-                                }
-                                MoodButton("🙂", "Bien") { mood ->
-                                    homeViewModel.setMood(mood)
-                                    showMoodDialog = false
-                                }
-                                MoodButton("😐", "Regular") { mood ->
-                                    homeViewModel.setMood(mood)
-                                    showMoodDialog = false
-                                }
-                                MoodButton("\uD83D\uDE30","Estresado"){ mood->
-                                    homeViewModel.setMood(mood)
-                                    showMoodDialog=false
-                                }
-                                MoodButton("😔", "Triste") { mood ->
-                                    homeViewModel.setMood(mood)
-                                    showMoodDialog = false
-                                }
-                            }
-                        }
-                    },
-                    confirmButton = {}
-                )
-            }
-        }
-    }
-}
 
 //================ Dialog de informacion =================
 @Composable

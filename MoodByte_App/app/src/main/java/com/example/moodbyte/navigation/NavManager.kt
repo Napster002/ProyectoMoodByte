@@ -35,13 +35,13 @@ fun NavManager(onToggleTheme: () -> Unit) {
 
     NavHost(
         navController = navController,
-        startDestination = "camara"
+        startDestination = "Login"
     ) {
         composable("login") {
             val loginViewModel: LoginViewModel = koinViewModel()
             LoginView(navController, loginViewModel)
         }
-        composable("Inicio") {
+        composable("Home") {
             val homeViewModel: HomeViewModel = koinViewModel()
             HomeView(navController, homeViewModel)
         }

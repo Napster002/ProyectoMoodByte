@@ -52,7 +52,6 @@ import com.example.moodbyte.domain.model.Genero
 import com.example.moodbyte.domain.model.TipoUsuario
 import com.example.moodbyte.domain.model.Usuario
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
-import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import java.time.LocalDate
 import java.time.Period
 
@@ -162,7 +161,7 @@ fun ContentLoginView(
    LaunchedEffect(loginState) {
       when (loginState) {
          LoginViewModel.LoginState.Success -> {
-            navController.navigate("Inicio")
+            navController.navigate("Home")
          }
 
          LoginViewModel.LoginState.Error -> {

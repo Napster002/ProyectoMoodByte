@@ -11,10 +11,8 @@ import com.example.moodbyte.data.local.AppDatabase
 import com.example.moodbyte.data.remote.RetrofitClient
 import com.example.moodbyte.data.repository.UsuarioRepository
 import com.example.moodbyte.navigation.NavManager
-import com.example.moodbyte.ui.screens.UsuarioView
 import com.example.moodbyte.ui.theme.MoodByteTheme
 import com.example.moodbyte.ui.viewmodel.LoginViewModel
-import com.example.moodbyte.ui.viewmodel.UsuarioViewModel
 import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import com.example.moodbyte.R
-import com.example.moodbyte.components.ArticulosViewContent
+//import com.example.moodbyte.components.ArticulosViewContent
 import com.example.moodbyte.components.BottomNavItem
 import com.example.moodbyte.components.IAViewContent
 

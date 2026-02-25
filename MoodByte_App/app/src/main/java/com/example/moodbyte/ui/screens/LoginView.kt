@@ -142,7 +142,7 @@ fun ContentLoginView(
 
       Button(
          onClick = {
-            loginViewModel.getLoginUsuario(nomUsu, password)
+            loginViewModel.getLoginUsuario(nomUsu.trim(), password.trim())
          },
          modifier = Modifier.fillMaxWidth(),
          colors = ButtonDefaults.buttonColors(

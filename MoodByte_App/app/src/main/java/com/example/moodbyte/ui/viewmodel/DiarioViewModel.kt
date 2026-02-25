@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.moodbyte.data.repository.EntradaRepository
 import com.example.moodbyte.domain.model.Entrada
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -16,12 +18,14 @@ class DiarioViewModel(
 
     val usuario = session.usuario
 
-    val entradas = repo.entradas
-        .stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5000),
-            emptyList()
-        )
+    val entradas = usuario.flatMapLatest { user ->
+        if (user == null) flowOf(emptyList())
+        else repo.entradasDeUsuario(user.id!!)
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000),
+        emptyList()
+    )
 
     init {
         viewModelScope.launch {

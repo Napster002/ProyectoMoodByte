@@ -11,12 +11,12 @@ data class RegistroEntity(
     val id: Long =0,
     val puntuacion: Int,
     val fechaRegistro: String,
-    val id_usuario: Long?
+    val idUsuario: Long?
 )
 
 fun RegistroEntity.toDomain()= Registro(
     id =id,
     puntuacion =puntuacion,
     fechaRegistro =LocalDate.parse(fechaRegistro),
-    id_usuario =id_usuario
+    idUsuario =idUsuario!!
 )

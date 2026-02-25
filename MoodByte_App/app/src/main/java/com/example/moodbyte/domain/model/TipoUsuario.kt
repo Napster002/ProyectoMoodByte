@@ -1,6 +1,5 @@
 package com.example.moodbyte.domain.model
 
 enum class TipoUsuario {
-    ADMINISTRADOR,
-    NORMAL
+    INVITADO, CLIENTE, ADMINISTRADOR, CLIENTE_PREMIUM
 }

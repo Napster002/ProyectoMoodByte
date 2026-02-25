@@ -3,7 +3,7 @@ package com.example.moodbyte.data.remote.dtos
 import com.example.moodbyte.data.local.entities.UsuarioEntity
 
 data class UsuarioDto(
-    val id: Long,
+    val id: Long?,
     val nombreCompleto: String,
     val nombreUsuario: String,
     val password: String,

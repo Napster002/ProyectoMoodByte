@@ -22,7 +22,7 @@ class RegistroRepository(
 
     suspend fun insertarRegistro(registro: Registro){
         dao.insert(registro.toEntity())
-        Log.i("API",registro.toDto().id_usuario.toString())
+        Log.i("API",registro.toDto().idUsuario.toString())
         api.insertarRegistro(registro.toDto())
     }
     suspend fun refreshRegistros(){

@@ -27,7 +27,7 @@ class DiarioViewModel(
         viewModelScope.launch {
             usuario.collect { user ->
                 if (user != null) {
-                    repo.refreshEntradas(user.id)
+                    repo.refreshEntradas(user.id!!)
                 }
             }
         }
@@ -51,7 +51,7 @@ class DiarioViewModel(
             )
 
             repo.saveEntrada(entrada)
-            repo.refreshEntradas(user.id)
+            repo.refreshEntradas(user.id!!)
         }
     }
 }

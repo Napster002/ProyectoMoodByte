@@ -8,18 +8,18 @@ data class Registro(
     val id: Long?=null,
     val puntuacion: Int,
     val fechaRegistro: LocalDate,
-    val id_usuario: Long?
+    val idUsuario: Long
 )
 fun Registro.toEntity() = RegistroEntity(
     puntuacion = puntuacion,
     fechaRegistro = fechaRegistro.toString(),
-    id_usuario = id_usuario
+    idUsuario = idUsuario
 )
 
 fun Registro.toDto() = RegistroDto(
     puntuacion = puntuacion,
     fechaRegistro = fechaRegistro.toString(),
-    id_usuario = id_usuario
+    idUsuario = idUsuario
 )
 
 

@@ -17,6 +17,7 @@ import com.example.moodbyte.data.repository.UsuarioRepository
 import com.example.moodbyte.domain.model.Genero
 import com.example.moodbyte.domain.model.TipoUsuario
 import com.example.moodbyte.domain.model.Usuario
+import com.example.moodbyte.domain.model.toEntity
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
@@ -49,11 +50,16 @@ class LoginViewModel(
                 } else {
                     _loginState.value = LoginState.Error
                 }
-
             } catch (e: Exception) {
                 Log.e("LOGIN_ERROR", "Error en login", e)
                 _loginState.value = LoginState.Error
             }
+        }
+    }
+
+    fun crearUsuario(usuario: Usuario) {
+        viewModelScope.launch {
+            repo.insertarusuario(usuario)
         }
     }
 }

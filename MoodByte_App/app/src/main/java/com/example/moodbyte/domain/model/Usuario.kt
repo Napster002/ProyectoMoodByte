@@ -6,7 +6,7 @@ import java.time.LocalDate
 import kotlin.math.exp
 
 data class Usuario(
-    val id: Long,
+    val id: Long? = null,
     var nombreCompleto: String,
     var nombreUsuario: String,
     var password:String,

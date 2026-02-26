@@ -27,6 +27,8 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxColors
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -169,8 +171,7 @@ fun ContentHomeView(
     LazyColumn(
         modifier = Modifier
             .padding(innerPadding)
-            .fillMaxSize()
-            .background(Color(0xFFD2E6F6)),
+            .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -396,6 +397,7 @@ fun AccionesDiariasDialog(
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Checkbox(
+                            colors= CheckboxDefaults.colors(checkedColor = Color(0xFFF56D5F),uncheckedColor = Color.Gray,checkmarkColor = Color.White),
                             checked = accionCheckeada[index],
                             onCheckedChange = { checked ->
                                 accionCheckeada = accionCheckeada.toMutableList().also {
@@ -417,12 +419,16 @@ fun AccionesDiariasDialog(
 
                 onConfirm(totalXp)
             }) {
-                Text("Confirmar")
+                Text("Confirmar",
+                    color=Color(0xFFF56D5F)
+                )
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Cancelar")
+                Text("Cancelar",
+                    color=Color(0xFFF56D5F)
+                )
             }
         }
     )

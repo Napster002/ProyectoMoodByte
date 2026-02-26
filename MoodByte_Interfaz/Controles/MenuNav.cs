@@ -31,10 +31,6 @@ namespace Controles
         {
             AbrirFrases.Invoke(this, new EventArgs());
         }
-        private void musica_Click(object sender, EventArgs e)
-        {
-            //AbrirMusica.Invoke(this, new EventArgs());
-        }
         private void cerrarSesion_Click(object sender, EventArgs e) { 
 
             AbrirLogin.Invoke(this, new EventArgs());

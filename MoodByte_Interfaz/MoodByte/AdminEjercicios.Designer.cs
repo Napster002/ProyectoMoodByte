@@ -1,4 +1,6 @@
-﻿namespace MoodByte
+﻿using System.Windows.Forms;
+
+namespace MoodByte
 {
     partial class AdminEjercicios
     {
@@ -28,6 +30,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             cmbEstado = new ComboBox();
             label1 = new Label();
             lblTipo = new Label();
@@ -42,7 +47,7 @@
             // cmbEstado
             // 
             cmbEstado.FormattingEnabled = true;
-            cmbEstado.Location = new Point(398, 75);
+            cmbEstado.Location = new Point(681, 52);
             cmbEstado.Margin = new Padding(3, 4, 3, 4);
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(155, 28);
@@ -60,39 +65,77 @@
             // lblTipo
             // 
             lblTipo.AutoSize = true;
-            lblTipo.Location = new Point(336, 79);
+            lblTipo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblTipo.ForeColor = Color.FromArgb(245, 109, 95);
+            lblTipo.Location = new Point(619, 56);
             lblTipo.Name = "lblTipo";
-            lblTipo.Size = new Size(42, 20);
+            lblTipo.Size = new Size(46, 23);
             lblTipo.TabIndex = 2;
-            lblTipo.Text = "Tipo:";
+            lblTipo.Text = "Tipo";
             // 
             // dgvEjercicio
             // 
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(253, 255, 253);
+            dgvEjercicio.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dgvEjercicio.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvEjercicio.BackgroundColor = Color.White;
+            dgvEjercicio.BorderStyle = BorderStyle.Fixed3D;
+            dgvEjercicio.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(245, 109, 95);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            dgvEjercicio.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dgvEjercicio.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvEjercicio.Location = new Point(107, 125);
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 10F);
+            dataGridViewCellStyle6.ForeColor = Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(96, 245, 216);
+            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            dgvEjercicio.DefaultCellStyle = dataGridViewCellStyle6;
+            dgvEjercicio.EnableHeadersVisualStyles = false;
+            dgvEjercicio.GridColor = Color.FromArgb(245, 161, 95);
+            dgvEjercicio.Location = new Point(74, 98);
             dgvEjercicio.Margin = new Padding(3, 4, 3, 4);
             dgvEjercicio.Name = "dgvEjercicio";
+            dgvEjercicio.RowHeadersVisible = false;
             dgvEjercicio.RowHeadersWidth = 51;
-            dgvEjercicio.Size = new Size(680, 319);
-            dgvEjercicio.TabIndex = 3;
+            dgvEjercicio.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvEjercicio.Size = new Size(766, 392);
+            dgvEjercicio.TabIndex = 0;
             // 
             // btnInsertarEjercicio
             // 
-            btnInsertarEjercicio.Location = new Point(107, 475);
+            btnInsertarEjercicio.BackColor = Color.FromArgb(252, 144, 139);
+            btnInsertarEjercicio.FlatAppearance.BorderSize = 0;
+            btnInsertarEjercicio.FlatStyle = FlatStyle.Flat;
+            btnInsertarEjercicio.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnInsertarEjercicio.ForeColor = Color.White;
+            btnInsertarEjercicio.Location = new Point(74, 507);
             btnInsertarEjercicio.Margin = new Padding(3, 4, 3, 4);
             btnInsertarEjercicio.Name = "btnInsertarEjercicio";
             btnInsertarEjercicio.Size = new Size(131, 31);
             btnInsertarEjercicio.TabIndex = 4;
             btnInsertarEjercicio.Text = "Añadir";
-            btnInsertarEjercicio.UseVisualStyleBackColor = true;
+            btnInsertarEjercicio.UseVisualStyleBackColor = false;
             btnInsertarEjercicio.Click += btnInsertarEjercicio_Click;
             // 
             // btnEditar
             // 
-            btnEditar.Location = new Point(594, 475);
+            btnEditar.BackColor = Color.FromArgb(252, 144, 139);
+            btnEditar.FlatAppearance.BorderSize = 0;
+            btnEditar.FlatStyle = FlatStyle.Flat;
+            btnEditar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnEditar.ForeColor = Color.White;
+            btnEditar.Location = new Point(588, 507);
             btnEditar.Margin = new Padding(3, 4, 3, 4);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(86, 31);
+            btnEditar.Size = new Size(110, 31);
             btnEditar.TabIndex = 5;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
@@ -100,10 +143,15 @@
             // 
             // btnBorrar
             // 
-            btnBorrar.Location = new Point(702, 475);
+            btnBorrar.BackColor = Color.FromArgb(252, 144, 139);
+            btnBorrar.FlatAppearance.BorderSize = 0;
+            btnBorrar.FlatStyle = FlatStyle.Flat;
+            btnBorrar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnBorrar.ForeColor = Color.White;
+            btnBorrar.Location = new Point(730, 507);
             btnBorrar.Margin = new Padding(3, 4, 3, 4);
             btnBorrar.Name = "btnBorrar";
-            btnBorrar.Size = new Size(86, 31);
+            btnBorrar.Size = new Size(110, 31);
             btnBorrar.TabIndex = 6;
             btnBorrar.Text = "Borrar";
             btnBorrar.UseVisualStyleBackColor = true;
@@ -123,6 +171,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(253, 238, 228);
             ClientSize = new Size(914, 600);
             Controls.Add(navMenu);
             Controls.Add(btnBorrar);
@@ -133,7 +182,7 @@
             Controls.Add(cmbEstado);
             Margin = new Padding(3, 4, 3, 4);
             Name = "AdminEjercicios";
-            Text = "AdminEjercicios";
+            Text = "Administrar Ejercicios";
             Load += AdminEjercicios_Load;
             ((System.ComponentModel.ISupportInitialize)dgvEjercicio).EndInit();
             ResumeLayout(false);

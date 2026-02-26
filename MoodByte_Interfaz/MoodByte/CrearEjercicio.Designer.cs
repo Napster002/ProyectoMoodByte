@@ -48,43 +48,51 @@
             // lblEstado
             // 
             lblEstado.AutoSize = true;
-            lblEstado.Location = new Point(263, 51);
+            lblEstado.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblEstado.ForeColor = Color.FromArgb(245, 109, 95);
+            lblEstado.Location = new Point(217, 51);
             lblEstado.Name = "lblEstado";
-            lblEstado.Size = new Size(57, 20);
+            lblEstado.Size = new Size(56, 20);
             lblEstado.TabIndex = 0;
-            lblEstado.Text = "Estado:";
+            lblEstado.Text = "Estado";
             // 
             // lblTitulo
             // 
             lblTitulo.AutoSize = true;
-            lblTitulo.Location = new Point(263, 196);
+            lblTitulo.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblTitulo.ForeColor = Color.FromArgb(245, 109, 95);
+            lblTitulo.Location = new Point(224, 196);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(50, 20);
             lblTitulo.TabIndex = 1;
-            lblTitulo.Text = "Titulo:";
+            lblTitulo.Text = "Titulo";
             // 
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
-            lblDescripcion.Location = new Point(223, 343);
+            lblDescripcion.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblDescripcion.ForeColor = Color.FromArgb(245, 109, 95);
+            lblDescripcion.Location = new Point(184, 340);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(90, 20);
             lblDescripcion.TabIndex = 2;
-            lblDescripcion.Text = "Descripcion:";
+            lblDescripcion.Text = "Descripcion";
             // 
             // lblDuracion
             // 
             lblDuracion.AutoSize = true;
-            lblDuracion.Location = new Point(248, 124);
+            lblDuracion.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblDuracion.ForeColor = Color.FromArgb(245, 109, 95);
+            lblDuracion.Location = new Point(202, 124);
             lblDuracion.Name = "lblDuracion";
             lblDuracion.Size = new Size(72, 20);
             lblDuracion.TabIndex = 3;
-            lblDuracion.Text = "Duracion:";
+            lblDuracion.Text = "Duracion";
             // 
             // cmbEstado
             // 
             cmbEstado.FormattingEnabled = true;
-            cmbEstado.Location = new Point(343, 51);
+            cmbEstado.Location = new Point(296, 51);
             cmbEstado.Margin = new Padding(3, 4, 3, 4);
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(141, 28);
@@ -92,7 +100,7 @@
             // 
             // txtTitulo
             // 
-            txtTitulo.Location = new Point(343, 196);
+            txtTitulo.Location = new Point(296, 196);
             txtTitulo.Margin = new Padding(3, 4, 3, 4);
             txtTitulo.Name = "txtTitulo";
             txtTitulo.Size = new Size(321, 27);
@@ -100,7 +108,7 @@
             // 
             // txtDescripcion
             // 
-            txtDescripcion.Location = new Point(343, 340);
+            txtDescripcion.Location = new Point(296, 340);
             txtDescripcion.Margin = new Padding(3, 4, 3, 4);
             txtDescripcion.Multiline = true;
             txtDescripcion.Name = "txtDescripcion";
@@ -109,30 +117,41 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(578, 521);
+            btnGuardar.BackColor = Color.FromArgb(252, 144, 139);
+            btnGuardar.FlatAppearance.BorderSize = 0;
+            btnGuardar.FlatStyle = FlatStyle.Flat;
+            btnGuardar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnGuardar.ForeColor = Color.White;
+            btnGuardar.Location = new Point(489, 521);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(86, 31);
+            btnGuardar.Size = new Size(130, 31);
             btnGuardar.TabIndex = 8;
             btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // buttonLimpiar
             // 
-            buttonLimpiar.Location = new Point(343, 521);
+            buttonLimpiar.BackColor = Color.FromArgb(252, 144, 139);
+            buttonLimpiar.FlatAppearance.BorderColor = Color.Salmon;
+            buttonLimpiar.FlatAppearance.BorderSize = 0;
+            buttonLimpiar.FlatStyle = FlatStyle.Flat;
+            buttonLimpiar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            buttonLimpiar.ForeColor = Color.White;
+            buttonLimpiar.Location = new Point(296, 521);
             buttonLimpiar.Margin = new Padding(3, 4, 3, 4);
             buttonLimpiar.Name = "buttonLimpiar";
-            buttonLimpiar.Size = new Size(86, 31);
+            buttonLimpiar.Size = new Size(130, 31);
             buttonLimpiar.TabIndex = 9;
             buttonLimpiar.Text = "Limpiar";
-            buttonLimpiar.UseVisualStyleBackColor = true;
+            buttonLimpiar.UseVisualStyleBackColor = false;
             buttonLimpiar.Click += buttonLimpiar_Click;
             // 
             // dtpDuracion
             // 
             dtpDuracion.Format = DateTimePickerFormat.Time;
-            dtpDuracion.Location = new Point(343, 124);
+            dtpDuracion.Location = new Point(296, 124);
             dtpDuracion.Margin = new Padding(3, 4, 3, 4);
             dtpDuracion.Name = "dtpDuracion";
             dtpDuracion.Size = new Size(141, 27);
@@ -145,15 +164,17 @@
             // lblUrl
             // 
             lblUrl.AutoSize = true;
-            lblUrl.Location = new Point(275, 268);
+            lblUrl.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblUrl.ForeColor = Color.FromArgb(245, 109, 95);
+            lblUrl.Location = new Point(236, 268);
             lblUrl.Name = "lblUrl";
             lblUrl.Size = new Size(38, 20);
             lblUrl.TabIndex = 11;
-            lblUrl.Text = "URL:";
+            lblUrl.Text = "URL";
             // 
             // txtUrl
             // 
-            txtUrl.Location = new Point(343, 268);
+            txtUrl.Location = new Point(296, 268);
             txtUrl.Name = "txtUrl";
             txtUrl.Size = new Size(321, 27);
             txtUrl.TabIndex = 12;
@@ -162,6 +183,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(253, 238, 228);
             ClientSize = new Size(914, 600);
             Controls.Add(txtUrl);
             Controls.Add(lblUrl);
@@ -177,7 +199,7 @@
             Controls.Add(lblEstado);
             Margin = new Padding(3, 4, 3, 4);
             Name = "CrearEjercicio";
-            Text = "CrearEjercicio";
+            Text = "Crear Ejercicios";
             Load += CrearEjercicio_Load;
             ((System.ComponentModel.ISupportInitialize)epEjercicio).EndInit();
             ResumeLayout(false);

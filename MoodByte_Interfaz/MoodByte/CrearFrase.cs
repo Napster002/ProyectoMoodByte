@@ -64,9 +64,10 @@ namespace MoodByte
         }
         public async Task InsertaFrase(Frase frase)
         {
-            if (!esNuevo) { 
-           
-                Frase fraseActualizada= new Frase
+            if (!esNuevo)
+            {
+
+                Frase fraseActualizada = new Frase
                 {
                     id = frase.id,
                     frase = frase.frase,
@@ -109,13 +110,13 @@ namespace MoodByte
             await CargarEstados();
             if (!esNuevo)
             {
-                switch(frase.puntuacion)
+                switch (frase.puntuacion)
                 {
                     case 1: cmbEstado.SelectedItem = listaEstados.FirstOrDefault(e => e.nombre.ToLower() == "triste"); break;
-                    case 2: cmbEstado.SelectedItem = listaEstados.FirstOrDefault(e => e.nombre.ToLower() == "un poco mal"); break;
+                    case 2: cmbEstado.SelectedItem = listaEstados.FirstOrDefault(e => e.nombre.ToLower() == "estresado"); break;
                     case 3: cmbEstado.SelectedItem = listaEstados.FirstOrDefault(e => e.nombre.ToLower() == "regular"); break;
                     case 4: cmbEstado.SelectedItem = listaEstados.FirstOrDefault(e => e.nombre.ToLower() == "bien"); break;
-                    case 5: cmbEstado.SelectedItem = listaEstados.FirstOrDefault(e => e.nombre.ToLower() == "muy bien"); break;
+                    case 5: cmbEstado.SelectedItem = listaEstados.FirstOrDefault(e => e.nombre.ToLower() == "feliz"); break;
                 }
                 cmbEstado.Enabled = false;
             }
@@ -135,21 +136,25 @@ namespace MoodByte
                 EstadoDTO estado = cmbEstado.SelectedItem as EstadoDTO;
                 switch (estado.nombre.ToLower())
                 {
-                    case "triste": puntuaje = 1; break;
-                    case "un poco mal": puntuaje = 2; break;
+                    case "triste": puntuaje = 5; break;
+                    case "estresado": puntuaje = 4; break;
                     case "regular": puntuaje = 3; break;
-                    case "bien": puntuaje = 4; break;
-                    case "muy bien": puntuaje = 5; break;
-                };
+                    case "bien": puntuaje = 2; break;
+                    case "feliz": puntuaje = 1; break;
+                }
+                ;
                 Frase fraseInsert = new Frase();
-                if (!esNuevo) {
+                if (!esNuevo)
+                {
                     fraseInsert = new Frase
                     {
                         id = frase.id,
                         frase = txtFrase.Text,
                         puntuacion = puntuaje
                     };
-                } else {
+                }
+                else
+                {
                     fraseInsert = new Frase
                     {
                         frase = txtFrase.Text,
@@ -160,5 +165,6 @@ namespace MoodByte
                 await InsertaFrase(fraseInsert);
             }
         }
+
     }
 }

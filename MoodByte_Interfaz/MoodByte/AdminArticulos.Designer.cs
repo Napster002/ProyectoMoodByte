@@ -44,35 +44,50 @@
             // 
             // btnNuevoArticulo
             // 
-            btnNuevoArticulo.Location = new Point(75, 527);
+            btnNuevoArticulo.BackColor = Color.FromArgb(252, 144, 139);
+            btnNuevoArticulo.FlatAppearance.BorderSize = 0;
+            btnNuevoArticulo.FlatStyle = FlatStyle.Flat;
+            btnNuevoArticulo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnNuevoArticulo.ForeColor = SystemColors.ButtonHighlight;
+            btnNuevoArticulo.Location = new Point(75, 497);
             btnNuevoArticulo.Margin = new Padding(3, 4, 3, 4);
             btnNuevoArticulo.Name = "btnNuevoArticulo";
-            btnNuevoArticulo.Size = new Size(86, 31);
+            btnNuevoArticulo.Size = new Size(145, 31);
             btnNuevoArticulo.TabIndex = 1;
             btnNuevoArticulo.Text = "Nuevo";
-            btnNuevoArticulo.UseVisualStyleBackColor = true;
+            btnNuevoArticulo.UseVisualStyleBackColor = false;
             btnNuevoArticulo.Click += btnNuevoArticulo_Click;
             // 
             // btnEditarArticulo
             // 
-            btnEditarArticulo.Location = new Point(168, 527);
+            btnEditarArticulo.BackColor = Color.FromArgb(252, 144, 139);
+            btnEditarArticulo.FlatAppearance.BorderSize = 0;
+            btnEditarArticulo.FlatStyle = FlatStyle.Flat;
+            btnEditarArticulo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnEditarArticulo.ForeColor = SystemColors.ButtonHighlight;
+            btnEditarArticulo.Location = new Point(488, 497);
             btnEditarArticulo.Margin = new Padding(3, 4, 3, 4);
             btnEditarArticulo.Name = "btnEditarArticulo";
-            btnEditarArticulo.Size = new Size(86, 31);
+            btnEditarArticulo.Size = new Size(145, 31);
             btnEditarArticulo.TabIndex = 2;
             btnEditarArticulo.Text = "Editar";
-            btnEditarArticulo.UseVisualStyleBackColor = true;
+            btnEditarArticulo.UseVisualStyleBackColor = false;
             btnEditarArticulo.Click += btnEditarArticulo_Click;
             // 
             // btnBorrarArticulo
             // 
-            btnBorrarArticulo.Location = new Point(274, 527);
+            btnBorrarArticulo.BackColor = Color.FromArgb(252, 144, 139);
+            btnBorrarArticulo.FlatAppearance.BorderSize = 0;
+            btnBorrarArticulo.FlatStyle = FlatStyle.Flat;
+            btnBorrarArticulo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnBorrarArticulo.ForeColor = SystemColors.ButtonHighlight;
+            btnBorrarArticulo.Location = new Point(676, 497);
             btnBorrarArticulo.Margin = new Padding(3, 4, 3, 4);
             btnBorrarArticulo.Name = "btnBorrarArticulo";
-            btnBorrarArticulo.Size = new Size(86, 31);
+            btnBorrarArticulo.Size = new Size(145, 31);
             btnBorrarArticulo.TabIndex = 3;
             btnBorrarArticulo.Text = "Borrar";
-            btnBorrarArticulo.UseVisualStyleBackColor = true;
+            btnBorrarArticulo.UseVisualStyleBackColor = false;
             btnBorrarArticulo.Click += btnBorrarArticulo_Click;
             // 
             // imageList1
@@ -84,10 +99,10 @@
             // listViewArticulos
             // 
             listViewArticulos.FullRowSelect = true;
-            listViewArticulos.Location = new Point(488, 56);
+            listViewArticulos.Location = new Point(488, 77);
             listViewArticulos.Margin = new Padding(3, 4, 3, 4);
             listViewArticulos.Name = "listViewArticulos";
-            listViewArticulos.Size = new Size(333, 500);
+            listViewArticulos.Size = new Size(333, 387);
             listViewArticulos.TabIndex = 4;
             listViewArticulos.UseCompatibleStateImageBehavior = false;
             listViewArticulos.View = View.List;
@@ -95,17 +110,17 @@
             // 
             // pictureBoxArticulo
             // 
-            pictureBoxArticulo.Location = new Point(75, 56);
+            pictureBoxArticulo.Location = new Point(75, 77);
             pictureBoxArticulo.Margin = new Padding(3, 4, 3, 4);
             pictureBoxArticulo.Name = "pictureBoxArticulo";
-            pictureBoxArticulo.Size = new Size(285, 247);
+            pictureBoxArticulo.Size = new Size(285, 264);
             pictureBoxArticulo.TabIndex = 5;
             pictureBoxArticulo.TabStop = false;
             // 
             // panelTituloArticulo
             // 
             panelTituloArticulo.Controls.Add(lblTitulo);
-            panelTituloArticulo.Location = new Point(75, 343);
+            panelTituloArticulo.Location = new Point(75, 385);
             panelTituloArticulo.Margin = new Padding(3, 4, 3, 4);
             panelTituloArticulo.Name = "panelTituloArticulo";
             panelTituloArticulo.Size = new Size(285, 79);
@@ -114,6 +129,7 @@
             // lblTitulo
             // 
             lblTitulo.AutoSize = true;
+            lblTitulo.ForeColor = Color.FromArgb(245, 109, 95);
             lblTitulo.Location = new Point(16, 32);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(42, 20);
@@ -124,16 +140,17 @@
             // 
             navMenu.BackColor = Color.Transparent;
             navMenu.ForeColor = SystemColors.ControlText;
-            navMenu.Location = new Point(8, 4);
+            navMenu.Location = new Point(12, 4);
             navMenu.Margin = new Padding(3, 5, 3, 5);
             navMenu.Name = "navMenu";
-            navMenu.Size = new Size(246, 32);
+            navMenu.Size = new Size(215, 28);
             navMenu.TabIndex = 7;
             // 
             // AdminArticulos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(253, 238, 228);
             ClientSize = new Size(914, 600);
             Controls.Add(navMenu);
             Controls.Add(panelTituloArticulo);
@@ -144,7 +161,7 @@
             Controls.Add(btnNuevoArticulo);
             Margin = new Padding(3, 4, 3, 4);
             Name = "AdminArticulos";
-            Text = "AdminArticulos";
+            Text = "Administrar Artículos";
             Load += AdminArticulos_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticulo).EndInit();
             panelTituloArticulo.ResumeLayout(false);

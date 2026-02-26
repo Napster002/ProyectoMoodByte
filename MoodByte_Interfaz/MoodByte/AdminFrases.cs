@@ -24,8 +24,14 @@ namespace MoodByte
             navMenu.AbrirArticulos += menu_abrirArticulos;
             navMenu.AbrirEjercicios += menu_abrirEjercicios;
             navMenu.AbrirFrases += menu_abrirFrases;
+            navMenu.AbrirLogin += menu_abrirLogin;
         }
-        //Metodos menu de navegacion-----------------------
+        private void menu_abrirLogin(object? sender, EventArgs e)
+        {
+            Program.log.Visible = true;
+            this.Close();
+        }
+
         private void menu_abrirUsuarios(object sender, EventArgs e)
         {
 
@@ -56,7 +62,6 @@ namespace MoodByte
             AdminFrases frases = new AdminFrases();
             frases.Visible = true;
             this.Close();
-
         }
 
         private void btnInsertar_Click(object sender, EventArgs e)

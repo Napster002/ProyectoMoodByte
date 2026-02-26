@@ -32,80 +32,113 @@
             lblPassword = new Label();
             txtUsuario = new TextBox();
             txtPassword = new TextBox();
+            pictureLogo = new PictureBox();
             btnRegistrar = new Button();
             btnEntrar = new Button();
+            ((System.ComponentModel.ISupportInitialize)pictureLogo).BeginInit();
             SuspendLayout();
             // 
             // lblUsuario
             // 
             lblUsuario.AutoSize = true;
-            lblUsuario.ForeColor = SystemColors.ButtonHighlight;
-            lblUsuario.Location = new Point(194, 107);
+            lblUsuario.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            lblUsuario.ForeColor = Color.FromArgb(245, 109, 95);
+            lblUsuario.Location = new Point(251, 258);
             lblUsuario.Name = "lblUsuario";
-            lblUsuario.Size = new Size(47, 15);
+            lblUsuario.Size = new Size(70, 23);
             lblUsuario.TabIndex = 0;
             lblUsuario.Text = "Usuario";
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.ForeColor = SystemColors.ButtonHighlight;
-            lblPassword.Location = new Point(174, 206);
+            lblPassword.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            lblPassword.ForeColor = Color.FromArgb(245, 109, 95);
+            lblPassword.Location = new Point(222, 359);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(67, 15);
+            lblPassword.Size = new Size(99, 23);
             lblPassword.TabIndex = 1;
             lblPassword.Text = "Contraseña";
             // 
             // txtUsuario
             // 
-            txtUsuario.Location = new Point(278, 104);
+            txtUsuario.BorderStyle = BorderStyle.FixedSingle;
+            txtUsuario.Location = new Point(334, 258);
+            txtUsuario.Margin = new Padding(3, 4, 3, 4);
             txtUsuario.Name = "txtUsuario";
-            txtUsuario.Size = new Size(255, 23);
+            txtUsuario.Size = new Size(264, 27);
             txtUsuario.TabIndex = 2;
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(278, 203);
+            txtPassword.BorderStyle = BorderStyle.FixedSingle;
+            txtPassword.Location = new Point(334, 359);
+            txtPassword.Margin = new Padding(3, 4, 3, 4);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(255, 23);
+            txtPassword.Size = new Size(264, 27);
             txtPassword.TabIndex = 3;
             txtPassword.UseSystemPasswordChar = true;
             // 
+            // pictureLogo
+            // 
+            pictureLogo.Image = Properties.Resources.icono_moodbyte;
+            pictureLogo.Location = new Point(334, 33);
+            pictureLogo.Name = "pictureLogo";
+            pictureLogo.Size = new Size(264, 218);
+            pictureLogo.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureLogo.TabIndex = 6;
+            pictureLogo.TabStop = false;
+            // 
             // btnRegistrar
             // 
-            btnRegistrar.Location = new Point(278, 339);
+            btnRegistrar.BackColor = Color.FromArgb(252, 144, 139);
+            btnRegistrar.FlatAppearance.BorderSize = 0;
+            btnRegistrar.FlatStyle = FlatStyle.Flat;
+            btnRegistrar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnRegistrar.ForeColor = Color.White;
+            btnRegistrar.Location = new Point(334, 440);
+            btnRegistrar.Margin = new Padding(3, 4, 3, 4);
             btnRegistrar.Name = "btnRegistrar";
-            btnRegistrar.Size = new Size(90, 23);
+            btnRegistrar.Size = new Size(115, 31);
             btnRegistrar.TabIndex = 4;
             btnRegistrar.Text = "Crear nuevo";
-            btnRegistrar.UseVisualStyleBackColor = true;
+            btnRegistrar.UseVisualStyleBackColor = false;
             btnRegistrar.Click += btnRegistrar_Click;
             // 
             // btnEntrar
             // 
-            btnEntrar.Location = new Point(433, 339);
+            btnEntrar.BackColor = Color.FromArgb(252, 144, 139);
+            btnEntrar.FlatAppearance.BorderSize = 0;
+            btnEntrar.FlatStyle = FlatStyle.Flat;
+            btnEntrar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnEntrar.ForeColor = Color.White;
+            btnEntrar.Location = new Point(487, 440);
+            btnEntrar.Margin = new Padding(3, 4, 3, 4);
             btnEntrar.Name = "btnEntrar";
-            btnEntrar.Size = new Size(90, 23);
+            btnEntrar.Size = new Size(115, 31);
             btnEntrar.TabIndex = 5;
             btnEntrar.Text = "Entrar";
-            btnEntrar.UseVisualStyleBackColor = true;
+            btnEntrar.UseVisualStyleBackColor = false;
             btnEntrar.Click += btnEntrar_Click;
             // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.MediumPurple;
-            ClientSize = new Size(800, 450);
+            BackColor = Color.FromArgb(253, 238, 228);
+            ClientSize = new Size(914, 600);
+            Controls.Add(pictureLogo);
             Controls.Add(btnEntrar);
             Controls.Add(btnRegistrar);
             Controls.Add(txtPassword);
             Controls.Add(txtUsuario);
             Controls.Add(lblPassword);
             Controls.Add(lblUsuario);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Login";
             Text = "Login";
             Load += Login_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureLogo).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -118,5 +151,6 @@
         private TextBox txtPassword;
         private Button btnRegistrar;
         private Button btnEntrar;
+        private PictureBox pictureLogo;
     }
 }

@@ -60,6 +60,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -170,7 +171,6 @@ fun ContentHomeView(
             .padding(innerPadding)
             .fillMaxSize()
             .background(Color(0xFFD2E6F6)),
-            .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -189,7 +189,7 @@ fun ContentHomeView(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 10.dp, horizontal = 25.dp),
+                    .padding(vertical = 20.dp, horizontal = 25.dp),
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
@@ -211,7 +211,8 @@ fun ContentHomeView(
                         text = fraseMoodActual ?: "",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Medium,
-                        color = Color(0xFF555555),
+                        fontStyle = FontStyle.Italic,
+                        color = Color(0xFFF5A15F),
                         textAlign = TextAlign.Center,
                         modifier=Modifier.fillMaxWidth()
                     )
@@ -222,7 +223,7 @@ fun ContentHomeView(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 25.dp),
+                    .padding(horizontal = 25.dp,vertical=10.dp),
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -351,7 +352,7 @@ fun BotonHomeView(
         onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 25.dp)
+            .padding(horizontal = 25.dp, vertical = 10.dp)
             .height(80.dp),
         shape = RoundedCornerShape(20.dp),
         colors = ButtonDefaults.buttonColors(

@@ -83,19 +83,7 @@ fun ContentLoginView(
       horizontalAlignment = Alignment.CenterHorizontally,
       verticalArrangement = Arrangement.Center
    ) {
-      Row(
-         modifier = Modifier.fillMaxWidth(),
-         horizontalArrangement = Arrangement.End,
-         verticalAlignment = Alignment.Top
-      ) {
-         Text(
-            "Registrarse",
-            fontFamily = FontFamily(Font(com.example.moodbyte.R.font.fuentes)),
-            modifier = Modifier.clickable {
-               crearUsuario = true
-            }
-         )
-      }
+
       Image(
          painter = painterResource(id=R.drawable.icono_moodbyte),
          contentDescription = "Logo MoodByte",
@@ -153,6 +141,21 @@ fun ContentLoginView(
          Text(
             "Entrar",
             fontWeight = FontWeight.Bold
+         )
+      }
+      Row(
+         modifier = Modifier.fillMaxWidth(),
+         horizontalArrangement = Arrangement.End,
+         verticalAlignment = Alignment.CenterVertically
+      ) {
+         Text(
+            "Registrarse",
+            color=Color(0xFFFC908B),
+            fontFamily = FontFamily(Font(com.example.moodbyte.R.font.fuentes)),
+            modifier = Modifier.padding(top=5.dp,end=10.dp)
+               .clickable{
+               crearUsuario = true
+            }
          )
       }
    }

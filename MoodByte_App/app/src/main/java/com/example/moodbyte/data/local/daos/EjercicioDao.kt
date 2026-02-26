@@ -30,7 +30,7 @@ interface EjercicioDao {
         """ 
        SELECT e.*  
       FROM ejercicios e 
-       WHERE estado_id = :idEstado 
+       WHERE estadoid = :idEstado 
    """
     )
     fun getByNombreEstado(idEstado: Long): Flow<List<EjercicioEntity>>

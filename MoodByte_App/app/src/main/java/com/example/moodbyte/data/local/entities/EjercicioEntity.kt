@@ -3,7 +3,10 @@ package com.example.moodbyte.data.local.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.example.moodbyte.components.LocalTimeAdapter
 import com.example.moodbyte.domain.model.Ejercicio
+import com.example.moodbyte.domain.model.Estado
 import java.time.LocalTime
 import kotlin.Long
 
@@ -15,8 +18,7 @@ data class EjercicioEntity(
     val descripcion:String,
     val recursoUrl:String,
     val duracion: LocalTime,
-    @ColumnInfo(name="estado_id")
-    val estadoid: Long=1L
+    val estadoid: Long
 )
 
 fun EjercicioEntity.toDomain()= Ejercicio(

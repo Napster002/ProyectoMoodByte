@@ -44,10 +44,15 @@ class HomeViewModel(
 
     //Lista de registros que cargaremos
     init {
-        comprobarRegistros()
-        cargarFrases()
-        cargarSemanaMoods()
-
+        viewModelScope.launch {
+            session.usuario.collect { user ->
+                if (user?.id != null) {
+                    cargarFrases()
+                    cargarSemanaMoods()
+                    comprobarRegistros()
+                }
+            }
+        }
         viewModelScope.launch {
             session.mood.collect {
                 actualizarFraseMood()
@@ -55,6 +60,7 @@ class HomeViewModel(
             }
         }
     }
+
     fun setMood(mood: String) {
         val punt = MoodAPuntuacion(mood)
         session.setMood(punt)

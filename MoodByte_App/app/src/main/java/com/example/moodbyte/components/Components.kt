@@ -510,13 +510,13 @@ fun EjercicioCard(
     var showDialog by remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth().padding(vertical = 20.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(6.dp),
         onClick = {
             showDialog=true
         },
-        colors = CardColors(Color(0xFFD2E6F6),Color(0xFFD2E6F6),Color(0xFFD2E6F6),Color(0xFFD2E6F6))
+        colors = CardColors(Color(0xFFFC908B),Color(0xFFD2E6F6),Color(0xFFD2E6F6),Color(0xFFD2E6F6))
     ) {
         Column (verticalArrangement = Arrangement.spacedBy(5.dp),
         ){
@@ -540,7 +540,7 @@ fun EjercicioCard(
             )
             Text(text = ejercicio.descripcion,
                 fontSize = 14.sp,
-                color = Color.Blue,
+                color = Color.White,
                 modifier = Modifier.padding(12.dp)
             )
         }

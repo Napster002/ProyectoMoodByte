@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -140,6 +141,7 @@ fun ArticuloCard(
             .padding(12.dp)
             .clickable { onClick(articulo.enlace) },
         shape = RoundedCornerShape(16.dp),
+        colors= CardDefaults.cardColors(containerColor=Color(0xFFFC908B)),
         elevation = CardDefaults.cardElevation(6.dp)
     ) {
         Column {
@@ -158,13 +160,14 @@ fun ArticuloCard(
                 text = articulo.titulo,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
+                color=Color(0xFF60F5D8),
                 modifier = Modifier.padding(horizontal = 12.dp)
             )
 
             Text(
                 text = articulo.subtitulo,
                 fontSize = 14.sp,
-                color = Color.Gray,
+                color = Color.White,
                 modifier = Modifier.padding(12.dp)
             )
         }

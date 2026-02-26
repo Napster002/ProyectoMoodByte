@@ -13,7 +13,7 @@ public record RegistroDTO(
         this(
           registro.getPuntuacion(),
           registro.getFechaRegistro(),
-          registro.getUsuario().getId()
+                registro.getUsuario() != null ? registro.getUsuario().getId() : null
         );
     }
 }

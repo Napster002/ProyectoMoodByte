@@ -19,6 +19,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -294,7 +296,7 @@ fun CrearUsuarioDialog(
             OutlinedTextField(
                value = fechaNacimiento,
                onValueChange = { fechaNacimiento = it },
-               label = { Text("Fecha de nacimiento (yyyy/MM/dd)") },
+               label = { Text("Fecha de nacimiento (yyyy-MM-dd)") },
                modifier = Modifier.fillMaxWidth(),
                shape = RoundedCornerShape(12.dp),
                colors = TextFieldDefaults.colors(
@@ -303,39 +305,43 @@ fun CrearUsuarioDialog(
                )
             )
             Spacer(Modifier.height(12.dp))
+            Card(
+               modifier=Modifier.fillMaxWidth().padding(all=10.dp),
+               colors= CardDefaults.cardColors(containerColor = Color.Transparent)
+            ) {
+               Text("Sexo")
 
-            Text("Sexo")
+               Row(verticalAlignment = Alignment.CenterVertically) {
+                  RadioButton(
+                     selected = genero == Genero.MASCULINO,
+                     onClick = { genero = Genero.MASCULINO },
+                     colors = RadioButtonDefaults.colors(
+                        selectedColor = Color(0xFFF5A15F)
+                     )
+                  )
+                  Text("Masculino")
+               }
 
-            Row(verticalAlignment = Alignment.CenterVertically) {
-               RadioButton(
-                  selected = genero==Genero.MASCULINO,
-                  onClick = {  genero=Genero.MASCULINO},
-                  colors= RadioButtonDefaults.colors(
-                     selectedColor = Color(0xFFF5A15F)
+               Row(verticalAlignment = Alignment.CenterVertically) {
+                  RadioButton(
+                     selected = genero == Genero.FEMENINO,
+                     onClick = { genero = Genero.FEMENINO },
+                     colors = RadioButtonDefaults.colors(
+                        selectedColor = Color(0xFFF5A15F)
+                     )
                   )
-               )
-               Text("Masculino")
-            }
-
-            Row(verticalAlignment = Alignment.CenterVertically) {
-               RadioButton(
-                  selected = genero == Genero.FEMENINO,
-                  onClick = { genero = Genero.FEMENINO },
-                  colors= RadioButtonDefaults.colors(
-                     selectedColor = Color(0xFFF5A15F)
+                  Text("Femenino")
+               }
+               Row(verticalAlignment = Alignment.CenterVertically) {
+                  RadioButton(
+                     selected = genero == Genero.OTRO,
+                     onClick = { genero = Genero.OTRO },
+                     colors = RadioButtonDefaults.colors(
+                        selectedColor = Color(0xFFF5A15F)
+                     )
                   )
-               )
-               Text("Femenino")
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-               RadioButton(
-                  selected = genero == Genero.OTRO,
-                  onClick = { genero = Genero.OTRO },
-                  colors= RadioButtonDefaults.colors(
-                     selectedColor = Color(0xFFF5A15F)
-                  )
-               )
-               Text("Otro")
+                  Text("Otro")
+               }
             }
          }
       },

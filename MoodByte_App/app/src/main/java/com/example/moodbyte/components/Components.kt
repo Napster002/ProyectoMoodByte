@@ -472,7 +472,7 @@ fun EjercicioViewContent(
                             onClick = {
                                 selectedOption = estados.nombre
                                 expanded = false
-                                ejercicioViewModel.cargarEjerciciosPorEstado(estados.nombre)
+                                ejercicioViewModel.cargarEjerciciosPorEstado(estados.id)
                             },
                             colors= MenuDefaults.itemColors(
                                 textColor=Color(0xFFFC908B)
@@ -561,7 +561,7 @@ fun VerEjercicioCard(
     estadoViewModel: EstadoViewModel
 ) {
     val estado=estadoViewModel.estados.collectAsState()
-    val estadoNombre = estado.value.firstOrNull { it.id == ejercicio.estado_id }?.nombre ?: "Sin estado"
+    val estadoNombre = estado.value.firstOrNull { it.id == ejercicio.estadoid }?.nombre ?: "Sin estado"
 
     Dialog(onDismissRequest = onDismiss) {
         Card(

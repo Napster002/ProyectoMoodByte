@@ -9,29 +9,23 @@ import com.example.moodbyte.data.remote.dtos.toEntity
 import com.example.moodbyte.domain.model.Ejercicio
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import java.util.Collections.list
 
 class EjercicioRepository(
     private val api: ApiService,
     private val dao: EjercicioDao
 ) {
-    val ejercicios: Flow<List<Ejercicio>> = flow{
-        emit( dao.getAll().map { it.toDomain() })
-    }
-    suspend fun getEjercicios(): List<Ejercicio>{
-        return dao.getAll().map { it.toDomain() }
-    }
+    fun ejerciciosdeEstado():Flow<List<Ejercicio>> =
+        dao.getAll().map { list -> list.map { it.toDomain() } }
+
     suspend fun refreshEjercicios(){
         val ejercicios=api.getEjercicios()
         dao.insertAll(ejercicios.map { it.toEntity() })
     }
-    suspend fun cargarEjerciciosPorEstado(nombreEstado: String): List<Ejercicio> {
-        return dao.getByNombreEstado(nombreEstado).map { it.toDomain() }
-    }
-    suspend fun cargarEjercicios(): List<Ejercicio>{
-        return dao.getAll().map { it.toDomain() }
-    }
-    suspend fun insertarEjercicio(ejercicio: EjercicioEntity) {
-        dao.insert(ejercicio)
-    }
+    fun cargarEjerciciosPorEstado(idEstado:Long): Flow<List<Ejercicio>> =
+        dao.getByNombreEstado(idEstado).map { list -> list.map{it.toDomain()}
+        }
+
 }

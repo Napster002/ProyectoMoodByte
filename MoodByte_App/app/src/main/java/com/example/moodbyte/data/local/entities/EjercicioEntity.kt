@@ -15,8 +15,8 @@ data class EjercicioEntity(
     val descripcion:String,
     val recursoUrl:String,
     val duracion: LocalTime,
-    @ColumnInfo(name = "estado_id")
-    val estado_id: Long
+    @ColumnInfo(name="estado_id")
+    val estadoid: Long=1L
 )
 
 fun EjercicioEntity.toDomain()= Ejercicio(
@@ -25,5 +25,5 @@ fun EjercicioEntity.toDomain()= Ejercicio(
     descripcion = descripcion,
     recursoUrl = recursoUrl,
     duracion = duracion,
-    estado_id = estado_id
+    estadoid = estadoid
 )

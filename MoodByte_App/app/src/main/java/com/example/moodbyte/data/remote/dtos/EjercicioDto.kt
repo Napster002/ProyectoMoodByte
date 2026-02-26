@@ -1,8 +1,6 @@
 package com.example.moodbyte.data.remote.dtos
 
-import androidx.room.PrimaryKey
 import com.example.moodbyte.data.local.entities.EjercicioEntity
-import com.example.moodbyte.domain.model.Ejercicio
 import java.time.LocalTime
 
 data class EjercicioDto(
@@ -11,7 +9,7 @@ data class EjercicioDto(
     val descripcion:String,
     val recursoUrl:String,
     val duracion: LocalTime,
-    val estado_id: Long=1L
+    val estadoid: Long
 )
 
 fun EjercicioDto.toEntity()= EjercicioEntity(
@@ -20,5 +18,5 @@ fun EjercicioDto.toEntity()= EjercicioEntity(
     descripcion = descripcion,
     recursoUrl = recursoUrl,
     duracion = duracion,
-    estado_id = estado_id
+    estadoid = estadoid
 )

@@ -38,6 +38,7 @@ namespace MoodByte
             InitializeComponent();
         }
 
+
         // Falta la opcion de salir al guardar correctamnete
         private async void buttonGuardar_Click(object sender, EventArgs e)
         {

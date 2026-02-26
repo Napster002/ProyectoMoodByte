@@ -56,139 +56,163 @@
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.ForeColor = SystemColors.ButtonHighlight;
-            lblNombre.Location = new Point(16, 9);
+            lblNombre.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNombre.ForeColor = Color.FromArgb(245, 109, 95);
+            lblNombre.Location = new Point(85, 15);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(54, 15);
+            lblNombre.Size = new Size(71, 20);
             lblNombre.TabIndex = 0;
             lblNombre.Text = "Nombre ";
             // 
             // lblNombreUsuario
             // 
             lblNombreUsuario.AutoSize = true;
-            lblNombreUsuario.ForeColor = SystemColors.ButtonHighlight;
-            lblNombreUsuario.Location = new Point(407, 9);
+            lblNombreUsuario.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblNombreUsuario.ForeColor = Color.FromArgb(245, 109, 95);
+            lblNombreUsuario.Location = new Point(85, 178);
             lblNombreUsuario.Name = "lblNombreUsuario";
-            lblNombreUsuario.Size = new Size(94, 15);
+            lblNombreUsuario.Size = new Size(125, 20);
             lblNombreUsuario.TabIndex = 1;
             lblNombreUsuario.Text = "Nombre Usuario";
             // 
             // lblContraseña
             // 
             lblContraseña.AutoSize = true;
-            lblContraseña.ForeColor = SystemColors.ButtonHighlight;
-            lblContraseña.Location = new Point(416, 119);
+            lblContraseña.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblContraseña.ForeColor = Color.FromArgb(245, 109, 95);
+            lblContraseña.Location = new Point(359, 15);
             lblContraseña.Name = "lblContraseña";
-            lblContraseña.Size = new Size(67, 15);
+            lblContraseña.Size = new Size(88, 20);
             lblContraseña.TabIndex = 2;
             lblContraseña.Text = "Contraseña";
             // 
             // lblGenero
             // 
             lblGenero.AutoSize = true;
-            lblGenero.ForeColor = SystemColors.ButtonHighlight;
-            lblGenero.Location = new Point(16, 171);
+            lblGenero.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblGenero.ForeColor = Color.FromArgb(245, 109, 95);
+            lblGenero.Location = new Point(85, 261);
             lblGenero.Name = "lblGenero";
-            lblGenero.Size = new Size(45, 15);
+            lblGenero.Size = new Size(60, 20);
             lblGenero.TabIndex = 4;
             lblGenero.Text = "Genero";
             // 
             // lblTipoUsuario
             // 
             lblTipoUsuario.AutoSize = true;
-            lblTipoUsuario.ForeColor = SystemColors.ButtonHighlight;
-            lblTipoUsuario.Location = new Point(16, 230);
+            lblTipoUsuario.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblTipoUsuario.ForeColor = Color.FromArgb(245, 109, 95);
+            lblTipoUsuario.Location = new Point(85, 344);
             lblTipoUsuario.Name = "lblTipoUsuario";
-            lblTipoUsuario.Size = new Size(73, 15);
+            lblTipoUsuario.Size = new Size(98, 20);
             lblTipoUsuario.TabIndex = 5;
             lblTipoUsuario.Text = "Tipo Usuario";
             // 
             // lblFechanacimiento
             // 
             lblFechanacimiento.AutoSize = true;
-            lblFechanacimiento.ForeColor = SystemColors.ButtonHighlight;
-            lblFechanacimiento.Location = new Point(16, 119);
+            lblFechanacimiento.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblFechanacimiento.ForeColor = Color.FromArgb(245, 109, 95);
+            lblFechanacimiento.Location = new Point(359, 178);
             lblFechanacimiento.Name = "lblFechanacimiento";
-            lblFechanacimiento.Size = new Size(117, 15);
+            lblFechanacimiento.Size = new Size(152, 20);
             lblFechanacimiento.TabIndex = 6;
             lblFechanacimiento.Text = "Fecha de nacimineto";
             // 
             // tbNombre
             // 
-            tbNombre.Location = new Point(16, 27);
+            tbNombre.BorderStyle = BorderStyle.FixedSingle;
+            tbNombre.Location = new Point(85, 39);
+            tbNombre.Margin = new Padding(3, 4, 3, 4);
             tbNombre.Name = "tbNombre";
-            tbNombre.Size = new Size(157, 23);
+            tbNombre.Size = new Size(179, 27);
             tbNombre.TabIndex = 7;
             // 
             // lblApellidos
             // 
             lblApellidos.AutoSize = true;
-            lblApellidos.ForeColor = SystemColors.ButtonHighlight;
-            lblApellidos.Location = new Point(16, 64);
+            lblApellidos.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblApellidos.ForeColor = Color.FromArgb(245, 109, 95);
+            lblApellidos.Location = new Point(85, 95);
             lblApellidos.Name = "lblApellidos";
-            lblApellidos.Size = new Size(56, 15);
+            lblApellidos.Size = new Size(74, 20);
             lblApellidos.TabIndex = 8;
             lblApellidos.Text = "Apellidos";
             // 
             // tbApellidos
             // 
-            tbApellidos.Location = new Point(16, 82);
+            tbApellidos.BorderStyle = BorderStyle.FixedSingle;
+            tbApellidos.Location = new Point(85, 121);
+            tbApellidos.Margin = new Padding(3, 4, 3, 4);
             tbApellidos.Name = "tbApellidos";
-            tbApellidos.Size = new Size(157, 23);
+            tbApellidos.Size = new Size(179, 27);
             tbApellidos.TabIndex = 9;
             // 
             // dtpFechanacimiento
             // 
-            dtpFechanacimiento.Location = new Point(16, 137);
+            dtpFechanacimiento.Location = new Point(359, 206);
+            dtpFechanacimiento.Margin = new Padding(3, 4, 3, 4);
             dtpFechanacimiento.Name = "dtpFechanacimiento";
-            dtpFechanacimiento.Size = new Size(235, 23);
+            dtpFechanacimiento.Size = new Size(268, 27);
             dtpFechanacimiento.TabIndex = 10;
             // 
             // lblFechaRegistro
             // 
             lblFechaRegistro.AutoSize = true;
-            lblFechaRegistro.ForeColor = SystemColors.ButtonHighlight;
-            lblFechaRegistro.Location = new Point(407, 64);
+            lblFechaRegistro.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblFechaRegistro.ForeColor = Color.FromArgb(245, 109, 95);
+            lblFechaRegistro.Location = new Point(359, 259);
             lblFechaRegistro.Name = "lblFechaRegistro";
-            lblFechaRegistro.Size = new Size(100, 15);
+            lblFechaRegistro.Size = new Size(133, 20);
             lblFechaRegistro.TabIndex = 11;
             lblFechaRegistro.Text = "Fecha de Registro";
             // 
             // dtpFechaRegistro
             // 
-            dtpFechaRegistro.Location = new Point(346, 82);
+            dtpFechaRegistro.Location = new Point(359, 283);
+            dtpFechaRegistro.Margin = new Padding(3, 4, 3, 4);
             dtpFechaRegistro.Name = "dtpFechaRegistro";
-            dtpFechaRegistro.Size = new Size(218, 23);
+            dtpFechaRegistro.Size = new Size(268, 27);
             dtpFechaRegistro.TabIndex = 12;
             // 
             // cbGenero
             // 
             cbGenero.FormattingEnabled = true;
-            cbGenero.Location = new Point(16, 192);
+            cbGenero.Location = new Point(85, 285);
+            cbGenero.Margin = new Padding(3, 4, 3, 4);
             cbGenero.Name = "cbGenero";
-            cbGenero.Size = new Size(157, 23);
+            cbGenero.Size = new Size(179, 28);
             cbGenero.TabIndex = 13;
             // 
             // cbTipoUsuario
             // 
             cbTipoUsuario.FormattingEnabled = true;
-            cbTipoUsuario.Location = new Point(16, 248);
+            cbTipoUsuario.Location = new Point(85, 368);
+            cbTipoUsuario.Margin = new Padding(3, 4, 3, 4);
             cbTipoUsuario.Name = "cbTipoUsuario";
-            cbTipoUsuario.Size = new Size(157, 23);
+            cbTipoUsuario.Size = new Size(179, 28);
             cbTipoUsuario.TabIndex = 14;
             // 
             // tbNombreUsuario
             // 
-            tbNombreUsuario.Location = new Point(407, 27);
+            tbNombreUsuario.BorderStyle = BorderStyle.FixedSingle;
+            tbNombreUsuario.Location = new Point(85, 203);
+            tbNombreUsuario.Margin = new Padding(3, 4, 3, 4);
             tbNombreUsuario.Name = "tbNombreUsuario";
-            tbNombreUsuario.Size = new Size(157, 23);
+            tbNombreUsuario.Size = new Size(179, 27);
             tbNombreUsuario.TabIndex = 15;
             // 
             // buttonGuardar
             // 
-            buttonGuardar.Location = new Point(416, 287);
+            buttonGuardar.BackColor = Color.FromArgb(252, 144, 139);
+            buttonGuardar.FlatAppearance.BorderSize = 0;
+            buttonGuardar.FlatStyle = FlatStyle.Flat;
+            buttonGuardar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonGuardar.ForeColor = Color.White;
+            buttonGuardar.Location = new Point(517, 365);
+            buttonGuardar.Margin = new Padding(3, 4, 3, 4);
             buttonGuardar.Name = "buttonGuardar";
-            buttonGuardar.Size = new Size(75, 23);
+            buttonGuardar.Size = new Size(110, 31);
             buttonGuardar.TabIndex = 16;
             buttonGuardar.Text = "Guardar";
             buttonGuardar.UseVisualStyleBackColor = true;
@@ -196,9 +220,11 @@
             // 
             // tbContraseña
             // 
-            tbContraseña.Location = new Point(407, 140);
+            tbContraseña.BorderStyle = BorderStyle.FixedSingle;
+            tbContraseña.Location = new Point(359, 39);
+            tbContraseña.Margin = new Padding(3, 4, 3, 4);
             tbContraseña.Name = "tbContraseña";
-            tbContraseña.Size = new Size(157, 23);
+            tbContraseña.Size = new Size(179, 27);
             tbContraseña.TabIndex = 17;
             tbContraseña.UseSystemPasswordChar = true;
             // 
@@ -208,38 +234,47 @@
             // 
             // buttonLimpiar
             // 
-            buttonLimpiar.Location = new Point(299, 287);
+            buttonLimpiar.BackColor = Color.FromArgb(252, 144, 139);
+            buttonLimpiar.FlatAppearance.BorderSize = 0;
+            buttonLimpiar.FlatStyle = FlatStyle.Flat;
+            buttonLimpiar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonLimpiar.ForeColor = Color.White;
+            buttonLimpiar.Location = new Point(359, 365);
+            buttonLimpiar.Margin = new Padding(3, 4, 3, 4);
             buttonLimpiar.Name = "buttonLimpiar";
-            buttonLimpiar.Size = new Size(75, 23);
+            buttonLimpiar.Size = new Size(110, 31);
             buttonLimpiar.TabIndex = 18;
             buttonLimpiar.Text = "Limpiar";
-            buttonLimpiar.UseVisualStyleBackColor = true;
+            buttonLimpiar.UseVisualStyleBackColor = false;
             buttonLimpiar.Click += buttonLimpiar_Click;
             // 
             // lblrepiteContraseña
             // 
             lblrepiteContraseña.AutoSize = true;
-            lblrepiteContraseña.ForeColor = SystemColors.ButtonHighlight;
-            lblrepiteContraseña.Location = new Point(407, 171);
+            lblrepiteContraseña.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblrepiteContraseña.ForeColor = Color.FromArgb(245, 109, 95);
+            lblrepiteContraseña.Location = new Point(359, 95);
             lblrepiteContraseña.Name = "lblrepiteContraseña";
-            lblrepiteContraseña.Size = new Size(113, 15);
+            lblrepiteContraseña.Size = new Size(151, 20);
             lblrepiteContraseña.TabIndex = 19;
             lblrepiteContraseña.Text = "Repite la contraseña";
             // 
             // tbRepitecontraseña
             // 
-            tbRepitecontraseña.Location = new Point(407, 192);
+            tbRepitecontraseña.BorderStyle = BorderStyle.FixedSingle;
+            tbRepitecontraseña.Location = new Point(359, 121);
+            tbRepitecontraseña.Margin = new Padding(3, 4, 3, 4);
             tbRepitecontraseña.Name = "tbRepitecontraseña";
-            tbRepitecontraseña.Size = new Size(157, 23);
+            tbRepitecontraseña.Size = new Size(179, 27);
             tbRepitecontraseña.TabIndex = 20;
             tbRepitecontraseña.UseSystemPasswordChar = true;
             // 
             // CrearUsuario
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.MediumPurple;
-            ClientSize = new Size(579, 357);
+            BackColor = Color.FromArgb(253, 238, 228);
+            ClientSize = new Size(662, 476);
             Controls.Add(tbRepitecontraseña);
             Controls.Add(lblrepiteContraseña);
             Controls.Add(buttonLimpiar);
@@ -260,8 +295,9 @@
             Controls.Add(lblContraseña);
             Controls.Add(lblNombreUsuario);
             Controls.Add(lblNombre);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "CrearUsuario";
-            Text = "CrearUsuario";
+            Text = "Crear Usuarios";
             Load += CrearUsuario_Load;
             ((System.ComponentModel.ISupportInitialize)epUsuario).EndInit();
             ResumeLayout(false);

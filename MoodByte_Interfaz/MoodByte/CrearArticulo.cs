@@ -25,7 +25,6 @@ namespace MoodByte
             InitializeComponent();
             this.articulo = _articulo;
         }
-
         private void buttonLimpiar_Click(object sender, EventArgs e)
         {
             txtTitulo.Clear();

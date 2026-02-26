@@ -35,19 +35,24 @@
             // 
             navMenu.BackColor = Color.Transparent;
             navMenu.ForeColor = SystemColors.ControlText;
-            navMenu.Location = new Point(12, 12);
+            navMenu.Location = new Point(0, -1);
+            navMenu.Margin = new Padding(3, 5, 3, 5);
             navMenu.Name = "navMenu";
-            navMenu.Size = new Size(215, 265);
+            navMenu.Size = new Size(246, 353);
             navMenu.TabIndex = 0;
             // 
             // Menu
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(192, 192, 255);
-            ClientSize = new Size(800, 450);
+            BackColor = Color.White;
+            BackgroundImage = Properties.Resources.FabianMoodByte_logo;
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(914, 600);
             Controls.Add(navMenu);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Menu";
+            ShowInTaskbar = false;
             Text = "Menu";
             ResumeLayout(false);
         }

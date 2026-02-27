@@ -11,7 +11,7 @@ public class Ejercicio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(length = 30)
+    @Column(length = 100)
     private String titulo;
     @Column(columnDefinition = "TEXT")
     private String descripcion;

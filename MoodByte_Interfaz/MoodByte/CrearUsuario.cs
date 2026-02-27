@@ -1,21 +1,8 @@
 ﻿using Conexiones;
 using Modelo;
 using ModeloDTO;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net.Http;
 using System.Net.Http.Json;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MoodByte
 {
@@ -25,17 +12,19 @@ namespace MoodByte
         private UsuarioDTO usuario;
         public EventHandler UsuarioCreado_Editado;
         private bool esNuevo;
-        public CrearUsuario(UsuarioDTO usuario)
+        private bool nuevoRegistro;
+        public CrearUsuario(UsuarioDTO usuario,bool nuevoRegistro)
         {
             esNuevo = false;
             InitializeComponent();
             this.usuario = usuario;
-           
+            this.nuevoRegistro = nuevoRegistro;
         }
-            public CrearUsuario()
+            public CrearUsuario(bool nuevoRegistro)
             {
             esNuevo = true;
             InitializeComponent();
+            this.nuevoRegistro = nuevoRegistro;
         }
 
 
@@ -149,7 +138,14 @@ namespace MoodByte
 ;
             }
                     await InsertarUsuario(user);
+                if (nuevoRegistro)
+                {
+                    Menu menu = new Menu();
+                    menu.Show();
                 }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
             }
         public async Task InsertarUsuario(Usuario usuario)
         {

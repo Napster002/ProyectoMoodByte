@@ -8,9 +8,9 @@ public class Articulo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(length = 40)
+    @Column(length = 100)
     private String titulo;
-    @Column(length = 60)
+    @Column(length = 225)
     private String subtitulo;
     @Column(columnDefinition = "TEXT")
     private String imagen;

@@ -1,17 +1,8 @@
 ﻿using Conexiones;
 using Modelo;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace MoodByte
 {
@@ -55,7 +46,7 @@ namespace MoodByte
             {
                 epArticulo.SetError(txtSubtitulo, "");
             }
-            if (!Validaciones.validaImagen(txtImagen.Text, out var err3))
+           /* if (!Validaciones.validaImagen(txtImagen.Text, out var err3))
             {
                 errores.Add(err3);
                 epArticulo.SetError(txtImagen, err3);
@@ -64,6 +55,7 @@ namespace MoodByte
             {
                 epArticulo.SetError(txtImagen, "");
             }
+           */
             if (string.IsNullOrWhiteSpace(txtEnlace.Text))
             {
                 errores.Add("Mal introducido: Enlace");
@@ -88,6 +80,7 @@ namespace MoodByte
             articulo.titulo = txtTitulo.Text;
 
             await InsertarArticulo(articulo);
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
         // No funciona el insertar Articulo comprobar codigo
@@ -122,7 +115,6 @@ namespace MoodByte
                 else {
                     var json = JsonSerializer.Serialize(articulo, options);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
-                    MessageBox.Show($"{ ConexionTabla.TablaArticulo}/{ articulo.id}");
                     var response = await _httpClient.PutAsync($"{ ConexionTabla.TablaArticulo}/{ articulo.id}",
                     content);
                     if (response.IsSuccessStatusCode)

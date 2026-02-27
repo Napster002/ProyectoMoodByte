@@ -53,7 +53,7 @@ namespace Modelo
         }
         public static bool validaTitulo(string titulo, out string error)
         {
-            if (!Regex.IsMatch(titulo, "^[A-ZÑ][ A-Za-záéíóúÁÉÍÓÚÑñ, ]{1,40}$"))
+            if (!Regex.IsMatch(titulo, "^[A-ZÑ][ A-Za-záéíóúÁÉÍÓÚÑñ,\\-;.: ]{1,100}$"))
             {
                 error = "Mal introducido: Titulo";
                 return false;
@@ -64,7 +64,7 @@ namespace Modelo
         }
         public static bool validaSubtitulo(string subtitulo, out string error)
         {
-            if (!Regex.IsMatch(subtitulo, "^[A-ZÑ][ A-Za-záéíóúÁÉÍÓÚÑñ, ]{1,60}$"))
+            if (!Regex.IsMatch(subtitulo, "^[A-ZÑ][ A-Za-záéíóúÁÉÍÓÚÑñ,\\-;.: ]{1,225}$"))
             {
                 error = "Mal introducido: Subtitulo";
                 return false;
@@ -72,7 +72,7 @@ namespace Modelo
             error = string.Empty;
             return true;
         }
-        public static bool validaImagen(string imagen, out string error)
+        /*public static bool validaImagen(string imagen, out string error)
         {
             if (!Regex.IsMatch(imagen, @"\.(png|jpg|jpeg)$",RegexOptions.IgnoreCase))
             {
@@ -82,9 +82,10 @@ namespace Modelo
             error = string.Empty;
             return true;
         }
+            */
         public static bool validaFrase(string frase, out string error)
         {
-            if (!Regex.IsMatch(frase, "^[A-ZÑ][ A-Za-záéíóúÁÉÍÓÚÑñ ]{1,45}$"))
+            if (!Regex.IsMatch(frase, "^[A-ZÑ][ A-Za-záéíóúÁÉÍÓÚÑñ¡!,.:\\- ]{1,225}$"))
             {
                 error = "Mal introducido: Formato de Frase";
                 return false;

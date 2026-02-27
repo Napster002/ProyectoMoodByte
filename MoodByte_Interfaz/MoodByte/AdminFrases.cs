@@ -1,16 +1,6 @@
 ﻿using Conexiones;
-using Modelo;
 using ModeloDTO;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace MoodByte
 {
@@ -64,10 +54,14 @@ namespace MoodByte
             this.Close();
         }
 
-        private void btnInsertar_Click(object sender, EventArgs e)
+        private async void btnInsertar_Click(object sender, EventArgs e)
         {
             CrearFrase fraseForm = new CrearFrase();
-            fraseForm.Show();
+            fraseForm.ShowDialog();
+            if(fraseForm.DialogResult == DialogResult.OK)
+            {
+                await CargarGrid();
+            }
         }
 
         private async void AdminFrases_Load(object sender, EventArgs e)
@@ -83,6 +77,7 @@ namespace MoodByte
             {
                 dgvFrases.DataSource = frases;
                 dgvFrases.AutoGenerateColumns = true;
+                dgvFrases.Columns["id"].Visible = false;
                 dgvFrases.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             }
@@ -121,10 +116,10 @@ namespace MoodByte
             EstadoDTO estadoSeleccionado = cmbEstados.SelectedItem as EstadoDTO;
             switch (estadoSeleccionado.nombre.ToLower())
             {
-                case "muy bien":
+                case "feliz":
                     foreach (var frase in frases)
                     {
-                        if (frase.puntuacion == 5)
+                        if (frase.puntuacion == 1)
                         {
                             frasesSeleccionadas.Add(frase);
                         }
@@ -132,12 +127,13 @@ namespace MoodByte
                     dgvFrases.DataSource = null;
                     dgvFrases.DataSource = frasesSeleccionadas;
                     dgvFrases.AutoGenerateColumns = true;
+                    dgvFrases.Columns["id"].Visible = false;
                     dgvFrases.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                     break;
                 case "bien":
                     foreach (var frase in frases)
                     {
-                        if (frase.puntuacion == 4)
+                        if (frase.puntuacion == 2)
                         {
                             frasesSeleccionadas.Add(frase);
                         }
@@ -145,6 +141,7 @@ namespace MoodByte
                     dgvFrases.DataSource = null;
                     dgvFrases.DataSource = frasesSeleccionadas;
                     dgvFrases.AutoGenerateColumns = true;
+                    dgvFrases.Columns["id"].Visible = false;
                     dgvFrases.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                     break;
                 case "regular":
@@ -158,12 +155,13 @@ namespace MoodByte
                     dgvFrases.DataSource = null;
                     dgvFrases.DataSource = frasesSeleccionadas;
                     dgvFrases.AutoGenerateColumns = true;
+                    dgvFrases.Columns["id"].Visible = false;
                     dgvFrases.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                     break;
-                case "un poco mal":
+                case "estresado":
                     foreach (var frase in frases)
                     {
-                        if (frase.puntuacion == 2)
+                        if (frase.puntuacion == 4)
                         {
                             frasesSeleccionadas.Add(frase);
                         }
@@ -171,12 +169,13 @@ namespace MoodByte
                     dgvFrases.DataSource = null;
                     dgvFrases.DataSource = frasesSeleccionadas;
                     dgvFrases.AutoGenerateColumns = true;
+                    dgvFrases.Columns["id"].Visible = false;
                     dgvFrases.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                     break;
                 case "triste":
                     foreach (var frase in frases)
                     {
-                        if (frase.puntuacion == 1)
+                        if (frase.puntuacion == 5)
                         {
                             frasesSeleccionadas.Add(frase);
                         }
@@ -185,19 +184,24 @@ namespace MoodByte
                     dgvFrases.DataSource = null;
                     dgvFrases.DataSource = frasesSeleccionadas;
                     dgvFrases.AutoGenerateColumns = true;
+                    dgvFrases.Columns["id"].Visible = false;
                     dgvFrases.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                     break;
 
             }
         }
 
-        private void btnEditar_Click(object sender, EventArgs e)
+        private async void btnEditar_Click(object sender, EventArgs e)
         {
             if (dgvFrases.SelectedRows.Count > 0)
             {
                 FraseDTO fraseSeleccionada = dgvFrases.SelectedRows[0].DataBoundItem as FraseDTO;
                 CrearFrase editFrase = new CrearFrase(fraseSeleccionada);
-                editFrase.Show();
+                editFrase.ShowDialog();
+                if (editFrase.DialogResult == DialogResult.OK)
+                {
+                    await CargarGrid();
+                }
             }
             else
             {
@@ -223,7 +227,5 @@ namespace MoodByte
                 }
             }
         }
-
-        ///-----------------------------------
     }
 }

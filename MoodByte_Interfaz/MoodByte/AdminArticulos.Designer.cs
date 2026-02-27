@@ -98,6 +98,9 @@
             // 
             // listViewArticulos
             // 
+            listViewArticulos.BackColor = Color.White;
+            listViewArticulos.BorderStyle = BorderStyle.None;
+            listViewArticulos.Font = new Font("Segoe UI", 11F);
             listViewArticulos.FullRowSelect = true;
             listViewArticulos.Location = new Point(488, 77);
             listViewArticulos.Margin = new Padding(3, 4, 3, 4);
@@ -119,22 +122,25 @@
             // 
             // panelTituloArticulo
             // 
+            panelTituloArticulo.AutoScroll = true;
             panelTituloArticulo.Controls.Add(lblTitulo);
-            panelTituloArticulo.Location = new Point(75, 385);
+            panelTituloArticulo.Location = new Point(75, 349);
             panelTituloArticulo.Margin = new Padding(3, 4, 3, 4);
             panelTituloArticulo.Name = "panelTituloArticulo";
+            panelTituloArticulo.Padding = new Padding(10);
             panelTituloArticulo.Size = new Size(285, 79);
             panelTituloArticulo.TabIndex = 6;
             // 
             // lblTitulo
             // 
             lblTitulo.AutoSize = true;
+            lblTitulo.Dock = DockStyle.Top;
             lblTitulo.ForeColor = Color.FromArgb(245, 109, 95);
-            lblTitulo.Location = new Point(16, 32);
+            lblTitulo.Location = new Point(10, 10);
+            lblTitulo.MaximumSize = new Size(200, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(42, 20);
+            lblTitulo.Size = new Size(0, 20);
             lblTitulo.TabIndex = 0;
-            lblTitulo.Text = "TEXT";
             // 
             // navMenu
             // 

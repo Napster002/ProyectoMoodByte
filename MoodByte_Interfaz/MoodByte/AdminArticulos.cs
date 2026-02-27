@@ -118,7 +118,7 @@ namespace MoodByte
                                      MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.Yes)
                 {
-                    await _httpClient.DeleteAsync($"{ ConexionTabla.TablaArticulo}/{ articuloSeleccionado.id}");
+                    await _httpClient.DeleteAsync($"{ConexionTabla.TablaArticulo}/{articuloSeleccionado.id}");
                     await CargarGrid();
                     Limpiar();
                 }
@@ -138,7 +138,7 @@ namespace MoodByte
                 Limpiar();
             };
             formCreacion.ShowDialog();
-            if(formCreacion.DialogResult == DialogResult.OK)
+            if (formCreacion.DialogResult == DialogResult.OK)
             {
                 await CargarGrid();
                 Limpiar();
@@ -149,7 +149,7 @@ namespace MoodByte
         {
             if (listViewArticulos.SelectedItems.Count > 0)
             {
-                var articuloSeleccionado=(Articulo)listViewArticulos.SelectedItems[0].Tag;
+                var articuloSeleccionado = (Articulo)listViewArticulos.SelectedItems[0].Tag;
                 CrearArticulo formEdicion = new CrearArticulo(articuloSeleccionado);
                 formEdicion.ArticuloModificado += async (s, ev) =>
                 {
@@ -161,7 +161,7 @@ namespace MoodByte
 
             else
             {
-                MessageBox.Show("Por favor, selecciona un artículo para editar.","Atencion",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show("Por favor, selecciona un artículo para editar.", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
         public void Limpiar()

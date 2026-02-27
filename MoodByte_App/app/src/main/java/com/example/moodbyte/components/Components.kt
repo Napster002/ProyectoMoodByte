@@ -1,10 +1,12 @@
 package com.example.moodbyte.components
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.compose.foundation.Image
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.CalendarView
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -63,6 +65,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
+import androidx.core.app.NotificationCompat
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.moodbyte.components.chatbotcomponents.ChatBot
@@ -415,7 +418,6 @@ fun DiarioCalendarView(
                         onDaySelected(fecha)
                     }
                 }
-
             }
         },
         modifier = Modifier.background(Color(0xEB8BFFE7))
@@ -434,6 +436,9 @@ fun EjercicioViewContent(
         var expanded by remember { mutableStateOf(false) }
         var selectedOption by remember{mutableStateOf("Todos")}
         val ejercicios by ejercicioViewModel.ejercicios.collectAsState()
+    ejercicios.forEach { elemento ->
+        Log.d("LISTA"+elemento.id+" "+elemento.estadoid, elemento.toString())
+    }
     Column(modifier=Modifier.fillMaxSize().padding(paddingValues)
         .padding(16.dp)
     ) {
@@ -472,7 +477,7 @@ fun EjercicioViewContent(
                             onClick = {
                                 selectedOption = estados.nombre
                                 expanded = false
-                                ejercicioViewModel.cargarEjerciciosPorEstado(estados.nombre)
+                                ejercicioViewModel.cargarEjerciciosPorEstado(estados.id)
                             },
                             colors= MenuDefaults.itemColors(
                                 textColor=Color(0xFFFC908B)
@@ -560,15 +565,28 @@ fun VerEjercicioCard(
     onDismiss: () -> Unit,
     estadoViewModel: EstadoViewModel
 ) {
+    val context = LocalContext.current
+    var valido by remember { mutableStateOf(false) }
     val estado=estadoViewModel.estados.collectAsState()
-    val estadoNombre = estado.value.firstOrNull { it.id == ejercicio.estado_id }?.nombre ?: "Sin estado"
-
+    val estadoNombre = estado.value.firstOrNull { it.id == ejercicio.estadoid }?.nombre ?: "Sin estado"
+    var mostrarAlerta by remember { mutableStateOf(false) }
     Dialog(onDismissRequest = onDismiss) {
         Card(
             shape = RoundedCornerShape(16.dp),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(16.dp)
+                .clickable {
+                    try {
+                        ejercicio.recursoUrl?.let {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
+                            context.startActivity(intent)
+                        }
+                    }catch(e: Exception){
+                        mostrarAlerta=true
+                      e.printStackTrace()
+                    }
+                },
             elevation = CardDefaults.cardElevation(8.dp)
         ) {
             Column(
@@ -605,7 +623,8 @@ fun VerEjercicioCard(
                     onValueChange = {},
                     label = { Text("URL Recurso") },
                     modifier = Modifier.fillMaxWidth(),
-                    enabled = false
+                    enabled = false,
+
                 )
 
                 OutlinedTextField(
@@ -639,6 +658,19 @@ fun VerEjercicioCard(
                     }
                 }
             }
+        }
+        if(mostrarAlerta){
+            AlertDialog(
+                onDismissRequest = { mostrarAlerta=false },
+                title = { Text("URL no valida") },
+                text = { Text("No se puede abrir el archivo la url por que no es una url") },
+                confirmButton = {
+                    TextButton(onClick = { mostrarAlerta=false }) {
+                        Text("OK")
+                        valido=true
+                    }
+                }
+            )
         }
     }
 }

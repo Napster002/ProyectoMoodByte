@@ -1,7 +1,7 @@
 package com.example.moodbyte.data.remote.dtos
 
 import com.example.moodbyte.data.local.entities.EjercicioEntity
-import com.example.moodbyte.domain.model.Estado
+import com.squareup.moshi.Json
 import java.time.LocalTime
 
 data class EjercicioDto(
@@ -10,7 +10,8 @@ data class EjercicioDto(
     val descripcion:String,
     val recursoUrl:String,
     val duracion: LocalTime,
-    val estado: EstadoDto
+    @Json(name = "idEstado")
+    val idestado: Long
 )
 
 fun EjercicioDto.toEntity()= EjercicioEntity(
@@ -19,5 +20,6 @@ fun EjercicioDto.toEntity()= EjercicioEntity(
     descripcion = descripcion,
     recursoUrl = recursoUrl,
     duracion = duracion,
-    estadoid = estado.id
+    estadoid = idestado
+
 )

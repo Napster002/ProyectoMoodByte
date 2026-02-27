@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.compose.foundation.Image
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.CalendarView
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -434,6 +435,9 @@ fun EjercicioViewContent(
         var expanded by remember { mutableStateOf(false) }
         var selectedOption by remember{mutableStateOf("Todos")}
         val ejercicios by ejercicioViewModel.ejercicios.collectAsState()
+    ejercicios.forEach { elemento ->
+        Log.d("LISTA"+elemento.id+" "+elemento.estadoid, elemento.toString())
+    }
     Column(modifier=Modifier.fillMaxSize().padding(paddingValues)
         .padding(16.dp)
     ) {

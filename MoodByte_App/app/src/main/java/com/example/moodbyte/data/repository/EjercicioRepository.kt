@@ -21,6 +21,7 @@ class EjercicioRepository(
         dao.getAll().map { list -> list.map { it.toDomain() } }
 
     suspend fun refreshEjercicios(){
+        dao.clearAll()
         val ejercicios=api.getEjercicios()
         dao.insertAll(ejercicios.map { it.toEntity() })
     }

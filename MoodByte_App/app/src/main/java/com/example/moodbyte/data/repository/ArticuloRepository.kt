@@ -21,6 +21,7 @@ class ArticuloRepository (
 
     suspend fun refreshArticulos(){
         val articulosApi=api.getArticulos()
+        dao.clearAll()
         dao.insertAll(articulosApi.map { it.toEntity() })
     }
 }

@@ -19,6 +19,8 @@ interface EjercicioDao {
 
     @Query("SELECT * FROM ejercicios WHERE id= :idEjercicio")
     suspend fun getById(idEjercicio: Long): EjercicioEntity?
+    @Query("DELETE FROM ejercicios")
+    suspend fun clearAll()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(ejercicio: EjercicioEntity)

@@ -11,6 +11,9 @@ interface ArticuloDao {
     @Query("SELECT * FROM articulos")
     suspend fun getAll():List<ArticuloEntity>
 
+    @Query("DELETE FROM articulos")
+    suspend fun clearAll()
+
     @Query("SELECT * FROM articulos WHERE id= :idArticulo")
     suspend fun getById(idArticulo:Long):ArticuloEntity?
 

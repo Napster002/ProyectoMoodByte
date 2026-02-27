@@ -34,13 +34,6 @@ namespace MoodByte
                 MessageBox.Show("Error al cargar los usuarios: " + ex.Message);
             }
         }
-        // Que vaya a CrearUsuario
-        private void btnRegistrar_Click(object sender, EventArgs e)
-        {
-            CrearUsuario newUsu = new CrearUsuario(true);
-            newUsu.Visible = true;
-            this.Visible = false;
-        }
 
         private async void Login_Load(object sender, EventArgs e)
         {

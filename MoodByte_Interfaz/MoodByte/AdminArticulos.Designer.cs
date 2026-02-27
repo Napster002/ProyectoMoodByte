@@ -146,10 +146,10 @@
             // 
             navMenu.BackColor = Color.Transparent;
             navMenu.ForeColor = SystemColors.ControlText;
-            navMenu.Location = new Point(12, 4);
-            navMenu.Margin = new Padding(3, 5, 3, 5);
+            navMenu.Location = new Point(-1, 2);
+            navMenu.Margin = new Padding(3, 4, 3, 4);
             navMenu.Name = "navMenu";
-            navMenu.Size = new Size(215, 28);
+            navMenu.Size = new Size(221, 38);
             navMenu.TabIndex = 7;
             // 
             // AdminArticulos

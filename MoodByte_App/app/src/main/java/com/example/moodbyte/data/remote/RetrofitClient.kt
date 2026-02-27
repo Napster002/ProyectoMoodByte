@@ -11,7 +11,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 object RetrofitClient {
 
     //Para utilizar la apk hay que poner la ipv4 del pc aqui
-    private const val BASE_URL = "http://10.0.2.2:5500/api/"
+    private const val BASE_URL = "http://10.99.85.172:5500/api/"
 
     private val moshi = Moshi.Builder()
         .add(LocalTimeAdapter())

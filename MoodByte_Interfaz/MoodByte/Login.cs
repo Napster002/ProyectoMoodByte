@@ -1,6 +1,5 @@
 using Conexiones;
 using Modelo;
-using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -38,7 +37,7 @@ namespace MoodByte
         // Que vaya a CrearUsuario
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            CrearUsuario newUsu = new CrearUsuario();
+            CrearUsuario newUsu = new CrearUsuario(true);
             newUsu.Visible = true;
             this.Visible = false;
         }
@@ -50,16 +49,29 @@ namespace MoodByte
         // Falta solo cambiar si va a otra pantalla
         private async void btnEntrar_Click(object sender, EventArgs e)
         {
+            var encontrado = false;
             await CargarUsuarios();
             foreach (var usuario in listaUsuarios)
             {
                 if (txtUsuario.Text.Equals(usuario.NombreUsuario) && txtPassword.Text.Equals(usuario.Password))
                 {
-                    Menu menu = new Menu();
-                    menu.Visible = true;
-                    this.Visible = false;
-                    return;
+                    if (usuario.TipoUsuario.ToString().ToLower().Equals("administrador"))
+                    {
+                        Menu menu = new Menu();
+                        menu.Visible = true;
+                        this.Visible = false;
+                        encontrado = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Solo los administradores pueden acceder");
+                        encontrado = true;
+                    }
                 }
+            }
+            if (!encontrado)
+            {
+                                MessageBox.Show("Usuario o contraseña incorrectos");
             }
         }
     }

@@ -1,18 +1,7 @@
 ﻿using Conexiones;
 using Modelo;
 using ModeloDTO;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace MoodByte
 {
@@ -163,6 +152,9 @@ namespace MoodByte
                     };
                 }
                 await InsertaFrase(fraseInsert);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+
             }
         }
 

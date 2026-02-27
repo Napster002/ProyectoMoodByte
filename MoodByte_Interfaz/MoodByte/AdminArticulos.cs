@@ -1,16 +1,6 @@
 ﻿using Conexiones;
 using Modelo;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace MoodByte
 {
@@ -96,7 +86,7 @@ namespace MoodByte
             {
 
                 var articulo = (Articulo)listViewArticulos.SelectedItems[0].Tag;
-                lblTitulo.Text = articulo.titulo;
+                lblTitulo.Text = articulo.subtitulo;
                 await CargarImagen(articulo.imagen);
             }
         }
@@ -148,6 +138,11 @@ namespace MoodByte
                 Limpiar();
             };
             formCreacion.ShowDialog();
+            if(formCreacion.DialogResult == DialogResult.OK)
+            {
+                await CargarGrid();
+                Limpiar();
+            }
         }
 
         private async void btnEditarArticulo_Click(object sender, EventArgs e)

@@ -1,16 +1,7 @@
 ﻿using Conexiones;
 using ModeloDTO;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace MoodByte
 {
@@ -98,10 +89,14 @@ namespace MoodByte
             await CargarGrid();
         }
 
-        private void btnInsertarEjercicio_Click(object sender, EventArgs e)
+        private async void btnInsertarEjercicio_Click(object sender, EventArgs e)
         {
             CrearEjercicio crear = new CrearEjercicio();
-            crear.Show();
+            crear.ShowDialog();
+            if (crear.DialogResult == DialogResult.OK)
+            {
+                await CargarGrid();
+            }
         }
 
         private async void cmbEstado_SelectedIndexChanged(object sender, EventArgs e)
@@ -115,11 +110,13 @@ namespace MoodByte
             dgvEjercicio.DataSource = null;
             dgvEjercicio.DataSource = ejerciciosSeleccionados;
             dgvEjercicio.AutoGenerateColumns = true;
+            dgvEjercicio.Columns["Id"].Visible = false;
+            dgvEjercicio.Columns["idEstado"].Visible = false;
             dgvEjercicio.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
 
-        private void btnEditar_Click(object sender, EventArgs e)
+        private async void btnEditar_Click(object sender, EventArgs e)
         {
             if (dgvEjercicio.SelectedRows.Count > 0)
             {
@@ -127,7 +124,11 @@ namespace MoodByte
                 if (ejercicioSeleccionado != null)
                 {
                     CrearEjercicio editar = new CrearEjercicio(ejercicioSeleccionado);
-                    editar.Show();
+                    editar.ShowDialog();
+                    if (editar.DialogResult == DialogResult.OK)
+                    {
+                        await CargarGrid();
+                    }
                 }
             }
         }

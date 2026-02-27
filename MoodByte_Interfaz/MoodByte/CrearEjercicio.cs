@@ -1,19 +1,8 @@
 ﻿using Conexiones;
 using Modelo;
 using ModeloDTO;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace MoodByte
 {
@@ -145,6 +134,8 @@ namespace MoodByte
             }
 
             await InsertaEjercicio(ejercicioGuardar);
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
         public async Task InsertaEjercicio(Ejercicio ejercicio)
         {

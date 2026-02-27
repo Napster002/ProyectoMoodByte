@@ -1,18 +1,6 @@
 ﻿using Conexiones;
-using Modelo;
 using ModeloDTO;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace MoodByte
 {
@@ -95,21 +83,29 @@ namespace MoodByte
             await CargarGrid();
         }
 
-        private void btnCrearUsuario_Click(object sender, EventArgs e)
+        private async void btnCrearUsuario_Click(object sender, EventArgs e)
         {
-            CrearUsuario CU = new CrearUsuario();
+            CrearUsuario CU = new CrearUsuario(false);
             CU.UsuarioCreado_Editado += async (s, ev) => await CargarGrid();
             CU.ShowDialog();
+            if (CU.DialogResult == DialogResult.OK)
+            {
+                await CargarGrid();
+            }
         }
 
-        private void btnEditarusuario_Click(object sender, EventArgs e)
+        private async void btnEditarusuario_Click(object sender, EventArgs e)
         {
             if (dgvUsuarios.SelectedRows.Count>0)
             {
                 var usuarioSeleccionado = dgvUsuarios.SelectedRows[0].DataBoundItem as UsuarioDTO;
-                CrearUsuario crearUsuario = new CrearUsuario(usuarioSeleccionado);
+                CrearUsuario crearUsuario = new CrearUsuario(usuarioSeleccionado,false);
                 crearUsuario.UsuarioCreado_Editado += async (s, ev) => await CargarGrid();
                 crearUsuario.ShowDialog();
+                if (crearUsuario.DialogResult == DialogResult.OK)
+                {
+                    await CargarGrid();
+                }
             }
             else
             {

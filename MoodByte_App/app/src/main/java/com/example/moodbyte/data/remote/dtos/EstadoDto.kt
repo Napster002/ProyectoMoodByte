@@ -5,7 +5,7 @@ import com.example.moodbyte.data.local.entities.EstadoEntity
 import com.example.moodbyte.domain.model.Estado
 
 data class EstadoDto(
-
+    @PrimaryKey
     val id:Long,
     val nombre:String
 )

@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "26b7nufdH/g=",
+  "dgSpecHash": "7ZRvwaLWvBo=",
   "success": true,
   "projectFilePath": "C:\\AndroidProject\\ProyectoMoodByte\\MoodByte_Interfaz\\Controles\\Controles.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\profa\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.23\\microsoft.net.illink.tasks.8.0.23.nupkg.sha512",
+    "C:\\Users\\profa\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\8.0.23\\microsoft.netcore.app.runtime.win-x64.8.0.23.nupkg.sha512",
+    "C:\\Users\\profa\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\8.0.23\\microsoft.windowsdesktop.app.runtime.win-x64.8.0.23.nupkg.sha512",
+    "C:\\Users\\profa\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\8.0.23\\microsoft.aspnetcore.app.runtime.win-x64.8.0.23.nupkg.sha512"
+  ],
   "logs": []
 }
